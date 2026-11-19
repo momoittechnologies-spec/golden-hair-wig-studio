@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, MessageCircle, MapPin, Menu, X, Clock, Sparkles } from 'lucide-react';
+import { Phone, MessageCircle, MapPin, Menu, X, Clock, CalendarCheck } from 'lucide-react';
 import { BUSINESS_INFO, BRANCHES } from '../data/businessData';
 
 interface NavbarProps {
@@ -37,8 +37,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-gold-500"></span>
             </span>
-            <span className="font-medium text-gold-400">Rayalaseema's Premier Hair Studio:</span>
-            <span className="text-slate-300 transition-all duration-500">
+            <span className="font-semibold text-gold-400">Rayalaseema's Premier Hair Studio:</span>
+            <span className="text-slate-300 transition-all duration-500 font-medium">
               {BRANCHES[activeBranchIndex].name} • {BRANCHES[activeBranchIndex].landmark}
             </span>
           </div>
@@ -63,25 +63,28 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? 'bg-obsidian-950/90 backdrop-blur-xl border-b border-gold-500/20 shadow-2xl shadow-black/80 py-3'
-            : 'bg-obsidian-950/60 backdrop-blur-md border-b border-slate-800/60 py-4'
+            ? 'bg-obsidian-950/95 backdrop-blur-xl border-b border-gold-500/20 shadow-2xl shadow-black/80 py-2.5'
+            : 'bg-obsidian-950/70 backdrop-blur-md border-b border-slate-800/60 py-3.5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Brand Logo */}
+          
+          {/* Brand Logo with Official Insignia */}
           <a href="#" className="flex items-center gap-3 group">
-            <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-gold-300 via-gold-500 to-gold-700 p-[1.5px] shadow-gold-glow transition-transform duration-300 group-hover:scale-105">
-              <div className="w-full h-full bg-obsidian-950 rounded-[10px] flex items-center justify-center overflow-hidden">
-                <span className="font-serif font-black text-xl text-gold-gradient tracking-wider">GH</span>
-              </div>
+            <div className="relative flex-shrink-0">
+              <img
+                src="/images/logo.png"
+                alt="Golden Hair Wig Studio Official Logo"
+                className="h-11 w-11 sm:h-12 sm:w-12 object-contain rounded-full border border-gold-500/40 shadow-gold-glow group-hover:scale-105 transition-transform duration-300"
+              />
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-1.5">
-                <span className="font-serif font-bold text-lg sm:text-xl tracking-tight text-white group-hover:text-gold-300 transition-colors">
+                <span className="font-serif font-extrabold text-base sm:text-lg tracking-tight text-white group-hover:text-gold-300 transition-colors">
                   GOLDEN HAIR
                 </span>
-                <span className="text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30">
-                  STUDIO
+                <span className="text-[9px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30">
+                  WIG STUDIO
                 </span>
               </div>
               <span className="text-[10px] text-slate-400 tracking-wider uppercase font-medium">
@@ -95,12 +98,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
             <a href="#services" className="hover:text-gold-400 transition-colors py-1">
               Services
             </a>
-            <a href="#transformations" className="hover:text-gold-400 transition-colors py-1 flex items-center gap-1">
+            <a href="#transformations" className="hover:text-gold-400 transition-colors py-1 flex items-center gap-1.5">
               <span>1-Hour Results</span>
-              <span className="text-[9px] bg-red-600/90 text-white font-bold px-1.5 py-0.2 rounded-full uppercase">Instant</span>
+              <span className="text-[9px] bg-red-600/90 text-white font-bold px-1.5 py-0.2 rounded uppercase">Instant</span>
             </a>
             <a href="#patch-anatomy" className="hover:text-gold-400 transition-colors py-1">
-              3D Hair System
+              Swiss Lace Anatomy
             </a>
             <a href="#why-us" className="hover:text-gold-400 transition-colors py-1">
               Why Us vs Surgery
@@ -132,7 +135,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
             >
               <div className="absolute inset-0 bg-white/30 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
               <span className="relative flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" />
+                <CalendarCheck className="w-4 h-4" />
                 <span>Book Free Consultation</span>
               </span>
             </button>
@@ -142,9 +145,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           <div className="lg:hidden flex items-center gap-2">
             <button
               onClick={() => onOpenBooking()}
-              className="sm:hidden px-3 py-1.5 rounded-lg bg-gold-gradient text-obsidian-950 font-bold text-xs shadow-gold-glow"
+              className="sm:hidden px-3 py-1.5 rounded-lg bg-gold-gradient text-obsidian-950 font-bold text-xs shadow-gold-glow flex items-center gap-1"
             >
-              Book
+              <CalendarCheck className="w-3.5 h-3.5" />
+              <span>Book</span>
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -179,7 +183,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="p-2.5 rounded-lg bg-obsidian-900 border border-slate-800 hover:border-gold-500/40 hover:text-gold-400"
               >
-                3D Hair Anatomy
+                Swiss Lace Anatomy
               </a>
               <a
                 href="#why-us"
@@ -212,7 +216,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                 }}
                 className="w-full py-3 rounded-xl bg-gold-gradient text-obsidian-950 font-bold text-sm shadow-gold-glow flex items-center justify-center gap-2"
               >
-                <Sparkles className="w-4 h-4" />
+                <CalendarCheck className="w-4 h-4" />
                 <span>Book Free Consultation</span>
               </button>
 

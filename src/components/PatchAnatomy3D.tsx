@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layers, Wind, ShieldCheck, Sparkles, Eye, CheckCircle2, Info } from 'lucide-react';
+import { Layers, Wind, ShieldCheck, Eye, CheckCircle2, Info, Crown } from 'lucide-react';
 
 interface LayerSpec {
   id: string;
@@ -21,7 +21,7 @@ const LAYERS: LayerSpec[] = [
     tagline: 'Hand-knotted follicle by follicle for real scalp simulation',
     depth: 'Top Aesthetic Layer',
     material: 'Virgin Indian Human Hair (Cuticle Intact)',
-    icon: Sparkles,
+    icon: Crown,
     color: 'from-amber-400 to-gold-600',
     glowColor: 'rgba(212, 175, 55, 0.4)',
     keyFeatures: [
@@ -85,7 +85,7 @@ export const PatchAnatomy3D: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-semibold">
             <Layers className="w-3.5 h-3.5" />
-            <span>3D Interactive Hair System Architecture</span>
+            <span>Interactive Hair System Architecture</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white tracking-tight">
             Why It Looks & Feels 100% Undetectable
@@ -147,7 +147,7 @@ export const PatchAnatomy3D: React.FC = () => {
               >
                 <div className="flex items-center justify-between text-xs font-bold text-gold-300 mb-2">
                   <span className="flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+                    <Crown className="w-3.5 h-3.5 text-gold-400" />
                     <span>LAYER 1: Human Hair</span>
                   </span>
                   <span className="text-[10px] bg-gold-500/20 px-2 py-0.5 rounded text-gold-400 border border-gold-500/30">
@@ -159,7 +159,7 @@ export const PatchAnatomy3D: React.FC = () => {
                 </div>
                 {/* Hair strands visual graphic */}
                 <div className="mt-3 flex items-center gap-1 opacity-70">
-                  <div className="h-1.5 w-full rounded bg-gradient-to-r from-gold-400 via-amber-300 to-gold-500 animate-pulse"></div>
+                  <div className="h-1.5 w-full rounded bg-gradient-to-r from-gold-400 via-amber-300 to-gold-500"></div>
                 </div>
               </div>
 

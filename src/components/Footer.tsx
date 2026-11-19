@@ -14,14 +14,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
         {/* Top Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
           
-          {/* Brand Col */}
+          {/* Brand Col with Official Logo */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-300 via-gold-500 to-gold-700 p-[1.5px] shadow-gold-glow">
-                <div className="w-full h-full bg-obsidian-950 rounded-[10px] flex items-center justify-center font-serif font-black text-lg text-gold-gradient">
-                  GH
-                </div>
-              </div>
+              <img
+                src="/images/logo.png"
+                alt="Golden Hair Wig Studio Official Logo"
+                className="w-12 h-12 object-contain rounded-full border border-gold-500/50 shadow-gold-glow"
+              />
               <div>
                 <span className="font-serif font-bold text-lg text-white block">
                   GOLDEN HAIR WIG STUDIO
@@ -81,7 +81,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             </h4>
             <ul className="space-y-2.5">
               <li><a href="#transformations" className="hover:text-gold-400 transition-colors">1-Hour Real Transformations</a></li>
-              <li><a href="#patch-anatomy" className="hover:text-gold-400 transition-colors">3D Swiss Lace Anatomy</a></li>
+              <li><a href="#patch-anatomy" className="hover:text-gold-400 transition-colors">Swiss Lace Anatomy</a></li>
               <li><a href="#why-us" className="hover:text-gold-400 transition-colors">Hair Studio vs Transplant</a></li>
               <li><a href="#branches" className="hover:text-gold-400 transition-colors">Branch Locations & Maps</a></li>
               <li><a href="#faq" className="hover:text-gold-400 transition-colors">Client FAQs & Maintenance</a></li>
@@ -117,7 +117,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
           </div>
 
           <div>
-            © {new Date().getFullYear()} Golden Hair Wig Studio. Designed with excellence for Cloudflare Pages.
+            © {new Date().getFullYear()} Golden Hair Wig Studio. Kadapa • Proddatur • Madanapalle • Nandyal.
           </div>
         </div>
 

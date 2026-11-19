@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Clock, ShieldCheck, Phone, MessageCircle, Star, CheckCircle2, ChevronRight, Award } from 'lucide-react';
+import { Clock, ShieldCheck, Phone, MessageCircle, Star, CheckCircle2, ChevronRight, Award } from 'lucide-react';
 import { BUSINESS_INFO } from '../data/businessData';
 
 interface HeroProps {
@@ -9,22 +9,22 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
   return (
     <section className="relative overflow-hidden pt-8 pb-16 lg:pt-14 lg:pb-24">
-      {/* Background Ambience: Luxury Gold Orbs & Tech Grid */}
+      {/* Background Ambience: Luxury Gold Ambient Lighting */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] pointer-events-none opacity-40">
-        <div className="absolute top-10 left-1/4 w-96 h-96 bg-gold-500/20 rounded-full blur-[120px] animate-pulse-slow"></div>
-        <div className="absolute top-32 right-1/4 w-80 h-80 bg-gold-400/15 rounded-full blur-[100px] animate-pulse-slow"></div>
+        <div className="absolute top-10 left-1/4 w-96 h-96 bg-gold-500/15 rounded-full blur-[130px]"></div>
+        <div className="absolute top-32 right-1/4 w-80 h-80 bg-gold-400/10 rounded-full blur-[110px]"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
-          {/* Left Column: Compelling Sales Proposition */}
+          {/* Left Column: Compelling Clinical & Aesthetic Sales Proposition */}
           <div className="lg:col-span-7 flex flex-col items-start space-y-6">
             
             {/* Top Pill Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-semibold backdrop-blur-md shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-gold-400 animate-spin" style={{ animationDuration: '6s' }} />
-              <span>Rayalaseema's Premier Hair Studio</span>
+              <Award className="w-4 h-4 text-gold-400" />
+              <span>Rayalaseema's Premier Hair Restoration Studio</span>
               <span className="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
               <span className="text-white font-bold">Just 1 Hour</span>
             </div>
@@ -45,15 +45,15 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
               Painless, instant, and completely confidential.
             </p>
 
-            {/* Key Trust Checkmarks */}
+            {/* Key Clinical Checkmarks */}
             <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 w-full max-w-xl pt-1">
               <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-200">
                 <CheckCircle2 className="w-4 h-4 text-gold-400 flex-shrink-0" />
-                <span>100% Natural Human Hair</span>
+                <span>100% Virgin Natural Human Hair</span>
               </div>
               <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-200">
                 <CheckCircle2 className="w-4 h-4 text-gold-400 flex-shrink-0" />
-                <span>Zero Surgery & Zero Pain</span>
+                <span>Zero Surgery & Zero Injections</span>
               </div>
               <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-200">
                 <CheckCircle2 className="w-4 h-4 text-gold-400 flex-shrink-0" />
@@ -109,10 +109,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
 
           </div>
 
-          {/* Right Column: Hero Visual Showcase & Real Studio Asset Card */}
+          {/* Right Column: Hero Visual Showcase with Official Brand Crest & Studio Poster */}
           <div className="lg:col-span-5 relative">
             
-            {/* Glowing Backdrop Frame */}
             <div className="relative mx-auto max-w-md lg:max-w-none">
               
               {/* Outer gold ring border */}
@@ -120,18 +119,20 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
                 
                 <div className="bg-obsidian-900 rounded-[22px] overflow-hidden border border-slate-800">
                   
-                  {/* Top Card Badge: 1 Hour Transformation */}
-                  <div className="bg-gradient-to-r from-obsidian-950 via-obsidian-900 to-obsidian-950 p-4 border-b border-gold-500/20 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 font-bold text-xs">
-                        GH
-                      </div>
+                  {/* Top Card Badge: Official Logo + 1 Hour Transformation */}
+                  <div className="bg-gradient-to-r from-obsidian-950 via-obsidian-900 to-obsidian-950 p-3.5 sm:p-4 border-b border-gold-500/20 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <img
+                        src="/images/logo.png"
+                        alt="Golden Hair Wig Studio Official Logo"
+                        className="w-10 h-10 object-contain rounded-full border border-gold-500/50 shadow-gold-glow"
+                      />
                       <div>
-                        <div className="text-xs font-bold text-white uppercase tracking-wider">Golden Hair Studio</div>
-                        <div className="text-[10px] text-slate-400">Proprietor: Mr. Swarup</div>
+                        <div className="text-xs font-bold text-white uppercase tracking-wider">Golden Hair Wig Studio</div>
+                        <div className="text-[10px] text-gold-400">Proprietor: Mr. Swarup</div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-600/90 text-white font-bold text-xs tracking-wide shadow-sm animate-pulse">
+                    <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-600/90 text-white font-bold text-xs tracking-wide shadow-sm">
                       <Clock className="w-3 h-3" />
                       <span>Just 1 Hour!</span>
                     </div>
@@ -147,7 +148,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
 
                     {/* Overlay badge at bottom */}
                     <div className="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-obsidian-950 via-obsidian-950/80 to-transparent flex items-center justify-between">
-                      <span className="text-xs font-semibold text-gold-300 flex items-center gap-1">
+                      <span className="text-xs font-semibold text-gold-300 flex items-center gap-1.5">
                         <Award className="w-3.5 h-3.5 text-gold-400" />
                         <span>100% Breathable Lace Toupee</span>
                       </span>

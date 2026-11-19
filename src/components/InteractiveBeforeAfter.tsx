@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { Sparkles, MoveHorizontal, CheckCircle2, ArrowRight } from 'lucide-react';
+import { MoveHorizontal, CheckCircle2, ArrowRight, Award } from 'lucide-react';
 
 interface CaseStudy {
   id: string;
@@ -12,7 +12,6 @@ interface CaseStudy {
   afterLabel: string;
   beforeDesc: string;
   afterDesc: string;
-  // High quality realistic comparison visual data
   beforeImg: string;
   afterImg: string;
 }
@@ -108,7 +107,7 @@ export const InteractiveBeforeAfter: React.FC<InteractiveBeforeAfterProps> = ({ 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/25 text-gold-400 text-xs font-semibold">
-            <Sparkles className="w-3.5 h-3.5" />
+            <Award className="w-3.5 h-3.5" />
             <span>Interactive Real Results</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white tracking-tight">

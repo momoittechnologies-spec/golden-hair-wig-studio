@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Sparkles, Calendar, Clock, MapPin, User, Phone, CheckCircle2, MessageCircle } from 'lucide-react';
+import { X, Calendar, Clock, MapPin, User, Phone, CheckCircle2, MessageCircle, CalendarCheck, ShieldCheck } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { BRANCHES, SERVICES, BUSINESS_INFO } from '../data/businessData';
 
@@ -92,15 +92,24 @@ Please confirm my VIP appointment slot.`;
 
         {!submitted ? (
           <div>
-            {/* Header */}
-            <div className="space-y-1 mb-6">
-              <div className="inline-flex items-center gap-1.5 text-gold-400 text-xs font-bold uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>100% Free & Confidential</span>
+            {/* Header with Official Logo */}
+            <div className="space-y-2 mb-6">
+              <div className="flex items-center gap-3">
+                <img
+                  src="/images/logo.png"
+                  alt="Golden Hair Wig Studio"
+                  className="w-10 h-10 object-contain rounded-full border border-gold-500/40"
+                />
+                <div>
+                  <div className="inline-flex items-center gap-1.5 text-gold-400 text-[11px] font-bold uppercase tracking-wider">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    <span>100% Free & Confidential</span>
+                  </div>
+                  <h3 className="text-xl font-serif font-bold text-white">
+                    Book VIP Consultation
+                  </h3>
+                </div>
               </div>
-              <h3 className="text-2xl font-serif font-bold text-white">
-                Book VIP Consultation
-              </h3>
               <p className="text-xs text-slate-400">
                 Meet Mr. Swarup or senior stylists in a private room. Instant 1-hour hair transformations available.
               </p>
@@ -131,7 +140,7 @@ Please confirm my VIP appointment slot.`;
               {/* Service Selector */}
               <div>
                 <label className="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+                  <CalendarCheck className="w-3.5 h-3.5 text-gold-400" />
                   <span>Select Procedure / Service</span>
                 </label>
                 <select
@@ -257,7 +266,7 @@ Please confirm my VIP appointment slot.`;
                 type="submit"
                 className="w-full py-3.5 rounded-xl bg-gold-gradient text-obsidian-950 font-bold text-sm shadow-gold-glow hover:shadow-gold-glow-lg transition-all flex items-center justify-center gap-2"
               >
-                <Sparkles className="w-4 h-4" />
+                <CalendarCheck className="w-4 h-4" />
                 <span>Confirm VIP Consultation Slot</span>
               </button>
 

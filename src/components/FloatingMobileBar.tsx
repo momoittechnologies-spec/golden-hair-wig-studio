@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, MessageCircle, Sparkles } from 'lucide-react';
+import { Phone, MessageCircle, CalendarCheck } from 'lucide-react';
 import { BUSINESS_INFO } from '../data/businessData';
 
 interface FloatingMobileBarProps {
@@ -35,7 +35,7 @@ export const FloatingMobileBar: React.FC<FloatingMobileBarProps> = ({ onOpenBook
           onClick={onOpenBooking}
           className="py-2.5 rounded-xl bg-gold-gradient text-obsidian-950 font-bold text-xs shadow-gold-glow flex flex-col items-center justify-center gap-1 active:scale-95 transition-transform"
         >
-          <Sparkles className="w-4 h-4" />
+          <CalendarCheck className="w-4 h-4" />
           <span>Book Free</span>
         </button>
       </div>

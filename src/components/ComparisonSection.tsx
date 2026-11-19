@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, X, ShieldAlert, Sparkles, ArrowRight } from 'lucide-react';
+import { Check, X, ShieldAlert, ArrowRight, Award } from 'lucide-react';
 import { COMPARISON_TABLE } from '../data/businessData';
 
 interface ComparisonSectionProps {
@@ -14,7 +14,7 @@ export const ComparisonSection: React.FC<ComparisonSectionProps> = ({ onOpenBook
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-14">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/25 text-gold-400 text-xs font-semibold">
-            <Sparkles className="w-3.5 h-3.5" />
+            <Award className="w-3.5 h-3.5" />
             <span>Honest Clinical Comparison</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white tracking-tight">
@@ -36,7 +36,7 @@ export const ComparisonSection: React.FC<ComparisonSectionProps> = ({ onOpenBook
               </div>
               <div className="col-span-4 p-4 sm:p-5 bg-gold-500/15 border-x border-gold-500/30 text-gold-300 flex items-center justify-between">
                 <span className="flex items-center gap-1.5 font-serif text-sm sm:text-base">
-                  <Sparkles className="w-4 h-4 text-gold-400" />
+                  <Award className="w-4 h-4 text-gold-400" />
                   <span>Golden Hair Studio</span>
                 </span>
                 <span className="text-[10px] bg-gold-500 text-obsidian-950 font-bold px-2 py-0.5 rounded uppercase">
