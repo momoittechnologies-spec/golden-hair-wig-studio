@@ -48,6 +48,8 @@ export default {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'shimmer': 'shimmer 2.5s infinite linear',
         'float': 'float 6s ease-in-out infinite',
+        'marquee': 'marquee 30s linear infinite',
+        'marquee-reverse': 'marquee-reverse 30s linear infinite',
       },
       keyframes: {
         shimmer: {
@@ -57,6 +59,14 @@ export default {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-10px)' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        'marquee-reverse': {
+          '0%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(0%)' },
         }
       }
     },

@@ -80,6 +80,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               Quick Exploration
             </h4>
             <ul className="space-y-2.5">
+              <li><a href="#gallery-slider" className="hover:text-gold-400 transition-colors">Featured Studios & Slider</a></li>
               <li><a href="#transformations" className="hover:text-gold-400 transition-colors">1-Hour Real Transformations</a></li>
               <li><a href="#patch-anatomy" className="hover:text-gold-400 transition-colors">Swiss Lace Anatomy</a></li>
               <li><a href="#why-us" className="hover:text-gold-400 transition-colors">Hair Studio vs Transplant</a></li>
@@ -110,14 +111,28 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
         </div>
 
         {/* Disclaimer & Bottom Bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-400 border-b border-slate-800/60 pb-6">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-gold-500" />
             <span>100% Non-Surgical, Non-Invasive Aesthetic Hair Replacement. All Rights Reserved.</span>
           </div>
 
           <div>
-            © {new Date().getFullYear()} Golden Hair Wig Studio. Kadapa • Proddatur • Madanapalle • Nandyal.
+            © {new Date().getFullYear()} Golden Hair Wig Studio. Kadapa (HQ) • Proddatur • Madanapalle • Nandyal.
+          </div>
+        </div>
+
+        {/* Powered by MOMO IT TECHNOLOGIES Strip */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+          <span className="text-slate-500 text-[11px]">
+            Designed for high performance, mobile speed & Cloudflare Edge delivery
+          </span>
+
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-obsidian-900 border border-gold-500/30 text-slate-300 shadow-sm">
+            <span className="text-[11px] font-medium text-slate-400">Powered by</span>
+            <span className="font-bold text-gold-gradient tracking-wide uppercase text-xs">
+              MOMO IT TECHNOLOGIES
+            </span>
           </div>
         </div>
 
