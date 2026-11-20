@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Phone, MessageCircle, MapPin, Menu, X, ChevronDown, CalendarCheck, Clock, ShieldCheck } from 'lucide-react';
+import { Phone, MessageCircle, MapPin, Menu, X, ChevronDown, CalendarCheck, Clock, ShieldCheck, Star } from 'lucide-react';
 import { BUSINESS_INFO, BRANCHES } from '../data/businessData';
 import { buildWhatsAppUrl, getDirectCallUrl } from '../utils/whatsapp';
+import { InstagramIcon, GoogleIcon } from './SocialIcons';
 
 interface NavbarProps {
   onOpenBooking: (branchId?: string, serviceId?: string) => void;
@@ -87,12 +88,42 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
             </span>
           </div>
 
-          <div className="flex items-center gap-4 text-xs">
-            <div className="flex items-center gap-1 text-neutral-500 text-[11px]">
+          <div className="flex items-center gap-3.5 text-xs">
+            <a
+              href={BUSINESS_INFO.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-neutral-700 hover:text-rose-600 font-medium flex items-center gap-1.5 transition-colors text-[11px]"
+              title="Follow Golden Hair Studio on Instagram"
+            >
+              <span className="p-0.5 rounded-xs bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white">
+                <InstagramIcon className="w-2.5 h-2.5 text-white" />
+              </span>
+              <span>{BUSINESS_INFO.instagramHandle}</span>
+            </a>
+
+            <span className="text-[#D8D0C3]">|</span>
+
+            <a
+              href={BUSINESS_INFO.googleReviewUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-neutral-700 hover:text-gold-700 font-medium flex items-center gap-1 transition-colors text-[11px]"
+              title="Read & Write Google Reviews"
+            >
+              <GoogleIcon className="w-3 h-3" />
+              <span>4.9★ Google Reviews</span>
+            </a>
+
+            <span className="text-[#D8D0C3] hidden lg:inline">|</span>
+
+            <div className="hidden lg:flex items-center gap-1 text-neutral-500 text-[11px]">
               <Clock className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
               <span>Mon-Sun: 9:00 AM - 9:00 PM</span>
             </div>
+
             <span className="text-[#D8D0C3]">|</span>
+
             <a
               href={getDirectCallUrl()}
               className="text-neutral-800 hover:text-gold-600 font-semibold flex items-center gap-1.5 transition-colors text-[11px]"
@@ -636,8 +667,34 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
               </Link>
             </nav>
 
-            {/* Bottom Button in Drawer */}
-            <div className="pt-4 border-t border-[#E8E2D8]">
+            {/* Bottom Button & Social Links in Drawer */}
+            <div className="pt-4 border-t border-[#E8E2D8] space-y-3">
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  href={BUSINESS_INFO.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-2.5 px-3 rounded-xl bg-white border border-[#E8E2D8] hover:border-rose-300 text-neutral-800 text-xs font-semibold flex items-center justify-center gap-1.5 shadow-2xs"
+                  aria-label="Follow on Instagram"
+                >
+                  <span className="p-0.5 rounded-xs bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white">
+                    <InstagramIcon className="w-2.5 h-2.5 text-white" />
+                  </span>
+                  <span>Instagram</span>
+                </a>
+
+                <a
+                  href={BUSINESS_INFO.googleReviewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-2.5 px-3 rounded-xl bg-white border border-[#E8E2D8] hover:border-gold-400 text-neutral-800 text-xs font-semibold flex items-center justify-center gap-1.5 shadow-2xs"
+                  aria-label="Rate Us on Google"
+                >
+                  <GoogleIcon className="w-3.5 h-3.5" />
+                  <span>Google Review</span>
+                </a>
+              </div>
+
               <button
                 type="button"
                 onClick={() => {

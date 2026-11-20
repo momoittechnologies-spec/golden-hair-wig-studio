@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Phone, MessageCircle, MapPin, Clock, CalendarCheck, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Phone, MessageCircle, MapPin, Clock, CalendarCheck, ShieldCheck, CheckCircle2, Star } from 'lucide-react';
 import { BUSINESS_INFO, BRANCHES, SERVICES } from '../data/businessData';
 import { buildWhatsAppUrl, getDirectCallUrl, getSecondaryCallUrl } from '../utils/whatsapp';
 import { SEOHead } from '../components/SEOHead';
+import { GoogleIcon, InstagramIcon } from '../components/SocialIcons';
 import confetti from 'canvas-confetti';
 
 export const ContactPage: React.FC = () => {
@@ -143,6 +144,50 @@ export const ContactPage: React.FC = () => {
             <p className="text-xs text-neutral-600 leading-relaxed">
               We operate continuously including Sundays to accommodate working professionals and clients traveling from surrounding taluks.
             </p>
+          </div>
+
+          {/* Social Community & Google Reviews Card */}
+          <div className="p-6 rounded-3xl bg-[#FAF8F4] border border-[#E8E2D8] space-y-4 shadow-xs">
+            <div className="flex items-center gap-2 text-gold-700 font-semibold text-xs uppercase tracking-wider">
+              <Star className="w-4 h-4 text-amber-500 fill-current" aria-hidden="true" />
+              <span>Reviews &amp; Social Media</span>
+            </div>
+
+            <div className="space-y-2.5">
+              <a
+                href={BUSINESS_INFO.googleReviewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3.5 rounded-2xl bg-white border border-[#E8E2D8] hover:border-gold-400 flex items-center justify-between text-xs transition-colors group shadow-2xs"
+              >
+                <div className="flex items-center gap-2.5">
+                  <GoogleIcon className="w-5 h-5 flex-shrink-0" />
+                  <div>
+                    <span className="font-bold text-neutral-900 group-hover:text-gold-700 block">Google Verified Reviews</span>
+                    <span className="text-[11px] text-neutral-500">4.9 ★ Rating • 500+ Consultations</span>
+                  </div>
+                </div>
+                <span className="text-gold-700 font-bold text-xs group-hover:underline">Review →</span>
+              </a>
+
+              <a
+                href={BUSINESS_INFO.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3.5 rounded-2xl bg-white border border-[#E8E2D8] hover:border-rose-300 flex items-center justify-between text-xs transition-colors group shadow-2xs"
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="p-1 rounded-md bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white flex-shrink-0">
+                    <InstagramIcon className="w-4 h-4 text-white" />
+                  </span>
+                  <div>
+                    <span className="font-bold text-neutral-900 group-hover:text-rose-600 block">Instagram Community</span>
+                    <span className="text-[11px] text-neutral-500">{BUSINESS_INFO.instagramHandle}</span>
+                  </div>
+                </div>
+                <span className="text-rose-600 font-bold text-xs group-hover:underline">Follow →</span>
+              </a>
+            </div>
           </div>
         </div>
 

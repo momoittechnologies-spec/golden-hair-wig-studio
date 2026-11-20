@@ -11,6 +11,8 @@
 
 | Verification Category | Status | Result / Metrics |
 | :--- | :--- | :--- |
+| **Google Reviews & Social Media Integration** | **PASSED** | Official review link (`https://www.reviewsmart.online/r/golden-hair-wig-studio`) wired into 4.9★ rating cards, "Write a Google Review" actions, and footer/drawer links. Official Instagram (`https://www.instagram.com/goldenhair_studio_kadapa/`) showcased via dedicated `InstagramShowcase` section with 4 transformation reels, top utility bar, and footer links. |
+| **Gold Color Palette Upgrade** | **PASSED** | 100% elimination of dull champagne/khaki tones (`#B58D4A` / `#96713B`). Updated to vibrant authentic royal gold (`#C99716` / `#AB7B08` / `#875D06`) matching the official Golden Hair Wig Studio logo. All 8 procedural illustrations updated and verified. |
 | **Solution Cards Illustrations** | **PASSED** | 8 bespoke high-detail, realistic vector illustrations created and integrated across Homepage (`#services`), Services Catalog (`/services`), and Service Detail pages (`/services/:slug`). 100% valid XML, 0 console errors, crisp rendering across Retina/4K and mobile screens. |
 | **Theme Compliance (Light Theme)** | **PASSED** | 100% elimination of dark/obsidian backgrounds. Bright, elegant palette adhered to across all pages: `#FFFFFF` (base), `#FAF8F4` (sections), `#E8E2D8` (borders), `#242424` (headings), `#505050` (body), `#B58D4A` (accent gold). |
 | **Vite Production Build** | **PASSED** | 0 errors, 0 warnings. Build time: `1.30s`. Bundle: `131.62 kB` gzip JS, `7.31 kB` gzip CSS. |

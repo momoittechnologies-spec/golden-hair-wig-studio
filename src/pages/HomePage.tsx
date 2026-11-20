@@ -10,6 +10,7 @@ import { PatchAnatomy3D } from '../components/PatchAnatomy3D';
 import { HairLossStageGuide } from '../components/HairLossStageGuide';
 import { BranchesSection } from '../components/BranchesSection';
 import { TestimonialsSection } from '../components/TestimonialsSection';
+import { InstagramShowcase } from '../components/InstagramShowcase';
 import { FAQSection } from '../components/FAQSection';
 import { SEOHead } from '../components/SEOHead';
 import { ShieldCheck, CalendarCheck, Phone, MessageCircle, Award, Sparkles } from 'lucide-react';
@@ -78,10 +79,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking }) => {
       {/* I. Service Locations (Kadapa, Proddatur, Madanapalle, Nandyal) */}
       <BranchesSection onOpenBooking={onOpenBooking} />
 
-      {/* J. Verified Customer Reviews */}
+      {/* J. Verified Customer Reviews & Google Rating */}
       <TestimonialsSection />
 
-      {/* K. Hair Replacement FAQs */}
+      {/* K. Official Instagram Community Showcase */}
+      <InstagramShowcase />
+
+      {/* L. Hair Replacement FAQs */}
       <FAQSection />
 
       {/* L. Final Consultation CTA (Clean Warm Ivory Card) */}

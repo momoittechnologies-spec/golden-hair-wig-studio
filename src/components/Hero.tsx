@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ShieldCheck, Phone, MessageCircle, CheckCircle2, ChevronRight, Award, Star } from 'lucide-react';
 import { BUSINESS_INFO } from '../data/businessData';
 import { buildWhatsAppUrl, getDirectCallUrl } from '../utils/whatsapp';
+import { InstagramIcon } from './SocialIcons';
 
 interface HeroProps {
   onOpenBooking: () => void;
@@ -94,20 +95,40 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
             </div>
 
             {/* Verified Trust Strip */}
-            <div className="pt-2 flex flex-wrap items-center gap-6 text-xs text-neutral-500 border-t border-[#E8E2D8] w-full max-w-xl">
+            <div className="pt-2 flex flex-wrap items-center gap-5 text-xs text-neutral-500 border-t border-[#E8E2D8] w-full max-w-xl">
               <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-gold-600" aria-hidden="true" />
                 <span className="font-medium text-neutral-700">Led by Prop. Mr. Swarup</span>
               </div>
-              <div className="flex items-center gap-1">
+
+              <a
+                href={BUSINESS_INFO.googleReviewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 group hover:text-gold-700 transition-colors"
+                title="Read and write Google Reviews for Golden Hair Wig Studio"
+              >
                 <div className="flex text-amber-500">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-3.5 h-3.5 fill-current" aria-hidden="true" />
                   ))}
                 </div>
-                <span className="font-semibold text-neutral-800 ml-1">4.9 / 5.0</span>
-                <span className="text-neutral-500">Google Verified</span>
-              </div>
+                <span className="font-semibold text-neutral-800 ml-1 group-hover:text-gold-700">4.9 / 5.0</span>
+                <span className="text-neutral-500 group-hover:underline">Google Reviews</span>
+              </a>
+
+              <a
+                href={BUSINESS_INFO.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-neutral-600 hover:text-rose-600 font-medium transition-colors"
+                title="Follow Golden Hair Studio on Instagram"
+              >
+                <span className="p-0.5 rounded-xs bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white">
+                  <InstagramIcon className="w-2.5 h-2.5 text-white" />
+                </span>
+                <span className="hover:underline">{BUSINESS_INFO.instagramHandle}</span>
+              </a>
             </div>
 
           </div>

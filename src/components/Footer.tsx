@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, MessageCircle, ShieldCheck, MapPin } from 'lucide-react';
+import { Phone, MessageCircle, ShieldCheck, MapPin, ExternalLink, Star } from 'lucide-react';
 import { BUSINESS_INFO, BRANCHES, SERVICES } from '../data/businessData';
 import { buildWhatsAppUrl, getDirectCallUrl } from '../utils/whatsapp';
+import { InstagramIcon, GoogleIcon } from './SocialIcons';
 
 interface FooterProps {
   onOpenBooking: () => void;
@@ -50,6 +51,35 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               >
                 <MessageCircle className="w-3.5 h-3.5 text-emerald-600" aria-hidden="true" />
                 <span>WhatsApp</span>
+              </a>
+            </div>
+
+            {/* Social & Review Proof Actions */}
+            <div className="pt-2 flex flex-wrap items-center gap-2.5">
+              <a
+                href={BUSINESS_INFO.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-2 rounded-xl bg-white hover:bg-rose-50/50 border border-[#E8E2D8] hover:border-rose-300 text-neutral-800 hover:text-rose-600 font-semibold text-xs flex items-center gap-1.5 transition-all shadow-2xs group"
+                aria-label={`Follow ${BUSINESS_INFO.instagramHandle} on Instagram`}
+              >
+                <span className="p-0.5 rounded-sm bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white">
+                  <InstagramIcon className="w-3 h-3 text-white" />
+                </span>
+                <span>Follow Instagram</span>
+                <ExternalLink className="w-3 h-3 text-neutral-400 group-hover:text-rose-500" aria-hidden="true" />
+              </a>
+
+              <a
+                href={BUSINESS_INFO.googleReviewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-2 rounded-xl bg-white hover:bg-amber-50/50 border border-[#E8E2D8] hover:border-gold-400 text-neutral-800 hover:text-gold-700 font-semibold text-xs flex items-center gap-1.5 transition-all shadow-2xs group"
+                aria-label="Review Golden Hair Wig Studio on Google"
+              >
+                <GoogleIcon className="w-3.5 h-3.5" />
+                <span>Leave a Google Review</span>
+                <ExternalLink className="w-3 h-3 text-neutral-400 group-hover:text-gold-600" aria-hidden="true" />
               </a>
             </div>
           </div>
@@ -138,6 +168,28 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               <li><Link to="/contact" className="hover:text-gold-700 transition-colors block">Contact & Location Maps</Link></li>
               <li><Link to="/privacy-policy" className="hover:text-gold-700 transition-colors block">Privacy & Photo Consent</Link></li>
               <li><Link to="/terms" className="hover:text-gold-700 transition-colors block">Cosmetic Service Terms</Link></li>
+              <li>
+                <a
+                  href={BUSINESS_INFO.googleReviewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-amber-700 hover:text-amber-800 font-medium flex items-center gap-1"
+                >
+                  <Star className="w-3 h-3 fill-current text-amber-500" />
+                  <span>Rate Us on Google ★★★★★</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={BUSINESS_INFO.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-rose-600 hover:text-rose-700 font-medium flex items-center gap-1"
+                >
+                  <InstagramIcon className="w-3 h-3 text-rose-500" />
+                  <span>Instagram: {BUSINESS_INFO.instagramHandle}</span>
+                </a>
+              </li>
               <li>
                 <button
                   type="button"
