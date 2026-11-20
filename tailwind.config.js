@@ -15,8 +15,8 @@ export default {
           border: '#E8E2D8',
           heading: '#242424',
           body: '#505050',
-          gold: '#B58D4A',
-          'gold-hover': '#96713B',
+          gold: '#C99716',
+          'gold-hover': '#AB7B08',
           sage: '#E8EEE8',
         },
         ivory: {
@@ -27,16 +27,16 @@ export default {
           300: '#E0D5C3',
         },
         gold: {
-          50: '#FAF6ED',
-          100: '#F3EAD5',
-          200: '#E6D4AA',
-          300: '#D5BC7C',
-          400: '#C5A359',
-          500: '#B58D4A', // Premium brand accent gold
-          600: '#96713B', // Hover accent
-          700: '#755428',
-          800: '#543B1A',
-          900: '#36240E',
+          50: '#FDF9ED',
+          100: '#FBF0CB',
+          200: '#F5E095',
+          300: '#ECCB60',
+          400: '#DFB233',
+          500: '#C99716', // Vibrant authentic brand gold (matches official logo)
+          600: '#AB7B08', // Rich dark gold hover accent
+          700: '#875D06', // High-contrast accessible text gold (> 5.5:1 on white)
+          800: '#664402',
+          900: '#422B00',
         },
         neutral: {
           50: '#FAF8F4',
@@ -75,12 +75,12 @@ export default {
         sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
-        'gold-gradient': 'linear-gradient(135deg, #C5A359 0%, #B58D4A 50%, #96713B 100%)',
-        'gold-soft': 'linear-gradient(135deg, #FAF6ED 0%, #F5F0E8 100%)',
+        'gold-gradient': 'linear-gradient(135deg, #ECCB60 0%, #C99716 50%, #AB7B08 100%)',
+        'gold-soft': 'linear-gradient(135deg, #FDF9ED 0%, #FBF0CB 100%)',
         'light-card': 'linear-gradient(180deg, #FFFFFF 0%, #FAF8F4 100%)',
       },
       boxShadow: {
-        'gold-soft': '0 4px 20px -2px rgba(181, 141, 74, 0.15)',
+        'gold-soft': '0 4px 20px -2px rgba(201, 151, 22, 0.22)',
         'light-card': '0 2px 12px -2px rgba(0, 0, 0, 0.05)',
         'light-hover': '0 10px 25px -4px rgba(0, 0, 0, 0.08)',
       },

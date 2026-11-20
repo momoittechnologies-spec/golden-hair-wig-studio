@@ -35,7 +35,7 @@ export const ContactPage: React.FC = () => {
         particleCount: 60,
         spread: 60,
         origin: { y: 0.7 },
-        colors: ['#B58D4A', '#FAF8F4', '#242424'],
+        colors: ['#C99716', '#DFB233', '#AB7B08', '#242424'],
       });
     } catch {
       // ignore

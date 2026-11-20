@@ -20,14 +20,14 @@
 
   /* High-contrast focus visible state */
   :focus-visible {
-    outline: 2px solid #B58D4A;
+    outline: 2px solid #C99716;
     outline-offset: 3px;
   }
 }
 
 @layer utilities {
   .text-gold-gradient {
-    background: linear-gradient(135deg, #B58D4A 0%, #96713B 100%);
+    background: linear-gradient(135deg, #DFB233 0%, #C99716 50%, #AB7B08 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -61,7 +61,7 @@
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #B58D4A;
+  background: #C99716;
 }
 
 /* Accessibility: respect user prefers-reduced-motion settings */

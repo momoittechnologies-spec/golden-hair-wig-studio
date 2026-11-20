@@ -2,7 +2,7 @@
   <defs>
     <linearGradient id="bgGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#FCFAF7" />
-      <stop offset="100%" stop-color="#F3ECE1" />
+      <stop offset="100%" stop-color="#FBF0CB" />
     </linearGradient>
 
     <!-- Scalp Base -->
@@ -68,12 +68,12 @@
 
     <!-- 3. TOP LAYER: Micro-Lace Hair System Base + Upward Flowing Hair -->
     <g transform="translate(0, -40)">
-      <path d="M 80 115 L 200 145 L 320 115 L 200 85 Z" fill="url(#sysBaseLayer)" stroke="#B58D4A" stroke-width="1.5" />
+      <path d="M 80 115 L 200 145 L 320 115 L 200 85 Z" fill="url(#sysBaseLayer)" stroke="#C99716" stroke-width="1.5" />
       <path d="M 80 115 L 80 120 L 200 150 L 200 145 Z" fill="#C9B197" />
       <path d="M 200 145 L 200 150 L 320 120 L 320 115 Z" fill="#B39B82" />
 
       <!-- Honeycomb Lattice on Top Base -->
-      <g stroke="#B58D4A" stroke-width="0.75" opacity="0.4" fill="none">
+      <g stroke="#C99716" stroke-width="0.75" opacity="0.4" fill="none">
         <path d="M 120 110 L 200 130 L 280 110" />
         <path d="M 140 100 L 200 115 L 260 100" />
       </g>
@@ -89,7 +89,7 @@
         <path d="M 250 115 Q 262 72 290 45" stroke-width="2.6" />
         <path d="M 270 110 Q 280 78 300 55" stroke-width="2.4" />
       </g>
-      <text x="50" y="98" font-family="'DM Sans', system-ui, sans-serif" font-size="9" font-weight="700" fill="#B58D4A">HAIR SYSTEM BASE</text>
+      <text x="50" y="98" font-family="'DM Sans', system-ui, sans-serif" font-size="9" font-weight="700" fill="#C99716">HAIR SYSTEM BASE</text>
     </g>
 
   </g>
@@ -103,7 +103,7 @@
 
   <g transform="translate(225, 230)">
     <rect width="130" height="28" rx="8" fill="#FFFFFF" stroke="#E8E2D8" stroke-width="1" filter="url(#softShadow4)" />
-    <circle cx="16" cy="14" r="5" fill="#B58D4A" />
+    <circle cx="16" cy="14" r="5" fill="#C99716" />
     <text x="28" y="18" font-family="'DM Sans', system-ui, sans-serif" font-size="10" font-weight="700" fill="#242424" letter-spacing="0.5">3–4 WEEKS RETENTION</text>
   </g>
 </svg>

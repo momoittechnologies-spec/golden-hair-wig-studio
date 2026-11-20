@@ -2,7 +2,7 @@
   <defs>
     <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#FCFAF7" />
-      <stop offset="100%" stop-color="#F3ECE1" />
+      <stop offset="100%" stop-color="#FBF0CB" />
     </linearGradient>
 
     <!-- Base Membrane Gradient -->
@@ -35,7 +35,7 @@
   <!-- The Custom Hair Patch Unit in 3D Perspective -->
   <g filter="url(#softShadow3)">
     <!-- Base Outer Polyurethane Perimeter Rim -->
-    <ellipse cx="200" cy="135" rx="105" ry="68" fill="url(#patchBaseGrad)" stroke="#B58D4A" stroke-width="2" />
+    <ellipse cx="200" cy="135" rx="105" ry="68" fill="url(#patchBaseGrad)" stroke="#C99716" stroke-width="2" />
     
     <!-- Micro-Perforations for Scalp Breathability -->
     <g fill="#A88B68" opacity="0.4">
@@ -80,21 +80,21 @@
 
     <!-- Natural Crown Swirl Center Dot -->
     <circle cx="190" cy="125" r="3.5" fill="#140F0C" />
-    <circle cx="190" cy="125" r="1.5" fill="#B58D4A" />
+    <circle cx="190" cy="125" r="1.5" fill="#C99716" />
   </g>
 
   <!-- Caliper Dimension Spec Indicators -->
-  <g stroke="#B58D4A" stroke-width="1" opacity="0.9">
+  <g stroke="#C99716" stroke-width="1" opacity="0.9">
     <!-- Horizontal Width Arrow -->
     <path d="M 95 210 L 305 210" stroke-dasharray="3 3" />
     <path d="M 95 205 L 95 215" /><path d="M 305 205 L 305 215" />
-    <text x="200" y="222" font-family="'DM Sans', system-ui, sans-serif" font-size="9" font-weight="700" fill="#B58D4A" text-anchor="middle">CUSTOM CROWN PERIMETER</text>
+    <text x="200" y="222" font-family="'DM Sans', system-ui, sans-serif" font-size="9" font-weight="700" fill="#C99716" text-anchor="middle">CUSTOM CROWN PERIMETER</text>
   </g>
 
   <!-- Bottom Spec Badges -->
   <g transform="translate(45, 235)">
     <rect width="145" height="28" rx="8" fill="#FFFFFF" stroke="#E8E2D8" stroke-width="1" filter="url(#softShadow3)" />
-    <circle cx="16" cy="14" r="5" fill="#B58D4A" />
+    <circle cx="16" cy="14" r="5" fill="#C99716" />
     <text x="28" y="18" font-family="'DM Sans', system-ui, sans-serif" font-size="10" font-weight="700" fill="#242424" letter-spacing="0.5">360° CROWN WHORL</text>
   </g>
 

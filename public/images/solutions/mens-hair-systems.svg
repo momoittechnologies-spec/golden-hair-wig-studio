@@ -2,7 +2,7 @@
   <defs>
     <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#FCFAF7" />
-      <stop offset="100%" stop-color="#F3ECE1" />
+      <stop offset="100%" stop-color="#FBF0CB" />
     </linearGradient>
 
     <linearGradient id="mannequinSkin" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -68,28 +68,28 @@
   </g>
 
   <!-- Technical Caliper Contour Markers -->
-  <g stroke="#B58D4A" stroke-width="1.2" opacity="0.85">
+  <g stroke="#C99716" stroke-width="1.2" opacity="0.85">
     <!-- Frontal Angle Indicator -->
-    <circle cx="282" cy="116" r="3" fill="#B58D4A" />
+    <circle cx="282" cy="116" r="3" fill="#C99716" />
     <path d="M 282 116 L 330 105" stroke-dasharray="2 3" />
-    <text x="335" y="108" font-family="'DM Sans', system-ui, sans-serif" font-size="9" font-weight="700" fill="#B58D4A">NATURAL RECESSION</text>
+    <text x="335" y="108" font-family="'DM Sans', system-ui, sans-serif" font-size="9" font-weight="700" fill="#C99716">NATURAL RECESSION</text>
 
     <!-- Sideburn Blend Indicator -->
-    <circle cx="160" cy="140" r="3" fill="#B58D4A" />
+    <circle cx="160" cy="140" r="3" fill="#C99716" />
     <path d="M 160 140 L 95 130" stroke-dasharray="2 3" />
-    <text x="50" y="133" font-family="'DM Sans', system-ui, sans-serif" font-size="9" font-weight="700" fill="#B58D4A">FADE BLEND</text>
+    <text x="50" y="133" font-family="'DM Sans', system-ui, sans-serif" font-size="9" font-weight="700" fill="#C99716">FADE BLEND</text>
   </g>
 
   <!-- Bottom Spec Pills -->
   <g transform="translate(45, 230)">
     <rect width="145" height="28" rx="8" fill="#FFFFFF" stroke="#E8E2D8" stroke-width="1" filter="url(#softShadow2)" />
-    <circle cx="16" cy="14" r="5" fill="#B58D4A" />
+    <circle cx="16" cy="14" r="5" fill="#C99716" />
     <text x="28" y="18" font-family="'DM Sans', system-ui, sans-serif" font-size="10" font-weight="700" fill="#242424" letter-spacing="0.5">CUSTOM FADE CUT</text>
   </g>
 
   <g transform="translate(225, 230)">
     <rect width="130" height="28" rx="8" fill="#FFFFFF" stroke="#E8E2D8" stroke-width="1" filter="url(#softShadow2)" />
-    <circle cx="16" cy="14" r="5" fill="#B58D4A" />
+    <circle cx="16" cy="14" r="5" fill="#C99716" />
     <text x="28" y="18" font-family="'DM Sans', system-ui, sans-serif" font-size="10" font-weight="700" fill="#242424" letter-spacing="0.5">REMY VIRGIN HAIR</text>
   </g>
 </svg>

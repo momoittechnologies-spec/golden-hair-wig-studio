@@ -75,7 +75,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         particleCount: 70,
         spread: 60,
         origin: { y: 0.6 },
-        colors: ['#B58D4A', '#FAF8F4', '#96713B', '#FFFFFF'],
+        colors: ['#C99716', '#DFB233', '#AB7B08', '#FDF9ED', '#FFFFFF'],
       });
     } catch {
       // ignore
@@ -293,7 +293,7 @@ Please share appointment availability and consultation guidance.`;
                     onClick={() => setContactMode('call')}
                     className={`py-2 px-3 rounded-xl border text-xs font-medium flex items-center justify-center gap-1.5 transition-all ${
                       contactMode === 'call'
-                        ? 'bg-[#FAF6ED] border-gold-500 text-gold-800 font-bold'
+                        ? 'bg-gold-50 border-gold-500 text-gold-800 font-bold'
                         : 'bg-[#FAF8F4] border-[#E8E2D8] text-neutral-600'
                     }`}
                   >

@@ -42,7 +42,7 @@ export const BranchesSection: React.FC<BranchesSectionProps> = ({ onOpenBooking 
                 onClick={() => setSelectedBranchId(branch.id)}
                 className={`p-3.5 sm:p-4 rounded-2xl border text-left transition-all duration-200 relative ${
                   isCurrent
-                    ? 'bg-[#FAF6ED] border-gold-500 shadow-xs'
+                    ? 'bg-gold-50 border-gold-500 shadow-xs'
                     : 'bg-[#FAF8F4] border-[#E8E2D8] hover:bg-[#F5F0E8] text-neutral-600'
                 }`}
               >

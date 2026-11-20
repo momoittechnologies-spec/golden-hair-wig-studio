@@ -34,7 +34,7 @@ export const ComparisonSection: React.FC<ComparisonSectionProps> = ({ onOpenBook
               <div className="col-span-4 p-4 sm:p-5 text-neutral-500 uppercase tracking-wider">
                 Feature / Consideration
               </div>
-              <div className="col-span-4 p-4 sm:p-5 bg-[#FAF6ED] border-x border-[#E8E2D8] text-gold-800 flex items-center justify-between">
+              <div className="col-span-4 p-4 sm:p-5 bg-gold-50 border-x border-[#E8E2D8] text-gold-800 flex items-center justify-between">
                 <span className="flex items-center gap-1.5 font-serif text-sm sm:text-base font-bold">
                   <Award className="w-4 h-4 text-gold-600" aria-hidden="true" />
                   <span>Golden Hair Studio</span>
@@ -59,7 +59,7 @@ export const ComparisonSection: React.FC<ComparisonSectionProps> = ({ onOpenBook
                   </div>
 
                   {/* Golden Hair Studio Value */}
-                  <div className="col-span-4 p-4 sm:p-5 bg-[#FAF6ED]/70 border-x border-[#E8E2D8] text-neutral-900 font-medium flex items-center gap-2">
+                  <div className="col-span-4 p-4 sm:p-5 bg-gold-50/70 border-x border-[#E8E2D8] text-neutral-900 font-medium flex items-center gap-2">
                     <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" aria-hidden="true" />
                     <span>{row.goldenStudio}</span>
                   </div>
