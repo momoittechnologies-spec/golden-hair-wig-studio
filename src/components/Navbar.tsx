@@ -412,17 +412,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
             </Link>
           </nav>
 
-          {/* Action on Right (Call Link & Consultation Button) */}
+          {/* Action on Right (Consultation CTA Button & Mobile Toggle) */}
           <div className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0">
-            <a
-              href={getDirectCallUrl()}
-              className="hidden 2xl:flex items-center gap-1.5 px-3 py-2 rounded-xl text-neutral-700 hover:text-gold-600 text-xs font-semibold hover:bg-[#FAF8F4] border border-transparent hover:border-[#E8E2D8] transition-colors"
-              aria-label="Direct Phone Line"
-            >
-              <Phone className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
-              <span>{BUSINESS_INFO.primaryPhone}</span>
-            </a>
-
             <button
               onClick={() => onOpenBooking()}
               className="px-3.5 sm:px-4 xl:px-5 py-2 sm:py-2.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-xs sm:text-sm shadow-xs hover:shadow-md transition-all active:scale-98 flex items-center gap-1.5 whitespace-nowrap"
