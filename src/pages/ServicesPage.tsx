@@ -18,7 +18,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenBooking }) => 
   );
 
   return (
-    <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-white">
       <SEOHead
         title="Non-Surgical Hair Replacement Services"
         description="Explore personalized non-surgical hair replacement solutions: Hair Bonding, Hair Clipping, Hair Taping, Hair Weaving, Ladies Extensions, and System Maintenance across Andhra Pradesh."
@@ -27,14 +27,14 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenBooking }) => 
 
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/15 border border-gold-500/30 text-gold-400 text-xs font-semibold uppercase tracking-wider">
-          <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FAF8F4] border border-[#E8E2D8] text-gold-700 text-xs font-semibold uppercase tracking-wider">
+          <Sparkles className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
           <span>Non-Surgical Aesthetic Hair Restoration</span>
         </div>
-        <h1 className="text-3xl sm:text-5xl font-serif font-extrabold text-white tracking-tight">
+        <h1 className="text-3xl sm:text-5xl font-serif font-bold text-neutral-900 tracking-tight">
           Personalized Hair Replacement Services
         </h1>
-        <p className="text-sm sm:text-base text-ivory/80 leading-relaxed">
+        <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
           From semi-permanent active-wear bonding to zero-adhesive daily clip-on systems, each procedure is customized for undetectable hairline realism using 100% human hair.
         </p>
 
@@ -46,8 +46,8 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenBooking }) => 
               onClick={() => setFilter(cat)}
               className={`px-4 py-2 rounded-xl text-xs font-semibold capitalize transition-all ${
                 filter === cat
-                  ? 'bg-gold-gradient text-charcoal shadow-gold-glow'
-                  : 'bg-neutral-900 border border-neutral-700 text-ivory/70 hover:text-white'
+                  ? 'bg-gold-500 text-white shadow-xs'
+                  : 'bg-[#FAF8F4] border border-[#E8E2D8] text-neutral-600 hover:text-neutral-900'
               }`}
             >
               {cat === 'all' ? 'All Services' : cat === 'men' ? "Men's Systems" : "Women's Solutions"}
@@ -61,22 +61,22 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenBooking }) => 
         {filteredServices.map((service) => (
           <article
             key={service.id}
-            className="flex flex-col rounded-3xl bg-neutral-900/80 border border-gold-500/20 hover:border-gold-500/50 transition-all duration-300 hover:-translate-y-1 overflow-hidden shadow-xl"
+            className="flex flex-col rounded-3xl bg-[#FAF8F4] border border-[#E8E2D8] hover:border-gold-400 transition-all duration-300 hover:-translate-y-1 overflow-hidden shadow-xs"
           >
             {/* Card Image */}
-            <div className="relative h-52 overflow-hidden">
+            <div className="relative h-52 overflow-hidden bg-neutral-100">
               <img
                 src={service.image}
                 alt={service.title}
                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent" />
-              <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-gold-gradient text-charcoal text-[11px] font-bold shadow-md">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-xs text-neutral-900 text-[11px] font-bold shadow-xs">
                 {service.badge}
               </span>
-              <span className="absolute bottom-3 right-4 text-xs font-semibold text-ivory/90 flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5 text-gold-400" aria-hidden="true" />
+              <span className="absolute bottom-3 right-4 text-xs font-semibold text-white flex items-center gap-1 drop-shadow-xs">
+                <Clock className="w-3.5 h-3.5 text-gold-300" aria-hidden="true" />
                 <span>{service.duration}</span>
               </span>
             </div>
@@ -84,26 +84,26 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenBooking }) => 
             {/* Card Body */}
             <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
               <div>
-                <h2 className="text-xl font-serif font-bold text-white hover:text-gold-300 transition-colors">
+                <h2 className="text-xl font-serif font-bold text-neutral-900 hover:text-gold-700 transition-colors">
                   <Link to={`/services/${service.slug}`}>
                     {service.title}
                   </Link>
                 </h2>
-                <p className="text-xs text-gold-400 font-medium mt-1">
+                <p className="text-xs text-gold-700 font-semibold mt-1">
                   {service.subtitle}
                 </p>
-                <p className="text-xs text-ivory/70 mt-3 line-clamp-3 leading-relaxed">
+                <p className="text-xs text-neutral-600 mt-3 line-clamp-3 leading-relaxed">
                   {service.description}
                 </p>
 
                 {/* Key Benefits */}
                 <div className="mt-4 space-y-2">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-ivory/60 block">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500 block">
                     Key Highlights:
                   </span>
                   {service.benefits.slice(0, 2).map((benefit, i) => (
-                    <div key={i} className="flex items-start gap-2 text-xs text-ivory/80">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-gold-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                    <div key={i} className="flex items-start gap-2 text-xs text-neutral-700">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-gold-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
                       <span>{benefit}</span>
                     </div>
                   ))}
@@ -111,19 +111,20 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenBooking }) => 
               </div>
 
               {/* Card Footer Actions */}
-              <div className="pt-4 border-t border-neutral-800 space-y-2">
+              <div className="pt-4 border-t border-[#E8E2D8] space-y-2">
                 <div className="grid grid-cols-2 gap-2">
                   <Link
                     to={`/services/${service.slug}`}
-                    className="py-2.5 px-3 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-ivory text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                    className="py-2.5 px-3 rounded-xl bg-white hover:bg-neutral-50 text-neutral-800 text-xs font-semibold border border-[#E8E2D8] flex items-center justify-center gap-1.5 transition-colors"
                   >
                     <span>Full Details</span>
                     <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                   </Link>
 
                   <button
+                    type="button"
                     onClick={() => onOpenBooking(undefined, service.id)}
-                    className="py-2.5 px-3 rounded-xl bg-gold-gradient text-charcoal font-bold text-xs shadow-gold-glow flex items-center justify-center gap-1"
+                    className="py-2.5 px-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-xs shadow-xs flex items-center justify-center gap-1 transition-colors"
                   >
                     <span>Book Fitting</span>
                   </button>
@@ -133,9 +134,9 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenBooking }) => 
                   href={buildWhatsAppUrl({ serviceTitle: service.title, enquiryType: 'consultation' })}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[11px] font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                  className="w-full py-2 rounded-xl bg-[#E8EEE8] hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-[11px] font-semibold flex items-center justify-center gap-1.5 transition-colors"
                 >
-                  <MessageCircle className="w-3.5 h-3.5" aria-hidden="true" />
+                  <MessageCircle className="w-3.5 h-3.5 text-emerald-600" aria-hidden="true" />
                   <span>Ask about {service.title} on WhatsApp</span>
                 </a>
               </div>
@@ -148,15 +149,15 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenBooking }) => 
       <ComparisonSection onOpenBooking={() => onOpenBooking()} />
 
       {/* Trust & Transparency Note */}
-      <div className="mt-12 p-6 sm:p-8 rounded-3xl bg-neutral-900 border border-gold-500/25 flex flex-col sm:flex-row items-center gap-6">
-        <div className="p-4 rounded-2xl bg-gold-500/10 text-gold-400 border border-gold-500/30 flex-shrink-0">
+      <div className="mt-12 p-6 sm:p-8 rounded-3xl bg-[#FAF8F4] border border-[#E8E2D8] flex flex-col sm:flex-row items-center gap-6">
+        <div className="p-4 rounded-2xl bg-white text-gold-600 border border-[#E8E2D8] flex-shrink-0 shadow-xs">
           <ShieldCheck className="w-8 h-8" aria-hidden="true" />
         </div>
         <div className="space-y-1 text-center sm:text-left">
-          <h3 className="text-lg font-serif font-bold text-white">
+          <h3 className="text-lg font-serif font-bold text-neutral-900">
             Ethical & Transparent Consultation
           </h3>
-          <p className="text-xs text-ivory/70 leading-relaxed">
+          <p className="text-xs text-neutral-600 leading-relaxed">
             {BUSINESS_INFO.cosmeticDisclaimer} Every client receives a private evaluation with Mr. Swarup or trained stylists to choose the exact attachment technique matching their lifestyle.
           </p>
         </div>

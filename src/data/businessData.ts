@@ -22,6 +22,7 @@ export interface Service {
   id: string;
   slug: string;
   title: string;
+  shortTitle: string;
   subtitle: string;
   badge: string;
   duration: string;
@@ -32,28 +33,15 @@ export interface Service {
   process: string[];
   maintenance: string;
   image: string;
-  category: 'men' | 'women' | 'all';
+  category: 'hair-replacement' | 'core-services' | 'specialized';
   faqs: { question: string; answer: string }[];
-}
-
-export interface TransformationItem {
-  id: string;
-  title: string;
-  subtitle: string;
-  clientType: string;
-  ageGroup: string;
-  serviceUsed: string;
-  timeTaken: string;
-  beforeImage: string;
-  afterImage: string;
-  description: string;
 }
 
 export const BUSINESS_INFO = {
   name: "Golden Hair Wig Studio",
   shortName: "Golden Hair Studio",
-  tagline: "Non-Surgical Hair Replacement & Premium Hair Systems",
-  experienceTagline: "Natural-Looking Hair. Renewed Confidence.",
+  tagline: "Personalized Non-Surgical Hair Replacement",
+  experienceTagline: "Natural-Looking Hair Replacement, Designed for Your Confidence",
   proprietor: "Mr. Swarup",
   primaryPhone: "+91 8617264887",
   secondaryPhone: "+91 8609256195",
@@ -61,8 +49,8 @@ export const BUSINESS_INFO = {
   rawSecondaryPhone: "918609256195",
   email: "contact@goldenhairstudio.com",
   rating: "4.9",
-  reviewCount: "500+ Verified Consultations",
-  experienceYears: "10+ Years Dedicated Experience",
+  reviewCount: "500+ Consultations",
+  experienceYears: "10+ Years",
   transformationTime: "60 Minutes",
   cosmeticDisclaimer: "Hair systems and patches are non-surgical, external cosmetic hair replacement solutions. They do not stimulate biological hair growth or alter underlying follicular health. Results, maintenance intervals, and wear duration vary depending on individual scalp characteristics, lifestyle, and climate.",
 };
@@ -71,7 +59,7 @@ export const BRANCHES: Branch[] = [
   {
     id: "kadapa-hq",
     slug: "kadapa",
-    name: "Kadapa (Studio Headquarters)",
+    name: "Kadapa Headquarters",
     isHQ: true,
     address: "1st Floor, Door No: 4-622-1, Railway Station Road",
     landmark: "Beside Shirdi Sai Sweets, Near Old / New RTC Bus Stand",
@@ -84,8 +72,8 @@ export const BRANCHES: Branch[] = [
     googleMapsUrl: "https://maps.google.com/?q=Beside+Shirdi+Sai+Sweets+Railway+Station+Road+Kadapa",
     image: "/images/client/poster_banner.jpg",
     isAddressConfirmed: true,
-    description: "Our flagship Kadapa headquarters is equipped with private VIP styling suites, an extensive inventory of French and Swiss lace systems, and dedicated servicing bays led directly by Proprietor Mr. Swarup.",
-    landmarksAround: ["Shirdi Sai Sweets", "RTC Bus Stand", "Railway Station Road", "Kadapa Main Bazaar"]
+    description: "Our flagship Kadapa headquarters features private VIP styling suites, an extensive inventory of French and Swiss lace systems, and dedicated servicing bays led directly by Proprietor Mr. Swarup.",
+    landmarksAround: ["Shirdi Sai Sweets", "RTC Bus Stand Kadapa", "Railway Station Road", "Seven Roads Circle"]
   },
   {
     id: "proddatur",
@@ -93,7 +81,7 @@ export const BRANCHES: Branch[] = [
     name: "Proddatur Studio Hub",
     isHQ: false,
     address: "Commercial Center, RTC Bus Stand Road",
-    landmark: "Near Clock Tower Area (Exact Door No. shared upon appointment booking)",
+    landmark: "Near Clock Tower Area (Exact Door No. confirmed upon appointment booking)",
     city: "Proddatur",
     state: "Andhra Pradesh",
     pincode: "516360",
@@ -103,8 +91,8 @@ export const BRANCHES: Branch[] = [
     googleMapsUrl: "https://maps.google.com/?q=Proddatur+Andhra+Pradesh",
     image: "/images/client/poster_banner.jpg",
     isAddressConfirmed: false,
-    description: "Serving clients in Proddatur and nearby towns with premium non-surgical hair replacement, custom patch fittings, and routine monthly maintenance sessions in a discreet environment.",
-    landmarksAround: ["RTC Bus Stand Road", "Clock Tower Commercial Circle", "Mydukur Road"]
+    description: "Serving clients in Proddatur, Mydukur, and Jammalamadugu with custom non-surgical hair replacement, personalized patch fittings, and routine monthly servicing in a discreet, private environment.",
+    landmarksAround: ["RTC Bus Stand Road", "Clock Tower Commercial Circle", "Mydukur Road", "Gandhi Road"]
   },
   {
     id: "madanapalle",
@@ -112,7 +100,7 @@ export const BRANCHES: Branch[] = [
     name: "Madanapalle Studio Hub",
     isHQ: false,
     address: "Bangalore Road Commercial Plaza",
-    landmark: "Near NTR Circle (Exact Door No. shared upon appointment booking)",
+    landmark: "Near NTR Circle (Exact Door No. confirmed upon appointment booking)",
     city: "Madanapalle",
     state: "Andhra Pradesh",
     pincode: "517325",
@@ -122,8 +110,8 @@ export const BRANCHES: Branch[] = [
     googleMapsUrl: "https://maps.google.com/?q=Madanapalle+Andhra+Pradesh",
     image: "/images/client/services_card.jpg",
     isAddressConfirmed: false,
-    description: "Conveniently accessible for clients across Annamayya and Chittoor districts, offering custom hair systems, tape attachment, and ladies crown extensions.",
-    landmarksAround: ["NTR Circle", "Bangalore Road", "Madanapalle Bus Station"]
+    description: "Conveniently accessible for clients across Annamayya and Chittoor districts, offering custom hair systems, zero-glue clip systems, and ladies crown extensions.",
+    landmarksAround: ["NTR Circle", "Bangalore Road", "Madanapalle Bus Station", "C.T.M. Road"]
   },
   {
     id: "nandyal",
@@ -131,7 +119,7 @@ export const BRANCHES: Branch[] = [
     name: "Nandyal Studio Hub",
     isHQ: false,
     address: "Main Commercial Road",
-    landmark: "Near Sanjeeva Nagar Gate / Gandhi Chowk (Exact Door No. shared upon appointment booking)",
+    landmark: "Near Sanjeeva Nagar Gate / Gandhi Chowk (Exact Door No. confirmed upon appointment booking)",
     city: "Nandyal",
     state: "Andhra Pradesh",
     pincode: "518501",
@@ -141,63 +129,164 @@ export const BRANCHES: Branch[] = [
     googleMapsUrl: "https://maps.google.com/?q=Nandyal+Andhra+Pradesh",
     image: "/images/client/services_card.jpg",
     isAddressConfirmed: false,
-    description: "Providing high-density non-surgical hair bonding, clipping systems, and professional re-servicing for clients in Nandyal and Kurnool regions.",
-    landmarksAround: ["Gandhi Chowk", "Sanjeeva Nagar Gate", "RTC Bus Stand Nandyal"]
+    description: "Providing high-density non-surgical hair bonding, clipping systems, and professional re-servicing for clients across Nandyal and Kurnool districts.",
+    landmarksAround: ["Gandhi Chowk", "Sanjeeva Nagar Gate", "RTC Bus Stand Nandyal", "Atmakur Bus Stand"]
   },
 ];
 
 export const SERVICES: Service[] = [
   {
-    id: "hair-bonding",
-    slug: "hair-bonding",
-    title: "Non-Surgical Hair Bonding",
-    subtitle: "Secure, semi-permanent attachment for active lifestyles",
-    badge: "Most Popular",
+    id: "non-surgical-hair-replacement",
+    slug: "non-surgical-hair-replacement",
+    title: "Non-Surgical Hair Replacement",
+    shortTitle: "Non-Surgical Replacement",
+    subtitle: "Complete instant hair restoration in just 60 minutes",
+    badge: "Core Solution",
     duration: "45–60 Mins",
-    durability: "3 to 4 Weeks per bonding cycle",
-    idealFor: "Active lifestyles, daily commuters, gym enthusiasts, and continuous day-and-night wear",
-    description: "Hair Bonding is our most requested non-surgical hair replacement method. A custom-tailored 100% human hair system is bonded to the scalp perimeter using dermatologically tested, hypoallergenic adhesive resins. It integrates seamlessly with your existing hair for a totally undetectable front hairline.",
+    durability: "Semi-permanent or daily removable",
+    idealFor: "Men and women facing moderate to advanced crown thinning, receding hairline, or complete baldness",
+    description: "Our signature non-surgical hair replacement procedure uses ultra-breathable micro-skin or Swiss lace bases. Every single 100% human hair strand is hand-knotted to replicate natural follicular emergence. The system is customized to your exact hair color, wave pattern, and density for an undetectable hairline.",
     benefits: [
-      "Allows swimming, shampooing, workouts, and helmet wearing without displacement",
-      "Virtually invisible micro-thin front hairline",
-      "Exact matching of natural hair color, density, wave, and curl",
-      "Zero surgical incisions, zero needles, and zero downtime"
+      "Immediate results in just 60 minutes with zero downtime",
+      "Undetectable front hairline that looks like natural growing hair",
+      "Completely pain-free: no surgery, incisions, bleeding, or scars",
+      "Full freedom for sports, gym workouts, swimming, and wearing bike helmets"
     ],
     process: [
-      "Personal scalp contour mapping & custom patch sizing",
-      "Hair color, caliber, and density matching",
-      "Application of dermatologically safe scalp barrier & bonding resin",
-      "Precision cut, seamless blend, and custom salon styling"
+      "Confidential scalp mapping and thinning assessment",
+      "Exact hair texture, density, and color matching",
+      "Precision perimeter fitting and secure attachment",
+      "Custom salon haircut, fade blend, and modern styling"
     ],
-    maintenance: "Requires professional servicing every 25 to 30 days to clean the scalp, recondition hair fibers, and apply fresh bonding adhesive.",
-    image: "/images/client/services_card.jpg",
-    category: "men",
+    maintenance: "Depends on chosen attachment method: bonding requires servicing every 3–4 weeks; clipping can be removed and cleaned at home.",
+    image: "/images/slider/slide_1.jpg",
+    category: "hair-replacement",
     faqs: [
       {
-        question: "Can I shower and wear a bike helmet with bonded hair?",
-        answer: "Yes. Once the bonding adhesive cures (typically within 24 hours), it is waterproof and heat-resistant, permitting normal showers and daily helmet use."
+        question: "How is non-surgical hair replacement different from a hair transplant?",
+        answer: "A hair transplant is a surgical procedure that takes months to show sparse results and depends on donor follicles. Non-surgical replacement delivers full, thick, natural-looking density immediately in 1 hour with zero pain or surgery."
       },
       {
-        question: "Does the bonding glue harm my existing hair or scalp?",
-        answer: "No. We utilize dermatologically approved, medical-grade adhesives designed specifically for scalp contact. A patch test is conducted for sensitive skin."
+        question: "Does it look artificial or wig-like?",
+        answer: "No. Because we use 100% human hair hand-tied on transparent Swiss lace or ultra-thin skin, your real scalp shows through naturally."
+      }
+    ]
+  },
+  {
+    id: "mens-hair-systems",
+    slug: "mens-hair-systems",
+    title: "Hair Systems for Men",
+    shortTitle: "Men's Hair Systems",
+    subtitle: "Tailored masculine hairlines with modern fade styling",
+    badge: "Men's Specialist",
+    duration: "60 Mins",
+    durability: "3 to 4 Weeks per bonding cycle",
+    idealFor: "Men dealing with male pattern baldness (Norwood Stages 2 to 7) wanting a sharp, confident appearance",
+    description: "Designed specifically for men, our modern hair systems combine ultra-fine French lace frontals with durable polyurethane perimeters. We specialize in contemporary fade haircuts, pompadours, and textured crops that blend seamlessly with your native side hair.",
+    benefits: [
+      "Customized temple angles and gradual, natural front recession",
+      "Withstands high-sweat environments, sports, and daily helmet wear",
+      "Available with custom grey percentage blending for mature realism",
+      "Painless, reversible, and fully restylable at any time"
+    ],
+    process: [
+      "Hair loss stage evaluation (Norwood classification)",
+      "Selection of base type (Swiss lace, mono, or thin-skin)",
+      "Secure medical attachment tailored to your daily routine",
+      "Precision razor blending with your natural side hair"
+    ],
+    maintenance: "Monthly servicing recommended every 25–30 days for hygiene and adhesive renewal.",
+    image: "/images/slider/slide_3.jpg",
+    category: "hair-replacement",
+    faqs: [
+      {
+        question: "Can I ride my two-wheeler with a bike helmet?",
+        answer: "Yes, absolutely! With our medical bonding or weaving methods, the system will not move or slip when taking off or putting on a helmet."
+      }
+    ]
+  },
+  {
+    id: "hair-patch",
+    slug: "hair-patch",
+    title: "Hair Patch Solutions & Fitting",
+    shortTitle: "Hair Patch Solutions",
+    subtitle: "Targeted crown and frontal bald spot coverage",
+    badge: "Most Requested",
+    duration: "45–60 Mins",
+    durability: "Custom-fitted system life: 1 to 2 years with care",
+    idealFor: "Individuals with circular crown thinning or frontal balding patches",
+    description: "A hair patch is a localized cosmetic hair system crafted to cover specific bald areas while preserving all your healthy existing side and back hair. We hand-craft each patch to match your scalp contour exactly, securing it comfortably with bonding, clips, or tape.",
+    benefits: [
+      "Preserves all your healthy biological natural hair",
+      "Ultra-lightweight mesh base allows total heat and sweat escape",
+      "Looks completely natural under harsh direct sunlight and close inspection",
+      "Cost-effective alternative to expensive surgical interventions"
+    ],
+    process: [
+      "Accurate measurement of the balding crown zone",
+      "Selection of hair base and matching virgin human hair",
+      "Attachment using hypoallergenic bonding or silicone clips",
+      "Layering and texturing by Mr. Swarup"
+    ],
+    maintenance: "Routine servicing every 3–4 weeks for bonded patches; clip patches can be maintained at home with periodic salon conditioning.",
+    image: "/images/slider/slide_2.jpg",
+    category: "hair-replacement",
+    faqs: [
+      {
+        question: "How much does a hair patch cost?",
+        answer: "Hair patch pricing typically ranges from ₹8,000 to ₹18,000 depending on the lace base, hair length, and attachment method. We provide transparent pricing during your consultation."
+      }
+    ]
+  },
+  {
+    id: "hair-bonding",
+    slug: "hair-bonding",
+    title: "Hair Bonding Process",
+    shortTitle: "Hair Bonding",
+    subtitle: "Secure, semi-permanent attachment for continuous active wear",
+    badge: "Best for Active Lifestyles",
+    duration: "45–60 Mins",
+    durability: "3 to 4 Weeks per session",
+    idealFor: "Gym enthusiasts, swimmers, daily commuters, and continuous day-and-night wearers",
+    description: "Hair Bonding secures the hair patch to your scalp perimeter using US FDA-compliant, dermatologically tested hypoallergenic adhesive resins. It blends invisibly with your surrounding hair, allowing you to live an active lifestyle without worrying about shifting.",
+    benefits: [
+      "Shower, shampoo, workout, and swim with complete confidence",
+      "Undetectable front hairline that allows swept-back hairstyles",
+      "Hypoallergenic scalp-safe bonding resins",
+      "Zero downtime: walk out styled and ready for everyday life"
+    ],
+    process: [
+      "Scalp sanitation and barrier protection",
+      "Precision alignment of the custom hair patch",
+      "Application of medical bonding resin along the perimeter",
+      "Integration cut, blow-dry, and styling"
+    ],
+    maintenance: "Requires servicing every 25 to 30 days to cleanse the scalp, condition hair fibers, and apply fresh bonding adhesive.",
+    image: "/images/client/services_card.jpg",
+    category: "core-services",
+    faqs: [
+      {
+        question: "Is hair bonding painful or irritating?",
+        answer: "No, it is 100% painless. We use dermatologically safe scalp protectors. We also offer patch testing for sensitive skin."
       }
     ]
   },
   {
     id: "hair-clipping",
     slug: "hair-clipping",
-    title: "Daily Hair Clipping Systems",
-    subtitle: "Flexible daily wear with zero glues or chemicals on scalp",
-    badge: "Easiest Daily Maintenance",
+    title: "Hair Clipping Process",
+    shortTitle: "Hair Clipping",
+    subtitle: "Zero-glue daily removable system for maximum flexibility",
+    badge: "Easiest Daily Wear",
     duration: "30–45 Mins",
-    durability: "1 to 2 Years system lifespan with home removal",
-    idealFor: "Clients desiring the freedom to remove the system before sleep or who prefer zero adhesives",
-    description: "The Hair Clipping method uses miniature, silicone-cushioned stainless steel clips sewn along the perimeter of the hair system. The clips clasp gently and securely onto your existing side and back hair without tension, allowing you to attach or remove the piece at home in under 15 seconds.",
+    durability: "Removable in 10 seconds; system life 1.5–2 years",
+    idealFor: "Clients who prefer no adhesives on their skin or want the freedom to remove hair before sleeping",
+    description: "The Hair Clipping method uses miniature, silicone-cushioned stainless steel clips sewn along the border of the hair patch. The clips latch gently onto your existing side and back hair without tension, allowing you to take it off in 10 seconds before sleep and re-clip it in the morning.",
     benefits: [
       "Zero adhesives, tapes, or chemical contact with your scalp skin",
-      "Easily taken off before bedtime and reattached in the morning",
-      "Significantly extends system lifespan (often up to 1.5 - 2 years)",
-      "Maximum scalp ventilation and breathing during sleep"
+      "Easily taken off at night for maximum scalp breathing and comfort",
+      "Significantly prolongs hair patch lifespan up to 1.5 to 2 years",
+      "Simple home maintenance with sulfate-free shampoo"
     ],
     process: [
       "Balding zone measurement and density matching",
@@ -205,81 +294,79 @@ export const SERVICES: Service[] = [
       "One-on-one demonstration of self-removal and clipping technique",
       "Custom layering to blend naturally with your native hair"
     ],
-    maintenance: "Wash gently at home with sulfate-free shampoo every 7–10 days; visit studio every 2–3 months for deep conditioning.",
+    maintenance: "Wash gently at home every 7–10 days; visit studio every 2–3 months for deep conditioning.",
     image: "/images/client/poster_banner.jpg",
-    category: "men",
+    category: "core-services",
     faqs: [
       {
-        question: "Can the clip system slip off in windy weather?",
+        question: "Can clip systems slip off in the wind?",
         answer: "No. The medical silicone grips hold natural hair firmly without pulling, ensuring stability in routine daily wind and light exercise."
-      },
-      {
-        question: "Do I need to visit the studio every month for clips?",
-        answer: "No monthly studio visits are mandatory. You manage cleaning at home and only visit periodically for deep conditioning or haircut touchups."
       }
     ]
   },
   {
-    id: "hair-taping",
-    slug: "hair-taping",
-    title: "Medical Hair Taping Method",
-    subtitle: "Gentle, easily replaceable double-sided attachment",
-    badge: "Sensitive Scalp Friendly",
+    id: "hair-system-maintenance",
+    slug: "hair-system-maintenance",
+    title: "Hair System Maintenance & Servicing",
+    shortTitle: "System Maintenance",
+    subtitle: "Complete cleaning, scalp hygiene, conditioning, and fresh re-fitting",
+    badge: "Essential Routine Care",
     duration: "30–45 Mins",
-    durability: "1 to 2 Weeks per tape cycle",
-    idealFor: "Individuals with sensitive skin or who prefer DIY bi-weekly home maintenance",
-    description: "Hair Taping utilizes hypo-allergenic, medical-grade double-sided adhesive contour strips placed along the polyurethane perimeter of the system. It offers firm hold with gentle release, making it ideal for clients with sensitive skin.",
+    durability: "Fresh 3–4 week hold",
+    idealFor: "All existing hair system wearers needing periodic routine maintenance",
+    description: "Regular servicing maintains optimal scalp hygiene and keeps hair fibers soft, bouncy, and undetectable. Service includes gentle detachment, ultrasonic base cleansing, argan oil deep conditioning, scalp exfoliation, and fresh bonding.",
     benefits: [
-      "Very gentle on sensitive or allergy-prone skin",
-      "Resistant to perspiration and everyday humidity",
-      "Easy peel-and-apply maintenance you can perform yourself",
-      "Breathable central lace for effective heat dissipation"
+      "Substantially prolongs the usable lifespan of your hair system",
+      "Restores natural sheen and removes environmental buildup",
+      "Thorough scalp cleansing and anti-bacterial tonic treatment",
+      "Precision haircut touchup and fresh restyling included"
     ],
     process: [
-      "Scalp sanitation and anti-bacterial prep",
-      "Application of protective scalp barrier",
-      "Contour tape strip alignment along perimeter borders",
-      "Placement, hairline alignment, and final blending"
+      "Painless solvent-release detachment",
+      "Ultrasonic base cleaning and adhesive residue removal",
+      "Scalp wash, conditioning massage, and sanitization",
+      "Fresh bonding/taping and precision restyling"
     ],
-    maintenance: "Tape replacement recommended every 10–14 days for peak hygiene and secure adhesion.",
-    image: "/images/client/services_card.jpg",
-    category: "men",
+    maintenance: "Recommended every 25 to 30 days for continuous comfort.",
+    image: "/images/client/poster_banner.jpg",
+    category: "core-services",
     faqs: [
       {
-        question: "Can I replace the tapes myself at home?",
-        answer: "Yes! We teach you the exact solvent-release and re-taping process so you can service your hair system independently at home."
+        question: "How long does a routine service session take?",
+        answer: "Typically 35 to 45 minutes from arrival to freshly styled exit."
       }
     ]
   },
   {
-    id: "hair-weaving",
-    slug: "hair-weaving",
-    title: "Non-Surgical Hair Weaving",
-    subtitle: "Interlocked perimeter anchor with zero glues on skin",
-    badge: "100% Non-Adhesive",
-    duration: "60–75 Mins",
-    durability: "4 to 6 Weeks between tightening sessions",
-    idealFor: "Clients who want continuous 24/7 security without adhesive chemicals",
-    description: "In Hair Weaving, a thin, flat micro-track is created along the perimeter of your existing hair, and the base of the hair system is interlocked securely along this track using specialized thread. No adhesives make contact with your scalp.",
+    id: "hair-wigs",
+    slug: "hair-wigs",
+    title: "Natural Human Hair Wigs",
+    shortTitle: "Hair Wigs",
+    subtitle: "Full-cap natural hair coverage for extensive hair loss",
+    badge: "Full Coverage",
+    duration: "45–60 Mins",
+    durability: "Long lasting (1 to 2 years)",
+    idealFor: "Clients experiencing total alopecia, medical hair loss, or extensive thinning",
+    description: "Our full-cap human hair wigs are constructed with feather-light, breathable mesh caps and hand-tied 100% natural human hair. Each wig is cut, thinned, and styled specifically to complement your face shape for comfortable all-day wear.",
     benefits: [
-      "Completely adhesive-free — zero chemicals touching your skin",
-      "Exceptionally secure — withstands vigorous workouts and swimming",
-      "Allows normal showering and active lifestyle routines",
-      "Seamless integration with side hair"
+      "Complete coverage for total alopecia or medical hair loss",
+      "Feather-light breathable mesh prevents heat and sweat buildup",
+      "100% human hair that can be washed, heat-styled, and parted naturally",
+      "Secure, non-slip comfort bands"
     ],
     process: [
-      "Perimeter micro-track preparation with existing hair",
-      "Careful interlocking and tension-balanced stitching",
-      "Comfort inspection to prevent any traction stress",
-      "Styling and finishing razor blend"
+      "Head circumference mapping and cap sizing",
+      "Selection of hair length, texture, and density",
+      "Precision face-framing cut and salon blow-dry",
+      "Daily wear and care demonstration"
     ],
-    maintenance: "Tightening and track repositioning required every 30–45 days as your biological perimeter hair grows.",
-    image: "/images/client/services_card.jpg",
-    category: "men",
+    maintenance: "Gentle home washing with specialized wig shampoo; periodic studio re-conditioning.",
+    image: "/images/slider/slide_1.jpg",
+    category: "specialized",
     faqs: [
       {
-        question: "Does weaving hurt or cause tension headaches?",
-        answer: "When executed by our trained specialists, the tension is balanced comfortably so that it feels natural within a few hours of fitting."
+        question: "Are these synthetic wigs or real human hair?",
+        answer: "We use 100% natural virgin human hair, which looks vastly superior to synthetic plastic wigs and allows natural movement."
       }
     ]
   },
@@ -287,6 +374,7 @@ export const SERVICES: Service[] = [
     id: "ladies-extensions",
     slug: "ladies-extensions",
     title: "Ladies Hair Toppers & Extensions",
+    shortTitle: "Ladies Solutions",
     subtitle: "Crown volume restoration and invisible length enhancement",
     badge: "Women's Specialist",
     duration: "45–60 Mins",
@@ -307,43 +395,11 @@ export const SERVICES: Service[] = [
     ],
     maintenance: "Simple routine home maintenance with periodic salon conditioning visits.",
     image: "/images/client/services_card.jpg",
-    category: "women",
+    category: "specialized",
     faqs: [
       {
         question: "Can I style and wash the topper like my own hair?",
         answer: "Yes, because it is made of 100% human hair, you can wash, condition, blow-dry, and heat-style it just like your own hair."
-      }
-    ]
-  },
-  {
-    id: "patch-servicing",
-    slug: "patch-servicing",
-    title: "System Servicing & Re-Styling",
-    subtitle: "Comprehensive hygiene, conditioning, and fresh re-fitting",
-    badge: "Essential Routine Care",
-    duration: "30–45 Mins",
-    durability: "Fresh 3–4 week hold",
-    idealFor: "All existing hair system wearers needing routine monthly maintenance",
-    description: "Regular servicing maintains optimal scalp hygiene and keeps hair fibers soft, bouncy, and undetectable. Service includes gentle detachment, ultrasonic base cleansing, argan oil deep conditioning, scalp exfoliation, and fresh bonding.",
-    benefits: [
-      "Substantially prolongs the usable lifespan of your hair system",
-      "Restores natural sheen and removes environmental buildup",
-      "Thorough scalp cleansing and anti-bacterial tonic treatment",
-      "Precision haircut touchup and fresh restyling included"
-    ],
-    process: [
-      "Painless solvent-release detachment",
-      "Ultrasonic base cleaning and adhesive residue removal",
-      "Scalp wash, conditioning massage, and sanitization",
-      "Fresh bonding/taping and precision restyling"
-    ],
-    maintenance: "Recommended every 25 to 30 days for continuous comfort.",
-    image: "/images/client/poster_banner.jpg",
-    category: "all",
-    faqs: [
-      {
-        question: "How long does a routine service session take?",
-        answer: "Typically 35 to 45 minutes from arrival to freshly styled exit."
       }
     ]
   }
@@ -399,7 +455,7 @@ export const FAQS = [
   },
   {
     question: "Can I shower, swim, exercise, and wear a helmet normally?",
-    answer: "Yes. With our professional Hair Bonding and Weaving procedures, the hair system is securely attached with water-resistant, dermatologically tested materials. You can participate in sports, ride two-wheelers with helmets, and shower with confidence."
+    answer: "Yes. With our professional Hair Bonding procedure, the hair system is securely attached with water-resistant, dermatologically tested materials. You can participate in sports, ride two-wheelers with helmets, and shower with confidence."
   },
   {
     question: "Does non-surgical hair replacement cure or reverse biological hair loss?",

@@ -28,7 +28,7 @@ const STAGES: StageCard[] = [
     stageName: 'Norwood Grade 4-5',
     hairLossLevel: 'Advanced Frontal & Crown Thinning',
     symptoms: 'Bald crown vertex expanding towards receding frontal hairline.',
-    recommendedSolution: 'Full Crown Miraj Swiss Lace System',
+    recommendedSolution: 'Full Crown Swiss Lace System',
     recommendedTechnique: 'Hair Bonding Process (Semi-Permanent)',
     duration: '60 Minutes',
     suitability: 'men'
@@ -38,7 +38,7 @@ const STAGES: StageCard[] = [
     stageName: 'Norwood Grade 6-7',
     hairLossLevel: 'Extensive Scalp Baldness',
     symptoms: 'Complete loss of hair on crown and top, hair remains only on sides and back.',
-    recommendedSolution: 'Full Top Bio-Skin & Monofilament System',
+    recommendedSolution: 'Full Top Micro-Skin & Lace System',
     recommendedTechnique: 'Hair Bonding or Weaving',
     duration: '60 Minutes',
     suitability: 'men'
@@ -61,114 +61,109 @@ interface HairLossStageGuideProps {
 
 export const HairLossStageGuide: React.FC<HairLossStageGuideProps> = ({ onOpenBooking }) => {
   const [filter, setFilter] = useState<'all' | 'men' | 'women'>('all');
+  const [selectedStageId, setSelectedStageId] = useState<string>('stage-2');
 
-  const filteredStages = STAGES.filter(s => {
-    if (filter === 'all') return true;
-    return s.suitability === filter;
-  });
+  const filtered = STAGES.filter(s => filter === 'all' || s.suitability === filter);
+  const activeStage = STAGES.find(s => s.id === selectedStageId) || STAGES[1];
 
   return (
-    <section className="py-16 lg:py-24 bg-obsidian-950 relative border-t border-slate-800">
+    <section className="py-16 lg:py-22 bg-[#FAF8F4] relative border-t border-[#E8E2D8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-semibold">
-            <Award className="w-3.5 h-3.5" />
-            <span>Interactive Hair Loss Self-Assessment</span>
+        <div className="text-center max-w-3xl mx-auto space-y-3 mb-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#E8E2D8] text-gold-700 text-xs font-semibold shadow-xs">
+            <Award className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
+            <span>Hair Loss Self-Assessment</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white tracking-tight">
-            Identify Your Stage & Recommended Solution
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-neutral-900 tracking-tight">
+            Find Your Recommended Solution
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base">
-            Every scalp condition is unique. Explore which custom hair system matches your exact stage of hair loss.
+          <p className="text-neutral-600 text-sm sm:text-base leading-relaxed">
+            Select your current hair thinning stage to identify the ideal non-surgical hair system and attachment method for your lifestyle.
           </p>
 
-          {/* Filter Pills */}
-          <div className="inline-flex p-1 rounded-2xl bg-obsidian-900 border border-slate-800 mt-3">
+          {/* Gender Filter */}
+          <div className="inline-flex p-1 rounded-2xl bg-white border border-[#E8E2D8] mt-3 shadow-xs">
             <button
+              type="button"
               onClick={() => setFilter('all')}
               className={`px-4 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                filter === 'all'
-                  ? 'bg-gold-gradient text-obsidian-950 shadow-gold-glow'
-                  : 'text-slate-400 hover:text-white'
+                filter === 'all' ? 'bg-gold-500 text-white' : 'text-neutral-600 hover:text-neutral-900'
               }`}
             >
               All Stages
             </button>
             <button
+              type="button"
               onClick={() => setFilter('men')}
               className={`px-4 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                filter === 'men'
-                  ? 'bg-gold-gradient text-obsidian-950 shadow-gold-glow'
-                  : 'text-slate-400 hover:text-white'
+                filter === 'men' ? 'bg-gold-500 text-white' : 'text-neutral-600 hover:text-neutral-900'
               }`}
             >
-              Men's Norwood Scale
+              Men (Norwood)
             </button>
             <button
+              type="button"
               onClick={() => setFilter('women')}
               className={`px-4 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                filter === 'women'
-                  ? 'bg-gold-gradient text-obsidian-950 shadow-gold-glow'
-                  : 'text-slate-400 hover:text-white'
+                filter === 'women' ? 'bg-gold-500 text-white' : 'text-neutral-600 hover:text-neutral-900'
               }`}
             >
-              Women's Ludwig Scale
+              Women (Ludwig)
             </button>
           </div>
         </div>
 
-        {/* Stage Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {filteredStages.map((stage) => (
-            <div
-              key={stage.id}
-              className="bg-obsidian-900/90 rounded-2xl border border-slate-800 p-6 flex flex-col justify-between hover:border-gold-500/50 transition-all duration-300 shadow-xl"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-bold px-2.5 py-1 rounded bg-gold-500/15 text-gold-400 border border-gold-500/30">
-                    {stage.stageName}
-                  </span>
-                  <span className="text-[10px] text-slate-400 uppercase font-medium">
-                    {stage.suitability === 'women' ? "Women" : "Men"}
-                  </span>
-                </div>
-
-                <h3 className="text-base font-bold text-white mb-2 leading-snug">
-                  {stage.hairLossLevel}
-                </h3>
-
-                <p className="text-xs text-slate-400 mb-4 leading-relaxed">
-                  {stage.symptoms}
-                </p>
-
-                <div className="space-y-2 p-3 bg-obsidian-950 rounded-xl border border-slate-800/80 text-xs mb-4">
-                  <div>
-                    <span className="text-[10px] text-slate-400 uppercase block font-medium">Recommended System:</span>
-                    <span className="text-white font-bold">{stage.recommendedSolution}</span>
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-slate-400 uppercase block font-medium">Best Attachment Method:</span>
-                    <span className="text-gold-400 font-semibold">{stage.recommendedTechnique}</span>
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-slate-400 uppercase block font-medium">Session Time:</span>
-                    <span className="text-slate-300">{stage.duration}</span>
-                  </div>
-                </div>
-              </div>
-
-              <button
-                onClick={onOpenBooking}
-                className="w-full py-2.5 rounded-xl bg-obsidian-850 hover:bg-gold-gradient hover:text-obsidian-950 border border-slate-700 hover:border-gold-500 text-slate-200 font-semibold text-xs transition-all flex items-center justify-center gap-1.5"
+        {/* Stage Selection Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          {filtered.map((item) => {
+            const isSelected = item.id === selectedStageId;
+            return (
+              <div
+                key={item.id}
+                onClick={() => setSelectedStageId(item.id)}
+                className={`p-5 rounded-2xl border transition-all duration-200 cursor-pointer ${
+                  isSelected
+                    ? 'bg-white border-gold-500 shadow-md scale-[1.02]'
+                    : 'bg-white/80 border-[#E8E2D8] hover:border-neutral-300 hover:bg-white'
+                }`}
               >
-                <span>Consult for This Stage</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
+                <div className="flex items-center justify-between text-xs mb-2">
+                  <span className="font-bold text-neutral-900">{item.stageName}</span>
+                  <span className="text-[10px] bg-[#FAF8F4] px-2 py-0.5 rounded text-gold-700 font-semibold border border-[#E8E2D8]">
+                    {item.duration}
+                  </span>
+                </div>
+                <div className="text-xs text-neutral-800 font-semibold mb-1">{item.hairLossLevel}</div>
+                <p className="text-[11px] text-neutral-500 line-clamp-2">{item.symptoms}</p>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Active Stage Recommendation Box */}
+        <div className="bg-white rounded-3xl border border-[#E8E2D8] p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="space-y-2 max-w-2xl">
+            <div className="text-[11px] font-bold uppercase tracking-wider text-gold-700">
+              Recommended Solution for {activeStage.stageName}
             </div>
-          ))}
+            <h3 className="text-xl sm:text-2xl font-serif font-bold text-neutral-900">
+              {activeStage.recommendedSolution}
+            </h3>
+            <p className="text-xs sm:text-sm text-neutral-600">
+              <strong>Technique:</strong> {activeStage.recommendedTechnique} • Fitting Duration: {activeStage.duration}
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={onOpenBooking}
+            className="px-6 py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-xs sm:text-sm shadow-xs transition-colors flex items-center gap-2 flex-shrink-0"
+          >
+            <span>Book Consultation for this Solution</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
 
       </div>

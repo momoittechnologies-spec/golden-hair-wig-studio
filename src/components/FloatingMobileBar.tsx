@@ -8,15 +8,15 @@ interface FloatingMobileBarProps {
 
 export const FloatingMobileBar: React.FC<FloatingMobileBarProps> = ({ onOpenBooking }) => {
   return (
-    <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-obsidian-950/95 backdrop-blur-xl border-t border-gold-500/25 px-4 py-2.5 shadow-2xl">
+    <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#E8E2D8] px-4 py-2.5 shadow-lg">
       <div className="max-w-md mx-auto grid grid-cols-3 gap-2">
         {/* Call Button */}
         <a
           href={`tel:${BUSINESS_INFO.rawPrimaryPhone}`}
-          className="py-2.5 rounded-xl bg-obsidian-900 border border-slate-700/80 text-slate-200 hover:text-white font-semibold text-xs flex flex-col items-center justify-center gap-1 active:scale-95 transition-transform"
+          className="py-2.5 rounded-xl bg-[#FAF8F4] border border-[#E8E2D8] text-[#242424] hover:bg-neutral-100 font-semibold text-xs flex flex-col items-center justify-center gap-1 active:scale-95 transition-all"
         >
-          <Phone className="w-4 h-4 text-gold-400" />
-          <span>Call</span>
+          <Phone className="w-4 h-4 text-gold-600" />
+          <span>Call Studio</span>
         </a>
 
         {/* WhatsApp Button */}
@@ -24,16 +24,16 @@ export const FloatingMobileBar: React.FC<FloatingMobileBarProps> = ({ onOpenBook
           href={`https://wa.me/${BUSINESS_INFO.rawPrimaryPhone}?text=Hi%20Golden%20Hair%20Studio%2C%20I%20would%20like%20to%20consult%20Mr.%20Swarup%20for%20hair%20replacement.`}
           target="_blank"
           rel="noopener noreferrer"
-          className="py-2.5 rounded-xl bg-emerald-500/15 border border-emerald-500/35 text-emerald-400 font-semibold text-xs flex flex-col items-center justify-center gap-1 active:scale-95 transition-transform"
+          className="py-2.5 rounded-xl bg-[#E8EEE8] border border-emerald-300 text-emerald-800 font-semibold text-xs flex flex-col items-center justify-center gap-1 active:scale-95 transition-all"
         >
-          <MessageCircle className="w-4 h-4 fill-emerald-500/20" />
+          <MessageCircle className="w-4 h-4 text-emerald-600" />
           <span>WhatsApp</span>
         </a>
 
         {/* Book Consultation Modal */}
         <button
           onClick={onOpenBooking}
-          className="py-2.5 rounded-xl bg-gold-gradient text-obsidian-950 font-bold text-xs shadow-gold-glow flex flex-col items-center justify-center gap-1 active:scale-95 transition-transform"
+          className="py-2.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-xs shadow-xs flex flex-col items-center justify-center gap-1 active:scale-95 transition-all"
         >
           <CalendarCheck className="w-4 h-4" />
           <span>Book Free</span>

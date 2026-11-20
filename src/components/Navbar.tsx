@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Phone, MessageCircle, MapPin, Menu, X, Clock, CalendarCheck } from 'lucide-react';
+import { Phone, MessageCircle, MapPin, Menu, X, ChevronDown, CalendarCheck, Clock, ShieldCheck } from 'lucide-react';
 import { BUSINESS_INFO, BRANCHES } from '../data/businessData';
-import { buildWhatsAppUrl } from '../utils/whatsapp';
+import { buildWhatsAppUrl, getDirectCallUrl } from '../utils/whatsapp';
 
 interface NavbarProps {
   onOpenBooking: (branchId?: string, serviceId?: string) => void;
@@ -11,26 +11,30 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeBranchIndex, setActiveBranchIndex] = useState(0);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
+  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 15);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile drawer on route navigation
+  // Close menus on route navigation
   useEffect(() => {
     setMobileMenuOpen(false);
+    setActiveDropdown(null);
   }, [location.pathname]);
 
-  // Handle Escape key to close mobile menu
+  // Handle Escape key to close any open dropdowns or mobile menu
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
+        setActiveDropdown(null);
         setMobileMenuOpen(false);
       }
     };
@@ -38,252 +42,606 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Rotate featured branch notice in top banner
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveBranchIndex((prev) => (prev + 1) % BRANCHES.length);
-    }, 4500);
-    return () => clearInterval(interval);
-  }, []);
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
-  const navLinks = [
-    { label: 'Services', path: '/services' },
-    { label: 'Transformations', path: '/gallery' },
-    { label: 'About', path: '/about' },
-    { label: 'Locations', path: '/locations', badge: '4 Hubs' },
-    { label: 'Contact', path: '/contact' },
-  ];
+  const handleDropdownEnter = (menuKey: string) => {
+    if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
+    setActiveDropdown(menuKey);
+  };
 
-  const currentBranch = BRANCHES[activeBranchIndex];
+  const handleDropdownLeave = () => {
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 180);
+  };
+
+  const toggleMobileAccordion = (key: string) => {
+    setMobileAccordion(prev => prev === key ? null : key);
+  };
 
   return (
     <>
-      {/* Top Announcement Bar */}
-      <div className="bg-charcoal-950 border-b border-gold-500/20 text-xs py-2 px-4 relative z-50">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-ivory/80 overflow-hidden">
-          <div className="flex items-center gap-2 min-w-0 max-w-full">
-            <span className="flex h-2 w-2 relative flex-shrink-0" aria-hidden="true">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-gold-500"></span>
+      {/* Top Utility Bar (Clean Light Warm Ivory) */}
+      <div className="bg-[#FAF8F4] border-b border-[#E8E2D8] text-xs py-1.5 px-4 relative z-50 text-neutral-600 hidden sm:block">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center gap-1.5 text-neutral-800 font-medium">
+              <span className="flex h-2 w-2 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-gold-600"></span>
+              </span>
+              <span>Rayalaseema's Premier Hair Studio:</span>
             </span>
-            <span className="font-semibold text-gold-500 flex-shrink-0">Rayalaseema Studios:</span>
-            <span className="text-ivory/90 transition-all duration-500 font-medium text-[11px] sm:text-xs truncate">
-              {currentBranch.city} • {currentBranch.isHQ ? 'Kadapa Headquarters' : 'Authorized Studio Hub'}
+            <span className="text-neutral-500 text-[11px]">
+              Kadapa (HQ) • Proddatur • Madanapalle • Nandyal
             </span>
           </div>
 
           <div className="flex items-center gap-4 text-xs">
-            <div className="hidden md:flex items-center gap-1.5 text-ivory/70">
-              <Clock className="w-3.5 h-3.5 text-gold-500" aria-hidden="true" />
+            <div className="flex items-center gap-1 text-neutral-500 text-[11px]">
+              <Clock className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
               <span>Mon-Sun: 9:00 AM - 9:00 PM</span>
             </div>
+            <span className="text-[#D8D0C3]">|</span>
             <a
-              href={`tel:${BUSINESS_INFO.rawPrimaryPhone}`}
-              className="text-gold-400 hover:text-gold-300 font-semibold flex items-center gap-1 transition-colors"
-              aria-label={`Call Golden Hair Wig Studio at ${BUSINESS_INFO.primaryPhone}`}
+              href={getDirectCallUrl()}
+              className="text-neutral-800 hover:text-gold-600 font-semibold flex items-center gap-1.5 transition-colors text-[11px]"
+              aria-label={`Call studio at ${BUSINESS_INFO.primaryPhone}`}
             >
-              <Phone className="w-3 h-3 text-gold-500" aria-hidden="true" />
+              <Phone className="w-3 h-3 text-gold-600" aria-hidden="true" />
               <span>Call: {BUSINESS_INFO.primaryPhone}</span>
             </a>
           </div>
         </div>
       </div>
 
-      {/* Main Glass Navbar */}
+      {/* Main Sticky White Header */}
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 ${
+        className={`sticky top-0 z-40 bg-white transition-all duration-200 border-b ${
           isScrolled
-            ? 'bg-charcoal/95 backdrop-blur-xl border-b border-gold-500/25 shadow-2xl shadow-black/80 py-2.5'
-            : 'bg-charcoal/80 backdrop-blur-md border-b border-neutral-800 py-3.5'
+            ? 'border-[#E8E2D8] shadow-sm py-2.5'
+            : 'border-[#E8E2D8] py-3.5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           
-          {/* Brand Logo with Official Insignia */}
+          {/* Logo on Left */}
           <Link
             to="/"
-            className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 rounded-lg p-1"
-            aria-label="Golden Hair Wig Studio - Return to Homepage"
+            className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 rounded-lg p-0.5 flex-shrink-0"
+            aria-label="Golden Hair Wig Studio - Home"
           >
-            <div className="relative flex-shrink-0">
-              <img
-                src="/images/logo.png"
-                alt="Golden Hair Wig Studio Official Brand Crest"
-                className="h-11 w-11 sm:h-12 sm:w-12 object-contain rounded-full border border-gold-500/40 shadow-gold-glow group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
+            <img
+              src="/images/logo.png"
+              alt="Golden Hair Wig Studio Logo"
+              className="h-10 w-10 sm:h-11 sm:w-11 object-contain rounded-full border border-[#E8E2D8] shadow-xs group-hover:scale-105 transition-transform"
+            />
             <div className="flex flex-col">
-              <div className="flex items-center gap-1.5">
-                <span className="font-serif font-extrabold text-base sm:text-lg tracking-tight text-white group-hover:text-gold-300 transition-colors">
-                  GOLDEN HAIR
-                </span>
-                <span className="text-[9px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-gold-500/20 text-gold-400 border border-gold-500/30">
-                  STUDIO
-                </span>
-              </div>
-              <span className="text-[10px] text-ivory/60 tracking-wider uppercase font-medium">
-                Non-Surgical Hair Replacement
+              <span className="font-serif font-bold text-base sm:text-lg tracking-tight text-neutral-900 group-hover:text-gold-600 transition-colors leading-tight">
+                GOLDEN HAIR
+              </span>
+              <span className="text-[10px] uppercase font-bold tracking-widest text-gold-600">
+                WIG STUDIO
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav
-            aria-label="Primary Navigation"
-            className="hidden lg:flex items-center gap-7 text-sm font-medium text-ivory/90"
-          >
-            {navLinks.map((link) => {
-              const isActive = location.pathname === link.path || (link.path !== '/' && location.pathname.startsWith(link.path));
-              return (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`py-1 transition-colors relative flex items-center gap-1.5 ${
-                    isActive ? 'text-gold-400 font-semibold' : 'hover:text-gold-400 text-ivory/80'
-                  }`}
+          {/* Centered Desktop Navigation */}
+          <nav aria-label="Main Navigation" className="hidden xl:flex items-center gap-7 text-sm font-medium text-neutral-700">
+            <Link
+              to="/"
+              className={`hover:text-gold-600 transition-colors py-1 ${
+                location.pathname === '/' ? 'text-gold-600 font-semibold' : ''
+              }`}
+            >
+              HOME
+            </Link>
+
+            {/* HAIR REPLACEMENT Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => handleDropdownEnter('replacement')}
+              onMouseLeave={handleDropdownLeave}
+            >
+              <button
+                type="button"
+                className={`flex items-center gap-1 py-1 hover:text-gold-600 transition-colors focus:outline-none ${
+                  location.pathname.startsWith('/services/non-surgical') || location.pathname.startsWith('/services/mens-hair') || location.pathname.startsWith('/services/hair-patch')
+                    ? 'text-gold-600 font-semibold'
+                    : ''
+                }`}
+                aria-expanded={activeDropdown === 'replacement'}
+                aria-haspopup="true"
+              >
+                <span>HAIR REPLACEMENT</span>
+                <ChevronDown className="w-3.5 h-3.5 text-neutral-400 group-hover:text-gold-600 transition-transform" aria-hidden="true" />
+              </button>
+
+              {activeDropdown === 'replacement' && (
+                <div
+                  className="absolute top-full left-0 mt-1 w-64 bg-white rounded-2xl border border-[#E8E2D8] shadow-lg p-2 animate-in fade-in slide-in-from-top-2 duration-150 z-50"
+                  role="menu"
                 >
-                  <span>{link.label}</span>
-                  {link.badge && (
-                    <span className="text-[9px] bg-gold-500/20 text-gold-400 font-bold px-1.5 py-0.5 rounded border border-gold-500/30">
-                      {link.badge}
-                    </span>
-                  )}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gold-500 rounded-full" />
-                  )}
-                </Link>
-              );
-            })}
+                  <Link
+                    to="/services/non-surgical-hair-replacement"
+                    className="block px-3.5 py-2.5 rounded-xl hover:bg-[#FAF8F4] text-xs text-neutral-700 hover:text-gold-700 font-medium transition-colors"
+                    role="menuitem"
+                  >
+                    <strong className="block text-neutral-900 font-semibold">Non-Surgical Hair Replacement</strong>
+                    <span className="text-[11px] text-neutral-500">1-Hour complete restoration</span>
+                  </Link>
+                  <Link
+                    to="/services/mens-hair-systems"
+                    className="block px-3.5 py-2.5 rounded-xl hover:bg-[#FAF8F4] text-xs text-neutral-700 hover:text-gold-700 font-medium transition-colors"
+                    role="menuitem"
+                  >
+                    <strong className="block text-neutral-900 font-semibold">Hair Systems for Men</strong>
+                    <span className="text-[11px] text-neutral-500">Natural hairline & modern fade cuts</span>
+                  </Link>
+                  <Link
+                    to="/services/hair-patch"
+                    className="block px-3.5 py-2.5 rounded-xl hover:bg-[#FAF8F4] text-xs text-neutral-700 hover:text-gold-700 font-medium transition-colors"
+                    role="menuitem"
+                  >
+                    <strong className="block text-neutral-900 font-semibold">Hair Patch Solutions</strong>
+                    <span className="text-[11px] text-neutral-500">Targeted crown & frontal coverage</span>
+                  </Link>
+                  <Link
+                    to="/#how-it-works"
+                    className="block px-3.5 py-2.5 rounded-xl hover:bg-[#FAF8F4] text-xs text-neutral-700 hover:text-gold-700 font-medium transition-colors border-t border-[#F5F0E8] mt-1"
+                    role="menuitem"
+                  >
+                    <strong className="block text-gold-600 font-semibold">How It Works (4 Steps)</strong>
+                    <span className="text-[11px] text-neutral-500">From mapping to final styling</span>
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* OUR SERVICES Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => handleDropdownEnter('services')}
+              onMouseLeave={handleDropdownLeave}
+            >
+              <button
+                type="button"
+                className={`flex items-center gap-1 py-1 hover:text-gold-600 transition-colors focus:outline-none ${
+                  location.pathname === '/services' || location.pathname.startsWith('/services/hair-bonding') || location.pathname.startsWith('/services/hair-clipping') || location.pathname.startsWith('/services/hair-system-maintenance') || location.pathname.startsWith('/services/hair-wigs')
+                    ? 'text-gold-600 font-semibold'
+                    : ''
+                }`}
+                aria-expanded={activeDropdown === 'services'}
+                aria-haspopup="true"
+              >
+                <span>OUR SERVICES</span>
+                <ChevronDown className="w-3.5 h-3.5 text-neutral-400" aria-hidden="true" />
+              </button>
+
+              {activeDropdown === 'services' && (
+                <div
+                  className="absolute top-full left-0 mt-1 w-64 bg-white rounded-2xl border border-[#E8E2D8] shadow-lg p-2 animate-in fade-in slide-in-from-top-2 duration-150 z-50"
+                  role="menu"
+                >
+                  <Link
+                    to="/services/hair-bonding"
+                    className="block px-3.5 py-2 rounded-xl hover:bg-[#FAF8F4] text-xs text-neutral-700 hover:text-gold-700 font-medium"
+                    role="menuitem"
+                  >
+                    <strong className="block text-neutral-900 font-semibold">Hair Bonding</strong>
+                    <span className="text-[11px] text-neutral-500">Semi-permanent active wear</span>
+                  </Link>
+                  <Link
+                    to="/services/hair-clipping"
+                    className="block px-3.5 py-2 rounded-xl hover:bg-[#FAF8F4] text-xs text-neutral-700 hover:text-gold-700 font-medium"
+                    role="menuitem"
+                  >
+                    <strong className="block text-neutral-900 font-semibold">Hair Clipping</strong>
+                    <span className="text-[11px] text-neutral-500">Zero-glue daily removable</span>
+                  </Link>
+                  <Link
+                    to="/services/hair-patch"
+                    className="block px-3.5 py-2 rounded-xl hover:bg-[#FAF8F4] text-xs text-neutral-700 hover:text-gold-700 font-medium"
+                    role="menuitem"
+                  >
+                    <strong className="block text-neutral-900 font-semibold">Hair Patch Fitting</strong>
+                    <span className="text-[11px] text-neutral-500">Precision custom contouring</span>
+                  </Link>
+                  <Link
+                    to="/services/hair-system-maintenance"
+                    className="block px-3.5 py-2 rounded-xl hover:bg-[#FAF8F4] text-xs text-neutral-700 hover:text-gold-700 font-medium"
+                    role="menuitem"
+                  >
+                    <strong className="block text-neutral-900 font-semibold">Hair System Maintenance</strong>
+                    <span className="text-[11px] text-neutral-500">Monthly hygiene & re-bonding</span>
+                  </Link>
+                  <Link
+                    to="/services/hair-wigs"
+                    className="block px-3.5 py-2 rounded-xl hover:bg-[#FAF8F4] text-xs text-neutral-700 hover:text-gold-700 font-medium"
+                    role="menuitem"
+                  >
+                    <strong className="block text-neutral-900 font-semibold">Hair Wigs & Toupees</strong>
+                    <span className="text-[11px] text-neutral-500">100% natural human hair</span>
+                  </Link>
+                  <Link
+                    to="/services"
+                    className="block px-3.5 py-2 rounded-xl hover:bg-[#FAF8F4] text-xs text-gold-600 font-semibold border-t border-[#F5F0E8] mt-1"
+                    role="menuitem"
+                  >
+                    View All Services Overview →
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* TRANSFORMATIONS */}
+            <Link
+              to="/gallery"
+              className={`hover:text-gold-600 transition-colors py-1 ${
+                location.pathname === '/gallery' ? 'text-gold-600 font-semibold' : ''
+              }`}
+            >
+              TRANSFORMATIONS
+            </Link>
+
+            {/* OUR LOCATIONS Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => handleDropdownEnter('locations')}
+              onMouseLeave={handleDropdownLeave}
+            >
+              <button
+                type="button"
+                className={`flex items-center gap-1 py-1 hover:text-gold-600 transition-colors focus:outline-none ${
+                  location.pathname.startsWith('/locations') ? 'text-gold-600 font-semibold' : ''
+                }`}
+                aria-expanded={activeDropdown === 'locations'}
+                aria-haspopup="true"
+              >
+                <span>OUR LOCATIONS</span>
+                <ChevronDown className="w-3.5 h-3.5 text-neutral-400" aria-hidden="true" />
+              </button>
+
+              {activeDropdown === 'locations' && (
+                <div
+                  className="absolute top-full left-0 mt-1 w-56 bg-white rounded-2xl border border-[#E8E2D8] shadow-lg p-2 animate-in fade-in slide-in-from-top-2 duration-150 z-50"
+                  role="menu"
+                >
+                  <Link
+                    to="/locations/kadapa"
+                    className="block px-3.5 py-2 rounded-xl hover:bg-[#FAF8F4] text-xs text-neutral-700 hover:text-gold-700 font-medium"
+                    role="menuitem"
+                  >
+                    <strong className="block text-neutral-900 font-semibold">Kadapa (Headquarters)</strong>
+                    <span className="text-[11px] text-neutral-500">Railway Station Road</span>
+                  </Link>
+                  <Link
+                    to="/locations/proddatur"
+                    className="block px-3.5 py-2 rounded-xl hover:bg-[#FAF8F4] text-xs text-neutral-700 hover:text-gold-700 font-medium"
+                    role="menuitem"
+                  >
+                    <strong className="block text-neutral-900 font-semibold">Proddatur Branch</strong>
+                    <span className="text-[11px] text-neutral-500">Near Clock Tower</span>
+                  </Link>
+                  <Link
+                    to="/locations/madanapalle"
+                    className="block px-3.5 py-2 rounded-xl hover:bg-[#FAF8F4] text-xs text-neutral-700 hover:text-gold-700 font-medium"
+                    role="menuitem"
+                  >
+                    <strong className="block text-neutral-900 font-semibold">Madanapalle Branch</strong>
+                    <span className="text-[11px] text-neutral-500">Near NTR Circle</span>
+                  </Link>
+                  <Link
+                    to="/locations/nandyal"
+                    className="block px-3.5 py-2 rounded-xl hover:bg-[#FAF8F4] text-xs text-neutral-700 hover:text-gold-700 font-medium"
+                    role="menuitem"
+                  >
+                    <strong className="block text-neutral-900 font-semibold">Nandyal Branch</strong>
+                    <span className="text-[11px] text-neutral-500">Near Gandhi Chowk</span>
+                  </Link>
+                  <Link
+                    to="/locations"
+                    className="block px-3.5 py-2 rounded-xl hover:bg-[#FAF8F4] text-xs text-gold-600 font-semibold border-t border-[#F5F0E8] mt-1"
+                    role="menuitem"
+                  >
+                    View All 4 Studios Map →
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* ABOUT US */}
+            <Link
+              to="/about"
+              className={`hover:text-gold-600 transition-colors py-1 ${
+                location.pathname === '/about' ? 'text-gold-600 font-semibold' : ''
+              }`}
+            >
+              ABOUT US
+            </Link>
+
+            {/* CONTACT */}
+            <Link
+              to="/contact"
+              className={`hover:text-gold-600 transition-colors py-1 ${
+                location.pathname === '/contact' ? 'text-gold-600 font-semibold' : ''
+              }`}
+            >
+              CONTACT
+            </Link>
           </nav>
 
-          {/* Action CTAs */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* Action on Right (Call Link & Consultation Button) */}
+          <div className="flex items-center gap-3">
             <a
-              href={buildWhatsAppUrl({ enquiryType: 'consultation' })}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-3.5 py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-semibold flex items-center gap-1.5 transition-all duration-200"
-              aria-label="Direct WhatsApp consultation chat with Golden Hair Wig Studio"
+              href={getDirectCallUrl()}
+              className="hidden lg:flex items-center gap-1.5 px-3 py-2 rounded-xl text-neutral-700 hover:text-gold-600 text-xs font-semibold hover:bg-[#FAF8F4] border border-transparent hover:border-[#E8E2D8] transition-colors"
+              aria-label="Direct Phone Line"
             >
-              <MessageCircle className="w-4 h-4 fill-emerald-500/20" aria-hidden="true" />
-              <span>WhatsApp</span>
+              <Phone className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
+              <span>{BUSINESS_INFO.primaryPhone}</span>
             </a>
 
             <button
               onClick={() => onOpenBooking()}
-              className="relative group overflow-hidden px-5 py-2.5 rounded-xl bg-gold-gradient text-charcoal font-bold text-xs sm:text-sm shadow-gold-glow hover:shadow-gold-glow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-xs sm:text-sm shadow-xs hover:shadow-md transition-all active:scale-98 flex items-center gap-1.5"
             >
-              <div className="absolute inset-0 bg-white/30 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-              <span className="relative flex items-center gap-1.5">
-                <CalendarCheck className="w-4 h-4 text-charcoal" aria-hidden="true" />
-                <span>Book Consultation</span>
-              </span>
+              <CalendarCheck className="w-4 h-4" aria-hidden="true" />
+              <span>Book Consultation</span>
+            </button>
+
+            {/* Mobile Menu Toggle Button */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="xl:hidden p-2 rounded-xl text-neutral-700 hover:text-neutral-900 hover:bg-[#FAF8F4] border border-[#E8E2D8] focus:outline-none focus:ring-2 focus:ring-gold-500"
+              aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu-drawer"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center gap-2">
-            <button
-              onClick={() => onOpenBooking()}
-              className="sm:hidden px-3 py-1.5 rounded-lg bg-gold-gradient text-charcoal font-bold text-xs shadow-gold-glow flex items-center gap-1"
-            >
-              <CalendarCheck className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Book</span>
-            </button>
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg bg-neutral-900 border border-neutral-700 text-ivory hover:text-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-500"
-              aria-expanded={mobileMenuOpen}
-              aria-controls="mobile-navigation"
-              aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
         </div>
 
-        {/* Mobile Dropdown Menu with Accessible Links */}
+        {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
           <div
-            id="mobile-navigation"
-            className="lg:hidden bg-charcoal-950/98 border-b border-gold-500/30 backdrop-blur-2xl px-5 pt-4 pb-6 mt-3 space-y-4 animate-in slide-in-from-top duration-200"
+            id="mobile-menu-drawer"
+            className="xl:hidden fixed inset-x-0 top-[65px] bottom-0 bg-white border-t border-[#E8E2D8] z-50 overflow-y-auto px-5 py-6 space-y-5 animate-in slide-in-from-top-2 duration-200"
           >
-            <nav aria-label="Mobile Navigation" className="grid grid-cols-2 gap-2 text-xs font-medium text-ivory/90 pb-3 border-b border-neutral-800">
+            {/* Quick Actions in Mobile Drawer */}
+            <div className="grid grid-cols-2 gap-2 pb-4 border-b border-[#E8E2D8]">
+              <a
+                href={getDirectCallUrl()}
+                className="py-2.5 rounded-xl bg-[#FAF8F4] border border-[#E8E2D8] text-neutral-800 text-xs font-semibold flex items-center justify-center gap-2"
+              >
+                <Phone className="w-3.5 h-3.5 text-gold-600" />
+                <span>Call Studio</span>
+              </a>
+              <a
+                href={buildWhatsAppUrl({ enquiryType: 'consultation' })}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-2.5 rounded-xl bg-[#E8EEE8] border border-emerald-300 text-emerald-800 text-xs font-semibold flex items-center justify-center gap-2"
+              >
+                <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
+                <span>WhatsApp</span>
+              </a>
+            </div>
+
+            {/* Accordion Navigation */}
+            <nav className="space-y-1 text-sm font-medium text-neutral-800">
               <Link
                 to="/"
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-lg bg-neutral-900/90 border border-neutral-800 hover:border-gold-500/40 hover:text-gold-400"
+                className="block py-2.5 px-3 rounded-xl hover:bg-[#FAF8F4]"
               >
                 Home
               </Link>
-              <Link
-                to="/services"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-lg bg-neutral-900/90 border border-neutral-800 hover:border-gold-500/40 hover:text-gold-400"
-              >
-                All Services
-              </Link>
+
+              {/* Hair Replacement Accordion */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => toggleMobileAccordion('replacement')}
+                  className="w-full flex items-center justify-between py-2.5 px-3 rounded-xl hover:bg-[#FAF8F4] text-left"
+                >
+                  <span className="font-semibold text-neutral-900">Hair Replacement</span>
+                  <ChevronDown className={`w-4 h-4 text-neutral-400 transition-transform ${mobileAccordion === 'replacement' ? 'rotate-180' : ''}`} />
+                </button>
+                {mobileAccordion === 'replacement' && (
+                  <div className="pl-4 pr-2 py-1 space-y-1 bg-[#FAF8F4] rounded-xl mt-1 text-xs text-neutral-600">
+                    <Link
+                      to="/services/non-surgical-hair-replacement"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 hover:text-gold-600"
+                    >
+                      • Non-Surgical Hair Replacement
+                    </Link>
+                    <Link
+                      to="/services/mens-hair-systems"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 hover:text-gold-600"
+                    >
+                      • Hair Systems for Men
+                    </Link>
+                    <Link
+                      to="/services/hair-patch"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 hover:text-gold-600"
+                    >
+                      • Hair Patch Solutions
+                    </Link>
+                    <Link
+                      to="/#how-it-works"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 text-gold-700 font-semibold"
+                    >
+                      • How It Works (4 Steps)
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* Our Services Accordion */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => toggleMobileAccordion('services')}
+                  className="w-full flex items-center justify-between py-2.5 px-3 rounded-xl hover:bg-[#FAF8F4] text-left"
+                >
+                  <span className="font-semibold text-neutral-900">Our Services</span>
+                  <ChevronDown className={`w-4 h-4 text-neutral-400 transition-transform ${mobileAccordion === 'services' ? 'rotate-180' : ''}`} />
+                </button>
+                {mobileAccordion === 'services' && (
+                  <div className="pl-4 pr-2 py-1 space-y-1 bg-[#FAF8F4] rounded-xl mt-1 text-xs text-neutral-600">
+                    <Link
+                      to="/services/hair-bonding"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 hover:text-gold-600"
+                    >
+                      • Hair Bonding Process
+                    </Link>
+                    <Link
+                      to="/services/hair-clipping"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 hover:text-gold-600"
+                    >
+                      • Hair Clipping (Daily Wear)
+                    </Link>
+                    <Link
+                      to="/services/hair-patch"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 hover:text-gold-600"
+                    >
+                      • Hair Patch Fitting
+                    </Link>
+                    <Link
+                      to="/services/hair-system-maintenance"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 hover:text-gold-600"
+                    >
+                      • Hair System Maintenance
+                    </Link>
+                    <Link
+                      to="/services/hair-wigs"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 hover:text-gold-600"
+                    >
+                      • Hair Wigs & Toupees
+                    </Link>
+                    <Link
+                      to="/services"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 text-gold-700 font-semibold"
+                    >
+                      • View All Services →
+                    </Link>
+                  </div>
+                )}
+              </div>
+
               <Link
                 to="/gallery"
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-lg bg-neutral-900/90 border border-neutral-800 hover:border-gold-500/40 hover:text-gold-400"
+                className="block py-2.5 px-3 rounded-xl hover:bg-[#FAF8F4]"
               >
-                1-Hour Results
+                Transformations
               </Link>
-              <Link
-                to="/locations"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-lg bg-neutral-900/90 border border-neutral-800 hover:border-gold-500/40 hover:text-gold-400 flex items-center gap-1"
-              >
-                <MapPin className="w-3.5 h-3.5 text-gold-500" />
-                <span>4 Hubs</span>
-              </Link>
+
+              {/* Locations Accordion */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => toggleMobileAccordion('locations')}
+                  className="w-full flex items-center justify-between py-2.5 px-3 rounded-xl hover:bg-[#FAF8F4] text-left"
+                >
+                  <span className="font-semibold text-neutral-900">Our Locations</span>
+                  <ChevronDown className={`w-4 h-4 text-neutral-400 transition-transform ${mobileAccordion === 'locations' ? 'rotate-180' : ''}`} />
+                </button>
+                {mobileAccordion === 'locations' && (
+                  <div className="pl-4 pr-2 py-1 space-y-1 bg-[#FAF8F4] rounded-xl mt-1 text-xs text-neutral-600">
+                    <Link
+                      to="/locations/kadapa"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 hover:text-gold-600"
+                    >
+                      • Kadapa (Headquarters)
+                    </Link>
+                    <Link
+                      to="/locations/proddatur"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 hover:text-gold-600"
+                    >
+                      • Proddatur Branch
+                    </Link>
+                    <Link
+                      to="/locations/madanapalle"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 hover:text-gold-600"
+                    >
+                      • Madanapalle Branch
+                    </Link>
+                    <Link
+                      to="/locations/nandyal"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 hover:text-gold-600"
+                    >
+                      • Nandyal Branch
+                    </Link>
+                    <Link
+                      to="/locations"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 text-gold-700 font-semibold"
+                    >
+                      • View All 4 Studios →
+                    </Link>
+                  </div>
+                )}
+              </div>
+
               <Link
                 to="/about"
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-lg bg-neutral-900/90 border border-neutral-800 hover:border-gold-500/40 hover:text-gold-400"
+                className="block py-2.5 px-3 rounded-xl hover:bg-[#FAF8F4]"
               >
-                About Studio
+                About Us
               </Link>
+
               <Link
                 to="/contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-lg bg-neutral-900/90 border border-neutral-800 hover:border-gold-500/40 hover:text-gold-400"
+                className="block py-2.5 px-3 rounded-xl hover:bg-[#FAF8F4]"
               >
-                Contact & Map
+                Contact
               </Link>
             </nav>
 
-            <div className="flex flex-col gap-2.5 pt-1">
+            {/* Bottom Button in Drawer */}
+            <div className="pt-4 border-t border-[#E8E2D8]">
               <button
+                type="button"
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenBooking();
                 }}
-                className="w-full py-3 rounded-xl bg-gold-gradient text-charcoal font-bold text-sm shadow-gold-glow flex items-center justify-center gap-2"
+                className="w-full py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-sm shadow-xs flex items-center justify-center gap-2"
               >
                 <CalendarCheck className="w-4 h-4" />
-                <span>Book Free Consultation</span>
+                <span>Book Consultation</span>
               </button>
-
-              <div className="grid grid-cols-2 gap-2">
-                <a
-                  href={`tel:${BUSINESS_INFO.rawPrimaryPhone}`}
-                  className="py-2.5 rounded-xl bg-neutral-900 border border-neutral-700 text-ivory text-xs font-semibold flex items-center justify-center gap-1.5"
-                >
-                  <Phone className="w-3.5 h-3.5 text-gold-400" />
-                  <span>Call Studio</span>
-                </a>
-                <a
-                  href={buildWhatsAppUrl({ enquiryType: 'consultation' })}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="py-2.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-xs font-semibold flex items-center justify-center gap-1.5"
-                >
-                  <MessageCircle className="w-3.5 h-3.5" />
-                  <span>WhatsApp</span>
-                </a>
-              </div>
             </div>
           </div>
         )}

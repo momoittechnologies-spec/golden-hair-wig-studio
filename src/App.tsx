@@ -37,7 +37,7 @@ export function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <div className="min-h-screen bg-charcoal text-ivory flex flex-col font-sans selection:bg-gold-500 selection:text-charcoal antialiased">
+      <div className="min-h-screen bg-white text-neutral-800 flex flex-col font-sans selection:bg-[#B58D4A]/20 selection:text-[#242424] antialiased">
         {/* Responsive Translucent Glass Navbar with Brand Crest */}
         <Navbar onOpenBooking={handleOpenBooking} />
 

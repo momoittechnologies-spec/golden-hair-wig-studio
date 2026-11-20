@@ -124,12 +124,13 @@ export const HomeImageSlider: React.FC<HomeImageSliderProps> = ({ onOpenBooking 
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      className="relative w-full overflow-hidden bg-obsidian-950 py-4 sm:py-6"
+      aria-label="Hair Transformation Showcase Slider"
+      className="relative w-full overflow-hidden bg-white py-4 sm:py-6"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Slider Canvas */}
-        <div className="relative h-[480px] sm:h-[540px] lg:h-[580px] w-full rounded-3xl overflow-hidden border border-gold-500/30 shadow-2xl bg-obsidian-900">
+        <div className="relative h-[480px] sm:h-[520px] lg:h-[560px] w-full rounded-3xl overflow-hidden border border-[#E8E2D8] shadow-sm bg-[#FAF8F4]">
           
           {/* Slide Background Images with Crossfade */}
           {SLIDES.map((slide, idx) => (
@@ -146,9 +147,9 @@ export const HomeImageSlider: React.FC<HomeImageSliderProps> = ({ onOpenBooking 
                 className="w-full h-full object-cover object-center transform scale-105 transition-transform duration-7000 ease-out"
               />
 
-              {/* Multi-layered cinematic gradient overlays */}
-              <div className="absolute inset-0 bg-gradient-to-r from-obsidian-950 via-obsidian-950/80 to-transparent"></div>
-              <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-transparent to-obsidian-950/40"></div>
+              {/* Multi-layered light/dark legible gradient overlays */}
+              <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/85 via-neutral-950/60 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/70 via-transparent to-neutral-950/30"></div>
             </div>
           ))}
 
@@ -160,21 +161,21 @@ export const HomeImageSlider: React.FC<HomeImageSliderProps> = ({ onOpenBooking 
                 <div key={slide.id} className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
                   
                   {/* Category Pill */}
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 border border-gold-500/40 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
-                    <Award className="w-3.5 h-3.5 text-gold-400" />
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-white border border-white/30 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
+                    <Award className="w-3.5 h-3.5 text-gold-300" />
                     <span>{slide.category}</span>
                   </div>
 
-                  {/* Title & Gold Highlight */}
+                  {/* Title & Highlight */}
                   <h2 className="text-2xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-white tracking-tight leading-tight">
                     {slide.title}{' '}
-                    <span className="text-gold-gradient block sm:inline">
+                    <span className="text-gold-300 block sm:inline">
                       {slide.highlight}
                     </span>
                   </h2>
 
                   {/* Subtitle Description */}
-                  <p className="text-xs sm:text-sm text-slate-200 leading-relaxed max-w-xl font-normal drop-shadow">
+                  <p className="text-xs sm:text-sm text-neutral-200 leading-relaxed max-w-xl font-normal drop-shadow">
                     {slide.description}
                   </p>
 
@@ -183,7 +184,7 @@ export const HomeImageSlider: React.FC<HomeImageSliderProps> = ({ onOpenBooking 
                     {slide.badges.map((b, bIdx) => (
                       <span
                         key={bIdx}
-                        className="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-obsidian-900/85 text-slate-300 border border-slate-700/80 backdrop-blur-sm"
+                        className="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-black/40 text-neutral-200 border border-white/20 backdrop-blur-sm"
                       >
                         {b}
                       </span>
@@ -193,8 +194,9 @@ export const HomeImageSlider: React.FC<HomeImageSliderProps> = ({ onOpenBooking 
                   {/* CTA Buttons */}
                   <div className="flex flex-wrap items-center gap-3 pt-3">
                     <button
+                      type="button"
                       onClick={() => handleCtaClick(slide.primaryCtaAction)}
-                      className="px-6 py-3 rounded-xl bg-gold-gradient text-obsidian-950 font-bold text-xs sm:text-sm shadow-gold-glow hover:shadow-gold-glow-lg transition-all flex items-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
+                      className="px-6 py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-xs sm:text-sm shadow-sm transition-all flex items-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
                     >
                       <CalendarCheck className="w-4 h-4" />
                       <span>{slide.primaryCtaText}</span>
@@ -205,9 +207,9 @@ export const HomeImageSlider: React.FC<HomeImageSliderProps> = ({ onOpenBooking 
                       href={`https://wa.me/${BUSINESS_INFO.rawPrimaryPhone}?text=Hi%20Golden%20Hair%20Studio%2C%20I%20am%20interested%20in%20your%20${slide.category}.`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-5 py-3 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-400 border border-emerald-500/40 text-xs sm:text-sm font-semibold flex items-center gap-2 backdrop-blur-md transition-all"
+                      className="px-5 py-3 rounded-xl bg-white/20 hover:bg-white/30 text-white border border-white/40 text-xs sm:text-sm font-semibold flex items-center gap-2 backdrop-blur-md transition-all"
                     >
-                      <MessageCircle className="w-4 h-4" />
+                      <MessageCircle className="w-4 h-4 text-emerald-400" />
                       <span>WhatsApp Consultation</span>
                     </a>
                   </div>
@@ -222,14 +224,14 @@ export const HomeImageSlider: React.FC<HomeImageSliderProps> = ({ onOpenBooking 
             <button
               onClick={prevSlide}
               aria-label="Previous Slide"
-              className="p-2.5 rounded-full bg-obsidian-900/80 hover:bg-obsidian-850 border border-slate-700 text-slate-300 hover:text-white transition-all backdrop-blur-md shadow-lg"
+              className="p-2.5 rounded-full bg-white/20 hover:bg-white/30 border border-white/30 text-white transition-all backdrop-blur-md shadow-sm"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={nextSlide}
               aria-label="Next Slide"
-              className="p-2.5 rounded-full bg-obsidian-900/80 hover:bg-obsidian-850 border border-slate-700 text-slate-300 hover:text-white transition-all backdrop-blur-md shadow-lg"
+              className="p-2.5 rounded-full bg-white/20 hover:bg-white/30 border border-white/30 text-white transition-all backdrop-blur-md shadow-sm"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -244,8 +246,8 @@ export const HomeImageSlider: React.FC<HomeImageSliderProps> = ({ onOpenBooking 
                 aria-label={`Go to slide ${idx + 1}`}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   idx === currentSlide
-                    ? 'w-8 bg-gold-gradient shadow-gold-glow'
-                    : 'w-2 bg-slate-600/70 hover:bg-slate-400'
+                    ? 'w-8 bg-gold-400 shadow-sm'
+                    : 'w-2 bg-white/40 hover:bg-white/70'
                 }`}
               />
             ))}

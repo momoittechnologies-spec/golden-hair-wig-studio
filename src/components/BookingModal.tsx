@@ -48,7 +48,6 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
   const validatePhone = (phone: string): boolean => {
     const clean = phone.replace(/[\s\-()]/g, '');
-    // Indian 10-digit number or international with +
     const indianRegex = /^[6-9]\d{9}$/;
     const intlRegex = /^\+?[1-9]\d{7,14}$/;
     return indianRegex.test(clean) || intlRegex.test(clean);
@@ -71,13 +70,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     const selectedBranch = BRANCHES.find(b => b.id === branchId || b.slug === branchId) || BRANCHES[0];
     const selectedService = SERVICES.find(s => s.id === serviceId || s.slug === serviceId) || SERVICES[0];
 
-    // Trigger celebration confetti
     try {
       confetti({
-        particleCount: 80,
+        particleCount: 70,
         spread: 60,
         origin: { y: 0.6 },
-        colors: ['#F9D976', '#B89454', '#82652E', '#FFFFFF'],
+        colors: ['#B58D4A', '#FAF8F4', '#96713B', '#FFFFFF'],
       });
     } catch {
       // ignore
@@ -85,16 +83,15 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
     setSubmitted(true);
 
-    // Build pre-formatted WhatsApp text
     const message = `*CONSULTATION ENQUIRY - GOLDEN HAIR WIG STUDIO*
 ---------------------------------------
 👤 *Client Name:* ${fullName.trim()}
 📱 *Phone:* ${phoneNumber.trim()}
-📍 *Preferred Branch:* ${selectedBranch.name} (${selectedBranch.city})
-✂️ *Service:* ${selectedService.title}
+📍 *Preferred Studio:* ${selectedBranch.name} (${selectedBranch.city})
+✂ *Service:* ${selectedService.title}
 📅 *Preferred Date:* ${preferredDate || 'Earliest Available'}
 ⏰ *Preferred Slot:* ${timeSlot}
-💬 *Contact Mode:* ${contactMode === 'whatsapp' ? 'WhatsApp' : 'Phone Call'}
+💬 *Contact Mode:* ${contactMode === 'whatsapp' ? 'WhatsApp' : 'Direct Phone Call'}
 ---------------------------------------
 Please share appointment availability and consultation guidance.`;
 
@@ -102,7 +99,6 @@ Please share appointment availability and consultation guidance.`;
     const targetUrl = `https://wa.me/${BUSINESS_INFO.rawPrimaryPhone}?text=${encodedMessage}`;
     setWhatsappHref(targetUrl);
 
-    // Open WhatsApp after brief delay
     setTimeout(() => {
       window.open(targetUrl, '_blank');
     }, 700);
@@ -119,41 +115,42 @@ Please share appointment availability and consultation guidance.`;
       role="dialog"
       aria-modal="true"
       aria-labelledby="booking-modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-150"
     >
-      <div className="relative w-full max-w-lg bg-charcoal rounded-3xl border border-gold-500/40 p-6 sm:p-8 shadow-2xl max-h-[92vh] overflow-y-auto text-ivory">
+      <div className="relative w-full max-w-lg bg-white rounded-3xl border border-[#E8E2D8] p-6 sm:p-8 shadow-xl max-h-[92vh] overflow-y-auto text-neutral-900">
         
         {/* Close Button */}
         <button
+          type="button"
           onClick={handleReset}
           aria-label="Close consultation modal"
-          className="absolute top-5 right-5 p-2 rounded-full bg-neutral-900 text-ivory/60 hover:text-white border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-gold-500"
+          className="absolute top-5 right-5 p-2 rounded-full bg-[#FAF8F4] text-neutral-500 hover:text-neutral-900 border border-[#E8E2D8] focus:outline-none focus:ring-2 focus:ring-gold-500"
         >
           <X className="w-5 h-5" />
         </button>
 
         {!submitted ? (
           <div>
-            {/* Header with Official Logo */}
+            {/* Header */}
             <div className="space-y-2 mb-6">
               <div className="flex items-center gap-3">
                 <img
                   src="/images/logo.png"
                   alt="Golden Hair Wig Studio Crest"
-                  className="w-10 h-10 object-contain rounded-full border border-gold-500/40"
+                  className="w-10 h-10 object-contain rounded-full border border-[#E8E2D8]"
                 />
                 <div>
-                  <div className="inline-flex items-center gap-1.5 text-gold-400 text-[11px] font-bold uppercase tracking-wider">
-                    <ShieldCheck className="w-3.5 h-3.5 text-gold-500" aria-hidden="true" />
+                  <div className="inline-flex items-center gap-1.5 text-gold-700 text-[11px] font-bold uppercase tracking-wider">
+                    <ShieldCheck className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
                     <span>Private & Confidential</span>
                   </div>
-                  <h3 id="booking-modal-title" className="text-xl font-serif font-bold text-white">
-                    Request Studio Consultation
+                  <h3 id="booking-modal-title" className="text-xl font-serif font-bold text-neutral-900">
+                    Schedule Studio Consultation
                   </h3>
                 </div>
               </div>
-              <p className="text-xs text-ivory/70">
-                Personal scalp evaluation with Mr. Swarup or senior stylists in a private VIP styling suite. 
+              <p className="text-xs text-neutral-600 leading-relaxed">
+                Meet Mr. Swarup or senior stylists for a personal scalp evaluation in a private VIP styling suite.
               </p>
             </div>
 
@@ -162,18 +159,18 @@ Please share appointment availability and consultation guidance.`;
               
               {/* Branch Selector */}
               <div>
-                <label className="block text-xs font-semibold text-ivory/90 mb-1.5 flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-gold-400" aria-hidden="true" />
+                <label className="block text-xs font-semibold text-neutral-800 mb-1.5 flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
                   <span>Select Studio Location</span>
                 </label>
                 <select
                   value={branchId}
                   onChange={(e) => setBranchId(e.target.value)}
-                  className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-ivory focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500"
+                  className="w-full bg-[#FAF8F4] border border-[#E8E2D8] rounded-xl px-3.5 py-2.5 text-xs text-neutral-900 focus:bg-white focus:outline-none focus:border-gold-500"
                 >
                   {BRANCHES.map((b) => (
                     <option key={b.id} value={b.id}>
-                      {b.name} ({b.city}) {b.isHQ ? '— HQ' : ''}
+                      {b.name} ({b.city}) {b.isHQ ? '— Headquarters' : ''}
                     </option>
                   ))}
                 </select>
@@ -181,14 +178,14 @@ Please share appointment availability and consultation guidance.`;
 
               {/* Service Selector */}
               <div>
-                <label className="block text-xs font-semibold text-ivory/90 mb-1.5 flex items-center gap-1.5">
-                  <CalendarCheck className="w-3.5 h-3.5 text-gold-400" aria-hidden="true" />
-                  <span>Select Desired Service</span>
+                <label className="block text-xs font-semibold text-neutral-800 mb-1.5 flex items-center gap-1.5">
+                  <CalendarCheck className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
+                  <span>Select Solution / Service</span>
                 </label>
                 <select
                   value={serviceId}
                   onChange={(e) => setServiceId(e.target.value)}
-                  className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-ivory focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500"
+                  className="w-full bg-[#FAF8F4] border border-[#E8E2D8] rounded-xl px-3.5 py-2.5 text-xs text-neutral-900 focus:bg-white focus:outline-none focus:border-gold-500"
                 >
                   {SERVICES.map((s) => (
                     <option key={s.id} value={s.id}>
@@ -201,8 +198,8 @@ Please share appointment availability and consultation guidance.`;
               {/* Name & Phone */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-ivory/90 mb-1.5 flex items-center gap-1.5">
-                    <User className="w-3.5 h-3.5 text-gold-400" aria-hidden="true" />
+                  <label className="block text-xs font-semibold text-neutral-800 mb-1.5 flex items-center gap-1.5">
+                    <User className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
                     <span>Your Full Name *</span>
                   </label>
                   <input
@@ -211,13 +208,13 @@ Please share appointment availability and consultation guidance.`;
                     placeholder="e.g. Ramesh"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-ivory placeholder:text-neutral-500 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500"
+                    className="w-full bg-[#FAF8F4] border border-[#E8E2D8] rounded-xl px-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none focus:border-gold-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-ivory/90 mb-1.5 flex items-center gap-1.5">
-                    <Phone className="w-3.5 h-3.5 text-gold-400" aria-hidden="true" />
+                  <label className="block text-xs font-semibold text-neutral-800 mb-1.5 flex items-center gap-1.5">
+                    <Phone className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
                     <span>Mobile Number *</span>
                   </label>
                   <input
@@ -229,12 +226,12 @@ Please share appointment availability and consultation guidance.`;
                       setPhoneNumber(e.target.value);
                       if (phoneError) setPhoneError('');
                     }}
-                    className={`w-full bg-neutral-900 border rounded-xl px-3.5 py-2.5 text-xs text-ivory placeholder:text-neutral-500 focus:outline-none ${
-                      phoneError ? 'border-red-500 focus:border-red-500' : 'border-neutral-700 focus:border-gold-500'
+                    className={`w-full bg-[#FAF8F4] border rounded-xl px-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:bg-white focus:outline-none ${
+                      phoneError ? 'border-red-400' : 'border-[#E8E2D8] focus:border-gold-500'
                     }`}
                   />
                   {phoneError && (
-                    <p className="text-[11px] text-red-400 mt-1">{phoneError}</p>
+                    <p className="text-[11px] text-red-600 mt-1">{phoneError}</p>
                   )}
                 </div>
               </div>
@@ -242,27 +239,27 @@ Please share appointment availability and consultation guidance.`;
               {/* Date & Time Slot */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-ivory/90 mb-1.5 flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-gold-400" aria-hidden="true" />
+                  <label className="block text-xs font-semibold text-neutral-800 mb-1.5 flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
                     <span>Preferred Date</span>
                   </label>
                   <input
                     type="date"
                     value={preferredDate}
                     onChange={(e) => setPreferredDate(e.target.value)}
-                    className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-ivory focus:outline-none focus:border-gold-500"
+                    className="w-full bg-[#FAF8F4] border border-[#E8E2D8] rounded-xl px-3.5 py-2.5 text-xs text-neutral-900 focus:bg-white focus:outline-none focus:border-gold-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-ivory/90 mb-1.5 flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5 text-gold-400" aria-hidden="true" />
+                  <label className="block text-xs font-semibold text-neutral-800 mb-1.5 flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
                     <span>Preferred Time Slot</span>
                   </label>
                   <select
                     value={timeSlot}
                     onChange={(e) => setTimeSlot(e.target.value)}
-                    className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-ivory focus:outline-none focus:border-gold-500"
+                    className="w-full bg-[#FAF8F4] border border-[#E8E2D8] rounded-xl px-3.5 py-2.5 text-xs text-neutral-900 focus:bg-white focus:outline-none focus:border-gold-500"
                   >
                     <option value="Morning (10:00 AM - 1:00 PM)">Morning (10:00 AM - 1:00 PM)</option>
                     <option value="Afternoon (1:00 PM - 4:00 PM)">Afternoon (1:00 PM - 4:00 PM)</option>
@@ -274,7 +271,7 @@ Please share appointment availability and consultation guidance.`;
 
               {/* Contact Mode Preference */}
               <div>
-                <label className="block text-xs font-semibold text-ivory/90 mb-1.5">
+                <label className="block text-xs font-semibold text-neutral-800 mb-1.5">
                   How should our studio reach you?
                 </label>
                 <div className="grid grid-cols-2 gap-2">
@@ -283,11 +280,11 @@ Please share appointment availability and consultation guidance.`;
                     onClick={() => setContactMode('whatsapp')}
                     className={`py-2 px-3 rounded-xl border text-xs font-medium flex items-center justify-center gap-1.5 transition-all ${
                       contactMode === 'whatsapp'
-                        ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400 font-bold'
-                        : 'bg-neutral-900 border-neutral-700 text-ivory/60'
+                        ? 'bg-[#E8EEE8] border-emerald-400 text-emerald-800 font-bold'
+                        : 'bg-[#FAF8F4] border-[#E8E2D8] text-neutral-600'
                     }`}
                   >
-                    <MessageCircle className="w-3.5 h-3.5" aria-hidden="true" />
+                    <MessageCircle className="w-3.5 h-3.5 text-emerald-600" aria-hidden="true" />
                     <span>WhatsApp (Instant)</span>
                   </button>
 
@@ -296,50 +293,50 @@ Please share appointment availability and consultation guidance.`;
                     onClick={() => setContactMode('call')}
                     className={`py-2 px-3 rounded-xl border text-xs font-medium flex items-center justify-center gap-1.5 transition-all ${
                       contactMode === 'call'
-                        ? 'bg-gold-500/20 border-gold-500 text-gold-400 font-bold'
-                        : 'bg-neutral-900 border-neutral-700 text-ivory/60'
+                        ? 'bg-[#FAF6ED] border-gold-500 text-gold-800 font-bold'
+                        : 'bg-[#FAF8F4] border-[#E8E2D8] text-neutral-600'
                     }`}
                   >
-                    <Phone className="w-3.5 h-3.5" aria-hidden="true" />
+                    <Phone className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
                     <span>Direct Call</span>
                   </button>
                 </div>
               </div>
 
               {/* Privacy Disclosure */}
-              <p className="text-[11px] text-ivory/60 leading-tight">
-                🔒 Your privacy is fully respected. Your details are used strictly to coordinate your confidential consultation and are never shared with third parties.
+              <p className="text-[11px] text-neutral-500 leading-tight">
+                🔒 Your privacy is strictly protected. Details are used solely to schedule your confidential consultation and are never shared with third parties.
               </p>
 
               {/* Submit CTA */}
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-xl bg-gold-gradient text-charcoal font-bold text-sm shadow-gold-glow hover:shadow-gold-glow-lg transition-all flex items-center justify-center gap-2"
+                className="w-full py-3.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-sm shadow-xs transition-colors flex items-center justify-center gap-2"
               >
-                <CalendarCheck className="w-4 h-4 text-charcoal" aria-hidden="true" />
+                <CalendarCheck className="w-4 h-4" aria-hidden="true" />
                 <span>Submit Consultation Enquiry</span>
               </button>
 
             </form>
           </div>
         ) : (
-          /* Accurate Confirmation State */
+          /* Confirmation State */
           <div className="text-center py-6 space-y-4">
-            <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center mx-auto shadow-lg animate-bounce">
-              <CheckCircle2 className="w-8 h-8" aria-hidden="true" />
+            <div className="w-16 h-16 rounded-full bg-[#E8EEE8] text-emerald-700 border border-emerald-300 flex items-center justify-center mx-auto shadow-xs animate-bounce">
+              <CheckCircle2 className="w-8 h-8 text-emerald-600" aria-hidden="true" />
             </div>
 
-            <h3 className="text-2xl font-serif font-bold text-white">
+            <h3 className="text-2xl font-serif font-bold text-neutral-900">
               Consultation Enquiry Initiated!
             </h3>
 
-            <p className="text-xs text-ivory/80 max-w-sm mx-auto leading-relaxed">
+            <p className="text-xs text-neutral-600 max-w-sm mx-auto leading-relaxed">
               Thank you, <strong>{fullName}</strong>. Opening WhatsApp now to connect directly with Mr. Swarup and our senior stylists to schedule your consultation slot.
             </p>
 
-            <div className="p-4 rounded-xl bg-neutral-900 border border-neutral-800 text-xs text-left space-y-1.5 text-ivory/80">
+            <div className="p-4 rounded-xl bg-[#FAF8F4] border border-[#E8E2D8] text-xs text-left space-y-1.5 text-neutral-700">
               <div><strong>Studio:</strong> {BRANCHES.find(b => b.id === branchId || b.slug === branchId)?.name}</div>
-              <div><strong>Procedure:</strong> {SERVICES.find(s => s.id === serviceId || s.slug === serviceId)?.title}</div>
+              <div><strong>Service:</strong> {SERVICES.find(s => s.id === serviceId || s.slug === serviceId)?.title}</div>
               <div><strong>Phone:</strong> {phoneNumber}</div>
             </div>
 
@@ -348,7 +345,7 @@ Please share appointment availability and consultation guidance.`;
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition-colors"
+                className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-xs transition-colors"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>Open WhatsApp Chat Directly</span>
@@ -357,8 +354,9 @@ Please share appointment availability and consultation guidance.`;
 
             <div className="pt-2">
               <button
+                type="button"
                 onClick={handleReset}
-                className="w-full py-2.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-ivory font-semibold text-xs border border-neutral-700 transition-colors"
+                className="w-full py-2.5 rounded-xl bg-[#FAF8F4] hover:bg-[#F5F0E8] text-neutral-700 font-semibold text-xs border border-[#E8E2D8] transition-colors"
               >
                 Close Window
               </button>
