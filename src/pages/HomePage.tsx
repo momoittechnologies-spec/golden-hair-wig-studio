@@ -44,8 +44,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking }) => {
               Why Rayalaseema Trusts Us
             </span>
             <h2 className="text-2xl sm:text-3xl font-serif font-bold text-neutral-900 tracking-tight">
-              Personalized Hair Replacement with Complete Confidence
+              Personalized Hair Replacement for Men & Women
             </h2>
+            <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+              Explore professional non-surgical hair solutions, personalized fittings, and ongoing care across our service locations.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">

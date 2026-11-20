@@ -1,90 +1,62 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  ChevronLeft,
-  ChevronRight,
-  CalendarCheck,
-  ArrowRight,
-  ShieldCheck,
-  CheckCircle2,
-  Pause,
-  Play,
-  Sparkles,
-  Phone,
-  MessageCircle,
-  Star
-} from 'lucide-react';
-import { BUSINESS_INFO } from '../data/businessData';
-import { buildWhatsAppUrl, getDirectCallUrl } from '../utils/whatsapp';
-import { InstagramIcon } from './SocialIcons';
+import { ChevronLeft, ChevronRight, CalendarCheck, ArrowRight, Pause, Play } from 'lucide-react';
 
 export interface HeroSlide {
   id: number;
+  eyebrow: string;
+  headline: string;
+  description: string;
+  primaryCtaText: string;
+  primaryCtaLink: string;
+  secondaryCtaText: string;
   desktopImage: string;
   mobileImage: string;
   alt: string;
-  categoryPill: string;
-  headline: string;
-  highlight: string;
-  supportingText: string;
-  features: string[];
-  primaryCtaText: string;
-  primaryCtaAction: 'booking' | 'services' | 'ladies';
-  secondaryCtaText: string;
-  secondaryCtaLink: string;
   isMainH1?: boolean;
 }
 
 export const HERO_SLIDES: HeroSlide[] = [
   {
     id: 1,
+    eyebrow: 'NON-SURGICAL HAIR REPLACEMENT',
+    headline: 'Look Natural. Feel Confident.',
+    description:
+      'Discover personalized hair replacement solutions designed to complement your appearance and lifestyle.',
+    primaryCtaText: "Explore Men's Solutions",
+    primaryCtaLink: '/services/mens-hair-systems',
+    secondaryCtaText: 'Book Consultation',
     desktopImage: '/images/slider/slide_1.webp',
     mobileImage: '/images/slider/slide_1_mobile.webp',
     alt: 'Confident Indian man with natural-looking hair replacement at Golden Hair Studio',
-    categoryPill: "Rayalaseema's Premier Hair Studio",
-    headline: 'NATURAL-LOOKING HAIR REPLACEMENT',
-    highlight: 'Confidence That Feels Like You.',
-    supportingText:
-      'Personalized non-surgical hair replacement solutions for men and women. Experience 100% undetectable front hairlines and custom fade blending fitted in just 60 minutes.',
-    features: ['100% Natural Human Hair', 'Zero Surgery & Zero Downtime', 'Fitted in 60 Minutes', 'Private VIP Studios'],
-    primaryCtaText: 'Book Consultation',
-    primaryCtaAction: 'booking',
-    secondaryCtaText: 'Explore Our Services',
-    secondaryCtaLink: '/services',
     isMainH1: true,
   },
   {
     id: 2,
+    eyebrow: "PERSONALIZED WOMEN'S HAIR SOLUTIONS",
+    headline: 'Beautiful Hair, Your Way.',
+    description:
+      'Explore elegant wigs, toppers, and personalized hair solutions for your individual style.',
+    primaryCtaText: "Explore Women's Solutions",
+    primaryCtaLink: '/services/hair-wigs',
+    secondaryCtaText: 'Book Consultation',
     desktopImage: '/images/slider/slide_2.webp',
     mobileImage: '/images/slider/slide_2_mobile.webp',
-    alt: 'Elegant Indian woman with beautiful, voluminous natural-looking hair in luxury salon',
-    categoryPill: "Dedicated Women's Solutions",
-    headline: 'BEAUTIFUL HAIR. BEAUTIFUL CONFIDENCE.',
-    highlight: 'Lush Crown Volume & Silk Toppers.',
-    supportingText:
-      'Explore personalized wigs and hair solutions designed around your style and preferences. Seamless parting realism with virgin human hair extensions.',
-    features: ['Silk-Base Parting Mimic', '100% Virgin Remy Hair', 'Blow-Dry & Heat Friendly', 'Completely Non-Surgical'],
-    primaryCtaText: "Explore Women's Solutions",
-    primaryCtaAction: 'ladies',
-    secondaryCtaText: 'Book Consultation',
-    secondaryCtaLink: '#booking',
+    alt: 'High-quality portrait of an Indian woman with beautiful natural-looking hair',
     isMainH1: false,
   },
   {
     id: 3,
+    eyebrow: 'CUSTOM HAIR SYSTEMS',
+    headline: 'Designed Around You.',
+    description:
+      'Explore personalized hair systems, professional fitting options, and ongoing maintenance support.',
+    primaryCtaText: 'Explore Hair Systems',
+    primaryCtaLink: '/services/non-surgical-hair-replacement',
+    secondaryCtaText: 'Book Consultation',
     desktopImage: '/images/slider/slide_3.webp',
     mobileImage: '/images/slider/slide_3_mobile.webp',
-    alt: 'Professional hair specialist hand-crafting and styling a custom Swiss lace hair system in modern studio',
-    categoryPill: 'Master Studio Craftsmanship',
-    headline: 'YOUR STYLE. YOUR HAIR. YOUR CONFIDENCE.',
-    highlight: 'Precision Custom Hair Systems.',
-    supportingText:
-      'Discover personalized hair systems, fitting options, and ongoing maintenance support. Scalp-safe bonding allows complete freedom to swim, gym, and shower.',
-    features: ['Breathable Swiss Lace', 'Shower, Swim & Gym Safe', 'Monthly Hygiene & Re-bonding', 'Kadapa • Proddatur • Madanapalle • Nandyal'],
-    primaryCtaText: 'Explore Hair Systems',
-    primaryCtaAction: 'services',
-    secondaryCtaText: 'Contact Our Team',
-    secondaryCtaLink: '/contact',
+    alt: 'Professional hair specialist styling a natural-looking hair system in studio',
     isMainH1: false,
   },
 ];
@@ -102,7 +74,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenBooking }) => {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const sliderContainerRef = useRef<HTMLDivElement | null>(null);
 
-  // Check prefers-reduced-motion
+  // Detect prefers-reduced-motion
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setPrefersReducedMotion(mediaQuery.matches);
@@ -122,7 +94,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenBooking }) => {
     setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
   }, []);
 
-  // Autoplay management
+  // Autoplay management (6.5s per slide, paused on hover/focus or reduced motion)
   useEffect(() => {
     if (!isPaused && !prefersReducedMotion) {
       timerRef.current = setInterval(() => {
@@ -134,7 +106,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenBooking }) => {
     };
   }, [isPaused, prefersReducedMotion, nextSlide]);
 
-  // Touch Swipe Handlers
+  // Touch swipe support for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
@@ -145,8 +117,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenBooking }) => {
     const diffX = touchStartX.current - e.changedTouches[0].clientX;
     const diffY = touchStartY.current - e.changedTouches[0].clientY;
 
-    // Horizontal swipe threshold > 45px and dominant over vertical scroll
-    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 45) {
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
       if (diffX > 0) {
         nextSlide();
       } else {
@@ -157,28 +128,12 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenBooking }) => {
     touchStartY.current = null;
   };
 
-  // Keyboard navigation
+  // Keyboard accessibility
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowLeft') {
       prevSlide();
     } else if (e.key === 'ArrowRight') {
       nextSlide();
-    }
-  };
-
-  const handlePrimaryCta = (action: 'booking' | 'services' | 'ladies') => {
-    if (action === 'booking') {
-      onOpenBooking();
-    } else if (action === 'services') {
-      const el = document.getElementById('services');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else if (action === 'ladies') {
-      const el = document.getElementById('services');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
     }
   };
 
@@ -196,265 +151,260 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenBooking }) => {
       onTouchEnd={handleTouchEnd}
       onKeyDown={handleKeyDown}
       tabIndex={0}
-      className="relative w-full bg-[#FAF8F4] overflow-hidden focus:outline-none select-none border-b border-[#E8E2D8]"
+      className="relative w-full bg-[#FAF8F4] border-b border-[#E8E2D8] overflow-hidden focus:outline-none select-none"
     >
-      {/* Slider Canvas Container */}
-      <div className="relative w-full min-h-[580px] sm:min-h-[620px] lg:h-[660px] xl:h-[700px] flex items-center">
-        
-        {/* Slides Images Track with Light-Theme Gradients */}
-        {HERO_SLIDES.map((slide, idx) => {
-          const isActive = idx === currentSlide;
-          return (
-            <div
-              key={slide.id}
-              role="group"
-              aria-roledescription="slide"
-              aria-label={`Slide ${idx + 1} of ${HERO_SLIDES.length}: ${slide.headline}`}
-              aria-hidden={!isActive}
-              className={`absolute inset-0 transition-opacity ${
-                prefersReducedMotion ? 'duration-0' : 'duration-700 ease-in-out'
-              } ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
-            >
-              {/* Picture Element: Responsive WebP Delivery with High Priority for Slide 1 */}
-              <picture>
-                <source media="(max-width: 767px)" srcSet={slide.mobileImage} type="image/webp" />
-                <source media="(min-width: 768px)" srcSet={slide.desktopImage} type="image/webp" />
-                <img
-                  src={slide.desktopImage}
-                  alt={slide.alt}
-                  fetchPriority={idx === 0 ? 'high' : 'auto'}
-                  loading={idx === 0 ? 'eager' : 'lazy'}
-                  decoding={idx === 0 ? 'sync' : 'async'}
-                  className={`w-full h-full object-cover object-[center_top] sm:object-center transform scale-100 ${
-                    isActive && !prefersReducedMotion ? 'transition-transform duration-8000 ease-out scale-[1.03]' : ''
-                  }`}
-                />
-              </picture>
-
-              {/* STRICT LIGHT THEME GRADIENT OVERLAYS (Ivory/White to Transparent) */}
-              {/* Desktop Left-to-Right Soft Gradient: Keeps text 100% legible against light background */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
+        {/* Relative Slider Container */}
+        <div className="relative min-h-[460px] sm:min-h-[500px] lg:min-h-[520px]">
+          {HERO_SLIDES.map((slide, idx) => {
+            const isActive = idx === currentSlide;
+            return (
               <div
-                className="hidden lg:block absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent w-7/12 pointer-events-none"
-                aria-hidden="true"
-              />
-              {/* Desktop Bottom Ambient Gradient */}
-              <div
-                className="hidden lg:block absolute inset-0 bg-gradient-to-t from-[#FAF8F4] via-transparent to-transparent pointer-events-none"
-                aria-hidden="true"
-              />
-              {/* Mobile Bottom-to-Top White Gradient: Keeps text legible on phone screens */}
-              <div
-                className="lg:hidden absolute inset-0 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none"
-                aria-hidden="true"
-              />
-              {/* Mobile Subtle Top Vignette */}
-              <div
-                className="lg:hidden absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-white/40 to-transparent pointer-events-none"
-                aria-hidden="true"
-              />
-            </div>
-          );
-        })}
-
-        {/* Slide Content Overlay (Safe Left-Aligned Text Canvas on Desktop, Centered/Bottom on Mobile) */}
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-8 sm:py-12 lg:py-0">
-          <div className="max-w-2xl lg:max-w-xl xl:max-w-2xl flex flex-col justify-center space-y-4 sm:space-y-5">
-            
-            {HERO_SLIDES.map((slide, idx) => {
-              if (idx !== currentSlide) return null;
-              return (
-                <div
-                  key={slide.id}
-                  className={`space-y-4 sm:space-y-5 ${
-                    prefersReducedMotion ? '' : 'animate-in fade-in slide-in-from-left-4 duration-500'
-                  }`}
-                >
-                  {/* Category Pill with Gold Badge */}
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-[#E8E2D8] text-neutral-800 text-xs font-semibold shadow-2xs">
-                    <Sparkles className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
-                    <span>{slide.categoryPill}</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-gold-600"></span>
-                    <span className="text-gold-700 font-bold">1-Hour Result</span>
-                  </div>
-
-                  {/* Main Headline (H1 on Slide 1 for SEO, H2 on others) */}
-                  {slide.isMainH1 ? (
-                    <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[54px] font-serif font-extrabold text-neutral-900 tracking-tight leading-[1.15]">
-                      {slide.headline}{' '}
-                      <span className="text-gold-700 block sm:inline mt-1 sm:mt-0 font-serif">
-                        {slide.highlight}
-                      </span>
-                    </h1>
-                  ) : (
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[54px] font-serif font-extrabold text-neutral-900 tracking-tight leading-[1.15]">
-                      {slide.headline}{' '}
-                      <span className="text-gold-700 block sm:inline mt-1 sm:mt-0 font-serif">
-                        {slide.highlight}
-                      </span>
-                    </h2>
-                  )}
-
-                  {/* Supporting Paragraph */}
-                  <p className="text-neutral-700 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-xl">
-                    {slide.supportingText}
-                  </p>
-
-                  {/* Key Verified Feature Pills */}
-                  <div className="grid grid-cols-2 gap-2 sm:gap-2.5 max-w-lg pt-1">
-                    {slide.features.map((feature, fIdx) => (
-                      <div
-                        key={fIdx}
-                        className="flex items-center gap-1.5 text-xs sm:text-sm text-neutral-800 font-medium"
-                      >
-                        <CheckCircle2 className="w-4 h-4 text-gold-600 flex-shrink-0" aria-hidden="true" />
-                        <span className="truncate">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* CTA Actions Group */}
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
-                    {/* Primary CTA */}
-                    <button
-                      type="button"
-                      onClick={() => handlePrimaryCta(slide.primaryCtaAction)}
-                      className="px-6 sm:px-7 py-3.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-sm sm:text-base shadow-sm hover:shadow-md transition-all active:scale-95 flex items-center justify-center gap-2"
-                    >
-                      <CalendarCheck className="w-4 h-4" aria-hidden="true" />
-                      <span>{slide.primaryCtaText}</span>
-                      <ArrowRight className="w-4 h-4" aria-hidden="true" />
-                    </button>
-
-                    {/* Secondary CTA */}
-                    <Link
-                      to={slide.secondaryCtaLink === '#booking' ? '#' : slide.secondaryCtaLink}
-                      onClick={(e) => {
-                        if (slide.secondaryCtaLink === '#booking') {
-                          e.preventDefault();
-                          onOpenBooking();
-                        }
-                      }}
-                      className="px-5 sm:px-6 py-3.5 rounded-xl bg-white/95 hover:bg-neutral-50 border border-[#E8E2D8] hover:border-gold-400 text-neutral-900 font-semibold text-sm sm:text-base transition-colors flex items-center justify-center gap-2 shadow-2xs"
-                    >
-                      <span>{slide.secondaryCtaText}</span>
-                    </Link>
-
-                    {/* Quick WhatsApp Action */}
-                    <a
-                      href={buildWhatsAppUrl({ enquiryType: 'consultation' })}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-3.5 rounded-xl bg-[#E8EEE8] hover:bg-emerald-100 border border-emerald-300 text-emerald-800 font-semibold text-sm transition-colors flex items-center justify-center gap-2 shadow-2xs"
-                      aria-label="Direct WhatsApp Consultation with Mr. Swarup"
-                    >
-                      <MessageCircle className="w-4 h-4 text-emerald-600" aria-hidden="true" />
-                      <span className="hidden sm:inline">WhatsApp</span>
-                    </a>
-                  </div>
-
-                  {/* Trust Micro-Strip */}
-                  <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-neutral-600 border-t border-[#E8E2D8]/80 max-w-xl">
-                    <div className="flex items-center gap-1.5 font-medium text-neutral-800">
-                      <ShieldCheck className="w-4 h-4 text-gold-600" aria-hidden="true" />
-                      <span>Under Prop. Mr. Swarup</span>
+                key={slide.id}
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`Slide ${idx + 1} of ${HERO_SLIDES.length}: ${slide.headline}`}
+                aria-hidden={!isActive}
+                className={`w-full transition-opacity ${
+                  prefersReducedMotion ? 'duration-0' : 'duration-700 ease-in-out'
+                } ${
+                  isActive
+                    ? 'opacity-100 relative z-10 pointer-events-auto'
+                    : 'opacity-0 absolute inset-0 z-0 pointer-events-none'
+                }`}
+              >
+                {/* DESKTOP SPLIT LAYOUT (>= 1024px): 45% Text on Left, 55% Image on Right */}
+                <div className="hidden lg:grid lg:grid-cols-12 lg:gap-12 lg:items-center">
+                  {/* Left 45% Content Column */}
+                  <div className="lg:col-span-5 space-y-5">
+                    {/* Eyebrow Label */}
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#E8E2D8] text-[12px] font-bold tracking-wider text-[#B58D4A] uppercase shadow-2xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#B58D4A]" aria-hidden="true" />
+                      <span>{slide.eyebrow}</span>
                     </div>
 
-                    <span className="text-[#D8D0C3]">|</span>
+                    {/* Headline */}
+                    {slide.isMainH1 ? (
+                      <h1 className="text-4xl lg:text-[46px] xl:text-[52px] font-serif font-bold text-[#242424] tracking-tight leading-[1.12]">
+                        {slide.headline}
+                      </h1>
+                    ) : (
+                      <h2 className="text-4xl lg:text-[46px] xl:text-[52px] font-serif font-bold text-[#242424] tracking-tight leading-[1.12]">
+                        {slide.headline}
+                      </h2>
+                    )}
 
-                    <a
-                      href={BUSINESS_INFO.googleReviewUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 hover:text-gold-700 transition-colors"
-                      title="Read 4.9★ Google Reviews"
-                    >
-                      <div className="flex text-amber-500">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-3.5 h-3.5 fill-current" aria-hidden="true" />
-                        ))}
+                    {/* Description */}
+                    <p className="text-base lg:text-[17px] text-[#555555] leading-relaxed font-normal max-w-lg">
+                      {slide.description}
+                    </p>
+
+                    {/* Clean Action Buttons (Max 2 CTAs) */}
+                    <div className="flex items-center gap-3.5 pt-2">
+                      <Link
+                        to={slide.primaryCtaLink}
+                        className="px-6 py-3.5 rounded-xl bg-[#B58D4A] hover:bg-[#96713B] text-white font-bold text-sm tracking-wide shadow-xs hover:shadow transition-all duration-200 active:scale-98 flex items-center justify-center gap-2 group"
+                      >
+                        <span>{slide.primaryCtaText}</span>
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                      </Link>
+
+                      <button
+                        type="button"
+                        onClick={onOpenBooking}
+                        className="px-5 py-3.5 rounded-xl bg-white hover:bg-[#FAF8F4] border border-[#E8E2D8] hover:border-[#B58D4A] text-[#242424] font-semibold text-sm transition-colors duration-200 flex items-center justify-center gap-2 shadow-2xs"
+                      >
+                        <CalendarCheck className="w-4 h-4 text-[#B58D4A]" aria-hidden="true" />
+                        <span>{slide.secondaryCtaText}</span>
+                      </button>
+                    </div>
+
+                    {/* Desktop Slider Controls Anchor (Cleanly Below Content) */}
+                    <div className="flex items-center justify-between pt-6 border-t border-[#E8E2D8]/70 mt-6 max-w-md">
+                      {/* Pagination Indicator Pills */}
+                      <div className="flex items-center gap-2" role="tablist" aria-label="Slides">
+                        {HERO_SLIDES.map((s, dotIdx) => {
+                          const isDotActive = dotIdx === currentSlide;
+                          return (
+                            <button
+                              key={s.id}
+                              role="tab"
+                              aria-selected={isDotActive}
+                              aria-label={`Go to slide ${dotIdx + 1}: ${s.headline}`}
+                              onClick={() => setCurrentSlide(dotIdx)}
+                              className={`h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#B58D4A] ${
+                                isDotActive
+                                  ? 'w-7 bg-[#B58D4A] shadow-2xs'
+                                  : 'w-2 bg-[#D8D0C3] hover:bg-[#B58D4A]/50'
+                              }`}
+                            />
+                          );
+                        })}
                       </div>
-                      <span className="font-bold text-neutral-900 ml-0.5">4.9★</span>
-                      <span className="text-neutral-500">Reviews</span>
-                    </a>
 
-                    <span className="text-[#D8D0C3] hidden sm:inline">|</span>
+                      <div className="flex items-center gap-2">
+                        {/* Autoplay Pause / Play Control */}
+                        <button
+                          type="button"
+                          onClick={() => setIsPaused((prev) => !prev)}
+                          aria-label={isPaused ? 'Resume autoplay slideshow' : 'Pause autoplay slideshow'}
+                          title={isPaused ? 'Resume autoplay' : 'Pause autoplay'}
+                          className="p-1.5 rounded-full text-[#555555] hover:text-[#B58D4A] hover:bg-white border border-transparent hover:border-[#E8E2D8] transition-colors"
+                        >
+                          {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
+                        </button>
 
-                    <a
-                      href={BUSINESS_INFO.instagramUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hidden sm:flex items-center gap-1 text-neutral-700 hover:text-rose-600 transition-colors"
-                    >
-                      <span className="p-0.5 rounded-[3px] bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white">
-                        <InstagramIcon className="w-2.5 h-2.5 text-white" />
-                      </span>
-                      <span className="font-medium">{BUSINESS_INFO.instagramHandle}</span>
-                    </a>
+                        <span className="h-3 w-px bg-[#E0D8CC]" aria-hidden="true" />
+
+                        {/* Prev / Next Arrows */}
+                        <button
+                          type="button"
+                          onClick={prevSlide}
+                          aria-label="Previous Slide"
+                          className="p-2 rounded-full bg-white hover:bg-[#FAF8F4] border border-[#E8E2D8] hover:border-[#B58D4A] text-[#242424] hover:text-[#B58D4A] transition-colors shadow-2xs focus:outline-none focus:ring-2 focus:ring-[#B58D4A]"
+                        >
+                          <ChevronLeft className="w-4 h-4" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={nextSlide}
+                          aria-label="Next Slide"
+                          className="p-2 rounded-full bg-white hover:bg-[#FAF8F4] border border-[#E8E2D8] hover:border-[#B58D4A] text-[#242424] hover:text-[#B58D4A] transition-colors shadow-2xs focus:outline-none focus:ring-2 focus:ring-[#B58D4A]"
+                        >
+                          <ChevronRight className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
                   </div>
 
+                  {/* Right 55% Photographic Image Frame (No Text Overlay, 100% Clear Portrait) */}
+                  <div className="lg:col-span-7">
+                    <div className="relative w-full h-[460px] xl:h-[500px] rounded-3xl overflow-hidden border border-[#E8E2D8] shadow-sm bg-white">
+                      <img
+                        src={slide.desktopImage}
+                        alt={slide.alt}
+                        fetchPriority={idx === 0 ? 'high' : 'auto'}
+                        loading={idx === 0 ? 'eager' : 'lazy'}
+                        decoding={idx === 0 ? 'sync' : 'async'}
+                        className="w-full h-full object-cover object-center"
+                      />
+                    </div>
+                  </div>
                 </div>
-              );
-            })}
 
-          </div>
+                {/* DEDICATED MOBILE LAYOUT (< 1024px): Full-Width Image at Top, Clean Text Section Below */}
+                <div className="lg:hidden flex flex-col space-y-4">
+                  {/* Top Photographic Frame (No text overlapping face/hair) */}
+                  <div className="relative w-full h-[260px] sm:h-[320px] rounded-2xl overflow-hidden border border-[#E8E2D8] shadow-xs bg-white">
+                    <img
+                      src={slide.mobileImage}
+                      alt={slide.alt}
+                      fetchPriority={idx === 0 ? 'high' : 'auto'}
+                      loading={idx === 0 ? 'eager' : 'lazy'}
+                      decoding={idx === 0 ? 'sync' : 'async'}
+                      className="w-full h-full object-cover object-center"
+                    />
+                  </div>
+
+                  {/* Bottom Clean Text Block */}
+                  <div className="space-y-2.5 pt-1">
+                    {/* Small Eyebrow */}
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#E8E2D8] text-[11px] font-bold tracking-wider text-[#B58D4A] uppercase shadow-2xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#B58D4A]" aria-hidden="true" />
+                      <span>{slide.eyebrow}</span>
+                    </div>
+
+                    {/* Concise Headline */}
+                    {slide.isMainH1 ? (
+                      <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#242424] tracking-tight leading-tight">
+                        {slide.headline}
+                      </h1>
+                    ) : (
+                      <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#242424] tracking-tight leading-tight">
+                        {slide.headline}
+                      </h2>
+                    )}
+
+                    {/* Short Description */}
+                    <p className="text-xs sm:text-sm text-[#555555] leading-relaxed">
+                      {slide.description}
+                    </p>
+
+                    {/* Mobile Action Buttons (Clear, Uncrowded) */}
+                    <div className="flex flex-col gap-2 pt-2">
+                      <Link
+                        to={slide.primaryCtaLink}
+                        className="w-full py-3 rounded-xl bg-[#B58D4A] hover:bg-[#96713B] text-white font-bold text-xs sm:text-sm text-center shadow-xs flex items-center justify-center gap-2 active:scale-98 transition-all"
+                      >
+                        <span>{slide.primaryCtaText}</span>
+                        <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                      </Link>
+
+                      <button
+                        type="button"
+                        onClick={onOpenBooking}
+                        className="w-full py-2.5 rounded-xl bg-white hover:bg-[#FAF8F4] border border-[#E8E2D8] text-[#242424] font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-2xs transition-colors"
+                      >
+                        <CalendarCheck className="w-3.5 h-3.5 text-[#B58D4A]" aria-hidden="true" />
+                        <span>{slide.secondaryCtaText}</span>
+                      </button>
+                    </div>
+
+                    {/* Mobile Controls (Pagination dots + pause + arrows) */}
+                    <div className="flex items-center justify-between pt-3 border-t border-[#E8E2D8]/70 mt-3">
+                      <div className="flex items-center gap-1.5" role="tablist" aria-label="Slides">
+                        {HERO_SLIDES.map((s, dotIdx) => {
+                          const isDotActive = dotIdx === currentSlide;
+                          return (
+                            <button
+                              key={s.id}
+                              role="tab"
+                              aria-selected={isDotActive}
+                              aria-label={`Go to slide ${dotIdx + 1}: ${s.headline}`}
+                              onClick={() => setCurrentSlide(dotIdx)}
+                              className={`h-1.5 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#B58D4A] ${
+                                isDotActive
+                                  ? 'w-6 bg-[#B58D4A]'
+                                  : 'w-1.5 bg-[#D8D0C3] hover:bg-[#B58D4A]/50'
+                              }`}
+                            />
+                          );
+                        })}
+                      </div>
+
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => setIsPaused((prev) => !prev)}
+                          aria-label={isPaused ? 'Resume autoplay' : 'Pause autoplay'}
+                          className="p-1 rounded-full text-[#555555] hover:text-[#B58D4A] transition-colors"
+                        >
+                          {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={prevSlide}
+                          aria-label="Previous Slide"
+                          className="p-1.5 rounded-full bg-white border border-[#E8E2D8] text-[#242424] hover:text-[#B58D4A] shadow-2xs"
+                        >
+                          <ChevronLeft className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={nextSlide}
+                          aria-label="Next Slide"
+                          className="p-1.5 rounded-full bg-white border border-[#E8E2D8] text-[#242424] hover:text-[#B58D4A] shadow-2xs"
+                        >
+                          <ChevronRight className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
-
-        {/* Desktop Prev & Next Arrows (Floating Luxury Buttons) */}
-        <div className="hidden lg:flex absolute z-30 right-8 bottom-12 items-center gap-2">
-          <button
-            type="button"
-            onClick={prevSlide}
-            aria-label="Previous Slide"
-            className="p-3 rounded-full bg-white/95 hover:bg-white border border-[#E8E2D8] hover:border-gold-400 text-neutral-800 hover:text-gold-700 shadow-md transition-all active:scale-95 focus:outline-none focus:ring-2 focus:ring-gold-500"
-          >
-            <ChevronLeft className="w-5 h-5" aria-hidden="true" />
-          </button>
-
-          <button
-            type="button"
-            onClick={nextSlide}
-            aria-label="Next Slide"
-            className="p-3 rounded-full bg-white/95 hover:bg-white border border-[#E8E2D8] hover:border-gold-400 text-neutral-800 hover:text-gold-700 shadow-md transition-all active:scale-95 focus:outline-none focus:ring-2 focus:ring-gold-500"
-          >
-            <ChevronRight className="w-5 h-5" aria-hidden="true" />
-          </button>
-        </div>
-
-        {/* Slider Pagination Pills & Autoplay Pause Control */}
-        <div className="absolute z-30 bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 lg:left-8 lg:translate-x-0 flex items-center gap-3 bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#E8E2D8] shadow-2xs">
-          {/* Slide Indicator Pills */}
-          <div className="flex items-center gap-1.5" role="tablist" aria-label="Slides">
-            {HERO_SLIDES.map((slide, idx) => {
-              const isActive = idx === currentSlide;
-              return (
-                <button
-                  key={slide.id}
-                  role="tab"
-                  aria-selected={isActive}
-                  aria-label={`Go to Slide ${idx + 1}: ${slide.headline}`}
-                  onClick={() => setCurrentSlide(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gold-500 ${
-                    isActive ? 'w-8 bg-gold-600 shadow-2xs' : 'w-2 bg-neutral-300 hover:bg-neutral-400'
-                  }`}
-                />
-              );
-            })}
-          </div>
-
-          <span className="h-3 w-px bg-[#E0D8CC]" aria-hidden="true" />
-
-          {/* Autoplay Pause / Play Toggle Control */}
-          <button
-            type="button"
-            onClick={() => setIsPaused((prev) => !prev)}
-            aria-label={isPaused ? 'Resume autoplay slideshow' : 'Pause autoplay slideshow'}
-            title={isPaused ? 'Resume autoplay' : 'Pause autoplay'}
-            className="p-1 rounded-full text-neutral-600 hover:text-gold-700 focus:outline-none transition-colors"
-          >
-            {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
-          </button>
-        </div>
-
       </div>
     </section>
   );
