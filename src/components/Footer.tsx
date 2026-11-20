@@ -164,12 +164,18 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
           </div>
 
           {/* Powered by MOMO IT TECHNOLOGIES Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-gold-500/30 text-ivory/80 shadow-sm">
+          <a
+            href="https://www.momoittechnologies.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 hover:bg-neutral-800 border border-gold-500/30 hover:border-gold-500/60 text-ivory/80 shadow-sm transition-all duration-200 group"
+            aria-label="Powered by MOMO IT TECHNOLOGIES - Visit Website"
+          >
             <span className="text-[11px] font-medium text-ivory/60">Powered by</span>
-            <span className="font-bold text-gold-gradient tracking-wide uppercase text-xs">
+            <span className="font-bold text-gold-gradient tracking-wide uppercase text-xs group-hover:underline">
               MOMO IT TECHNOLOGIES
             </span>
-          </div>
+          </a>
         </div>
 
       </div>
