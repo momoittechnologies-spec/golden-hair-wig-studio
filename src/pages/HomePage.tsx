@@ -1,7 +1,6 @@
 import React from 'react';
-import { Hero } from '../components/Hero';
+import { HeroSlider } from '../components/HeroSlider';
 import { MarqueeBanner } from '../components/MarqueeBanner';
-import { HomeImageSlider } from '../components/HomeImageSlider';
 import { ServicesSection } from '../components/ServicesSection';
 import { ComparisonSection } from '../components/ComparisonSection';
 import { InteractiveBeforeAfter } from '../components/InteractiveBeforeAfter';
@@ -13,7 +12,7 @@ import { TestimonialsSection } from '../components/TestimonialsSection';
 import { InstagramShowcase } from '../components/InstagramShowcase';
 import { FAQSection } from '../components/FAQSection';
 import { SEOHead } from '../components/SEOHead';
-import { ShieldCheck, CalendarCheck, Phone, MessageCircle, Award, Sparkles } from 'lucide-react';
+import { ShieldCheck, CalendarCheck, Phone, MessageCircle, Award, Sparkles, Clock, MapPin, CheckCircle2 } from 'lucide-react';
 import { BUSINESS_INFO } from '../data/businessData';
 import { buildWhatsAppUrl, getDirectCallUrl } from '../utils/whatsapp';
 
@@ -30,53 +29,111 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenBooking }) => {
         canonicalPath="/"
       />
 
-      {/* B. Clean, Visually Compelling Hero */}
-      <Hero onOpenBooking={() => onOpenBooking()} />
+      {/* 1. Premium Cinematic Hero Slider (Light Luxury Aesthetic) */}
+      <HeroSlider onOpenBooking={() => onOpenBooking()} />
 
-      {/* C. Subtle Service Marquee immediately AFTER hero! */}
+      {/* 2. Subtle Service Marquee immediately AFTER hero slider */}
       <MarqueeBanner />
 
-      {/* D. Trust and Reassurance Section */}
-      <section className="py-12 bg-white border-b border-[#E8E2D8]">
+      {/* 3. Verified Trust and Reassurance Section */}
+      <section className="py-14 sm:py-16 bg-white border-b border-[#E8E2D8] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div className="p-4 rounded-2xl bg-[#FAF8F4] border border-[#E8E2D8]">
-              <span className="font-serif font-black text-2xl sm:text-3xl text-gold-700 block">10+ Years</span>
-              <span className="text-xs text-neutral-600 mt-1 block">Dedicated Experience</span>
+          
+          <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
+            <span className="text-xs font-bold text-gold-700 tracking-wider uppercase">
+              Why Rayalaseema Trusts Us
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-neutral-900 tracking-tight">
+              Personalized Hair Replacement with Complete Confidence
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {/* Trust Card 1 */}
+            <div className="p-6 rounded-2xl bg-[#FAF8F4] border border-[#E8E2D8] hover:border-gold-400 transition-all duration-200 hover:shadow-sm space-y-2.5 group">
+              <div className="w-10 h-10 rounded-xl bg-white border border-[#E8E2D8] group-hover:border-gold-300 flex items-center justify-center text-gold-600 shadow-2xs">
+                <Award className="w-5 h-5" aria-hidden="true" />
+              </div>
+              <span className="font-serif font-black text-2xl text-neutral-900 block">
+                10+ Years
+              </span>
+              <strong className="text-xs font-bold text-gold-700 block uppercase tracking-wide">
+                Specialized Craftsmanship
+              </strong>
+              <p className="text-xs text-neutral-600 leading-relaxed">
+                Direct leadership of Prop. Mr. Swarup with thousands of satisfied clients across Andhra Pradesh.
+              </p>
             </div>
-            <div className="p-4 rounded-2xl bg-[#FAF8F4] border border-[#E8E2D8]">
-              <span className="font-serif font-black text-2xl sm:text-3xl text-gold-700 block">60 Mins</span>
-              <span className="text-xs text-neutral-600 mt-1 block">Instant Transformation</span>
+
+            {/* Trust Card 2 */}
+            <div className="p-6 rounded-2xl bg-[#FAF8F4] border border-[#E8E2D8] hover:border-gold-400 transition-all duration-200 hover:shadow-sm space-y-2.5 group">
+              <div className="w-10 h-10 rounded-xl bg-white border border-[#E8E2D8] group-hover:border-gold-300 flex items-center justify-center text-gold-600 shadow-2xs">
+                <Clock className="w-5 h-5" aria-hidden="true" />
+              </div>
+              <span className="font-serif font-black text-2xl text-neutral-900 block">
+                60 Minutes
+              </span>
+              <strong className="text-xs font-bold text-gold-700 block uppercase tracking-wide">
+                Instant Transformation
+              </strong>
+              <p className="text-xs text-neutral-600 leading-relaxed">
+                Walk in with visible scalp thinning, walk out with a full head of styled hair in a single sitting with zero pain.
+              </p>
             </div>
-            <div className="p-4 rounded-2xl bg-[#FAF8F4] border border-[#E8E2D8]">
-              <span className="font-serif font-black text-2xl sm:text-3xl text-gold-700 block">4 Hubs</span>
-              <span className="text-xs text-neutral-600 mt-1 block">Rayalaseema Studios</span>
+
+            {/* Trust Card 3 */}
+            <div className="p-6 rounded-2xl bg-[#FAF8F4] border border-[#E8E2D8] hover:border-gold-400 transition-all duration-200 hover:shadow-sm space-y-2.5 group">
+              <div className="w-10 h-10 rounded-xl bg-white border border-[#E8E2D8] group-hover:border-gold-300 flex items-center justify-center text-gold-600 shadow-2xs">
+                <MapPin className="w-5 h-5" aria-hidden="true" />
+              </div>
+              <span className="font-serif font-black text-2xl text-neutral-900 block">
+                4 Hub Studios
+              </span>
+              <strong className="text-xs font-bold text-gold-700 block uppercase tracking-wide">
+                Rayalaseema Network
+              </strong>
+              <p className="text-xs text-neutral-600 leading-relaxed">
+                Fully equipped private VIP styling cabins in Kadapa (HQ), Proddatur, Madanapalle, and Nandyal.
+              </p>
             </div>
-            <div className="p-4 rounded-2xl bg-[#FAF8F4] border border-[#E8E2D8]">
-              <span className="font-serif font-black text-2xl sm:text-3xl text-gold-700 block">100%</span>
-              <span className="text-xs text-neutral-600 mt-1 block">Human Virgin Hair</span>
+
+            {/* Trust Card 4 */}
+            <div className="p-6 rounded-2xl bg-[#FAF8F4] border border-[#E8E2D8] hover:border-gold-400 transition-all duration-200 hover:shadow-sm space-y-2.5 group">
+              <div className="w-10 h-10 rounded-xl bg-white border border-[#E8E2D8] group-hover:border-gold-300 flex items-center justify-center text-gold-600 shadow-2xs">
+                <ShieldCheck className="w-5 h-5" aria-hidden="true" />
+              </div>
+              <span className="font-serif font-black text-2xl text-neutral-900 block">
+                100% Virgin Hair
+              </span>
+              <strong className="text-xs font-bold text-gold-700 block uppercase tracking-wide">
+                Undetectable Realism
+              </strong>
+              <p className="text-xs text-neutral-600 leading-relaxed">
+                Premium human hair knotted onto breathable Swiss lace. Custom matched to your hair density and texture.
+              </p>
             </div>
           </div>
+
         </div>
       </section>
 
-      {/* E. Our Hair Replacement Solutions */}
+      {/* 4. Our Hair Replacement Solutions */}
       <ServicesSection onOpenBooking={onOpenBooking} />
 
-      {/* F. Why Choose Golden Hair Wig Studio (Comparison vs Surgery) */}
+      {/* 5. Why Choose Golden Hair Wig Studio (Comparison vs Surgery) */}
       <ComparisonSection onOpenBooking={() => onOpenBooking()} />
 
-      {/* G. Authentic Before & After Transformations */}
+      {/* 6. Authentic Before & After Transformations */}
       <InteractiveBeforeAfter onOpenBooking={() => onOpenBooking()} />
 
       {/* Interactive 3D Swiss Lace Architecture & Norwood Stage Diagnostic */}
       <PatchAnatomy3D />
       <HairLossStageGuide onOpenBooking={() => onOpenBooking()} />
 
-      {/* H. Our Simple Consultation and Fitting Process (4 Steps) */}
+      {/* 7. Our Simple Consultation and Fitting Process (4 Steps) */}
       <ProcessStepsSection onOpenBooking={() => onOpenBooking()} />
 
-      {/* I. Service Locations (Kadapa, Proddatur, Madanapalle, Nandyal) */}
+      {/* 8. Service Locations (Kadapa, Proddatur, Madanapalle, Nandyal) */}
       <BranchesSection onOpenBooking={onOpenBooking} />
 
       {/* J. Verified Customer Reviews & Google Rating */}
