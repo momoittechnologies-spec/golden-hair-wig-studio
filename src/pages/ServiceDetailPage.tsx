@@ -130,6 +130,40 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ onOpenBook
         </div>
       </div>
 
+      {/* Technical Anatomy Illustration */}
+      {service.illustration && (
+        <div className="mb-16 p-6 sm:p-8 rounded-3xl bg-[#FAF8F4] border border-[#E8E2D8]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-5 rounded-2xl bg-white border border-[#E8E2D8] p-4 shadow-xs overflow-hidden flex items-center justify-center">
+              <img
+                src={service.illustration}
+                alt={`${service.title} clinical illustration`}
+                className="w-full h-56 sm:h-64 object-contain"
+                loading="lazy"
+              />
+            </div>
+            <div className="lg:col-span-7 space-y-3">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#E8E2D8] text-gold-700 text-xs font-bold shadow-2xs">
+                <ShieldCheck className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
+                <span>Technical &amp; Aesthetic Anatomy</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-serif font-bold text-neutral-900">
+                Precision Engineering Behind {service.title}
+              </h2>
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                Every hair system installed at Golden Hair Wig Studio utilizes hand-knotted 100% virgin human hair aligned to your natural scalp direction, micro-porous breathable base layers, and dermatologically tested adhesion calibrated for hot Andhra Pradesh climates.
+              </p>
+              <div className="pt-2 flex flex-wrap gap-2 text-xs font-semibold text-neutral-700">
+                <span className="px-3 py-1 rounded-lg bg-white border border-[#E8E2D8]">✓ 100% Human Hair</span>
+                <span className="px-3 py-1 rounded-lg bg-white border border-[#E8E2D8]">✓ Breathable Skin/Lace Base</span>
+                <span className="px-3 py-1 rounded-lg bg-white border border-[#E8E2D8]">✓ Undetectable Hairline</span>
+                <span className="px-3 py-1 rounded-lg bg-white border border-[#E8E2D8]">✓ Customized by Mr. Swarup</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Suitability & Key Benefits */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
         <div className="p-8 rounded-3xl bg-[#FAF8F4] border border-[#E8E2D8] space-y-4">

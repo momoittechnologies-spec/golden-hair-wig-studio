@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="ladiesBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCFAF7" />
+      <stop offset="100%" stop-color="#F3ECE1" />
+    </linearGradient>
+
+    <!-- Silk Scalp Base Gradient -->
+    <linearGradient id="silkBaseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDF4EA" />
+      <stop offset="60%" stop-color="#F5E3D0" />
+      <stop offset="100%" stop-color="#E7CDB4" />
+    </linearGradient>
+
+    <!-- Silk Base Weave Pattern -->
+    <pattern id="silkMeshPattern" width="8" height="8" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="4" x2="8" y2="4" stroke="#D3B896" stroke-width="0.5" stroke-opacity="0.4" />
+      <line x1="4" y1="0" x2="4" y2="8" stroke="#D3B896" stroke-width="0.5" stroke-opacity="0.4" />
+    </pattern>
+
+    <!-- Hair Strand Gradients -->
+    <linearGradient id="ladiesHairBase" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#34281E" />
+      <stop offset="35%" stop-color="#1E1914" />
+      <stop offset="100%" stop-color="#0E0C0B" />
+    </linearGradient>
+
+    <linearGradient id="ladiesHairHighlight" x1="0%" y1="0%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#2D2218" />
+      <stop offset="25%" stop-color="#6E563E" />
+      <stop offset="50%" stop-color="#A88B68" />
+      <stop offset="75%" stop-color="#4B3928" />
+      <stop offset="100%" stop-color="#1B1612" />
+    </linearGradient>
+
+    <!-- Gold Accent -->
+    <linearGradient id="topperGold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#96713B" />
+      <stop offset="50%" stop-color="#D9B775" />
+      <stop offset="100%" stop-color="#B58D4A" />
+    </linearGradient>
+
+    <filter id="ladiesDropShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#4A3828" flood-opacity="0.14" />
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="400" height="280" rx="16" fill="url(#ladiesBgGrad)" />
+
+  <!-- Ambient Backdrop Circles -->
+  <circle cx="200" cy="135" r="95" fill="#FFFFFF" fill-opacity="0.65" />
+  <circle cx="200" cy="135" r="115" fill="none" stroke="#E8E2D8" stroke-dasharray="3 4" stroke-width="1" />
+
+  <!-- Natural Hair Silhouette Behind (Base Hairline) -->
+  <g opacity="0.35">
+    <path d="M 125 150 C 115 190 120 220 128 245 C 145 245 160 230 165 210 Z" fill="#2D2218" />
+    <path d="M 275 150 C 285 190 280 220 272 245 C 255 245 240 230 235 210 Z" fill="#2D2218" />
+  </g>
+
+  <!-- Silk Crown Hair Topper Structure -->
+  <g filter="url(#ladiesDropShadow)">
+    
+    <!-- Cascading Voluminous Hair Falls (From Topper Base Down) -->
+    <!-- Left Waves -->
+    <path d="M 160 85 C 130 115 125 160 135 235 C 148 238 162 230 166 210 C 158 160 162 125 180 95 Z" fill="url(#ladiesHairHighlight)" />
+    <!-- Right Waves -->
+    <path d="M 240 85 C 270 115 275 160 265 235 C 252 238 238 230 234 210 C 242 160 238 125 220 95 Z" fill="url(#ladiesHairHighlight)" />
+
+    <!-- Back Volume Depth -->
+    <path d="M 165 95 C 165 150 170 200 175 238 C 188 242 212 242 225 238 C 230 200 235 150 235 95 Z" fill="url(#ladiesHairBase)" />
+
+    <!-- The Ergonomic Silk-Base Topper Unit (Crown Oval) -->
+    <ellipse cx="200" cy="78" rx="46" ry="28" fill="url(#silkBaseGrad)" stroke="#B58D4A" stroke-width="1.5" />
+    <ellipse cx="200" cy="78" rx="46" ry="28" fill="url(#silkMeshPattern)" />
+
+    <!-- Micro-Pressure Attachment Clips (Equidistant on perimeter) -->
+    <!-- Front Clip -->
+    <rect x="193" y="52" width="14" height="6" rx="2.5" fill="#4A3B2C" stroke="#D9B775" stroke-width="0.8" />
+    <!-- Rear Clip -->
+    <rect x="193" y="98" width="14" height="6" rx="2.5" fill="#4A3B2C" stroke="#D9B775" stroke-width="0.8" />
+    <!-- Left Clip -->
+    <rect x="156" y="75" width="6" height="14" rx="2.5" fill="#4A3B2C" stroke="#D9B775" stroke-width="0.8" />
+    <!-- Right Clip -->
+    <rect x="238" y="75" width="6" height="14" rx="2.5" fill="#4A3B2C" stroke="#D9B775" stroke-width="0.8" />
+
+    <!-- Silk Crown Partition Line (Natural Center-Part with realistic knotting) -->
+    <path d="M 200 56 C 201 68 199 82 200 96" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.9" />
+    <path d="M 200 56 C 201 68 199 82 200 96" stroke="#F5E3D0" stroke-width="1.5" stroke-linecap="round" />
+
+    <!-- Strands originating directly from partition line -->
+    <!-- Left fall crown strands -->
+    <path d="M 199 60 C 180 62 165 72 150 115 C 142 145 146 195 152 230" fill="none" stroke="url(#ladiesHairHighlight)" stroke-width="4" stroke-linecap="round" />
+    <path d="M 199 72 C 178 76 160 90 152 135 C 148 168 152 205 158 232" fill="none" stroke="url(#ladiesHairBase)" stroke-width="3" stroke-linecap="round" />
+    <path d="M 199 84 C 182 90 170 108 165 150 C 162 185 168 215 174 235" fill="none" stroke="url(#ladiesHairHighlight)" stroke-width="3.5" stroke-linecap="round" />
+
+    <!-- Right fall crown strands -->
+    <path d="M 201 60 C 220 62 235 72 250 115 C 258 145 254 195 248 230" fill="none" stroke="url(#ladiesHairHighlight)" stroke-width="4" stroke-linecap="round" />
+    <path d="M 201 72 C 222 76 240 90 248 135 C 252 168 248 205 242 232" fill="none" stroke="url(#ladiesHairBase)" stroke-width="3" stroke-linecap="round" />
+    <path d="M 201 84 C 218 90 230 108 235 150 C 238 185 232 215 226 235" fill="none" stroke="url(#ladiesHairHighlight)" stroke-width="3.5" stroke-linecap="round" />
+
+    <!-- Fine Hair High-Gloss Accent Strokes -->
+    <path d="M 198 62 Q 170 80 158 130 Q 152 170 160 215" fill="none" stroke="#D9B775" stroke-width="1.2" opacity="0.6" />
+    <path d="M 202 62 Q 230 80 242 130 Q 248 170 240 215" fill="none" stroke="#D9B775" stroke-width="1.2" opacity="0.6" />
+    <path d="M 199 75 Q 185 110 175 165 Q 172 195 178 228" fill="none" stroke="#F3ECE1" stroke-width="0.8" opacity="0.5" />
+    <path d="M 201 75 Q 215 110 225 165 Q 228 195 222 228" fill="none" stroke="#F3ECE1" stroke-width="0.8" opacity="0.5" />
+  </g>
+
+  <!-- Technical Callout Cards -->
+  <!-- Top Left: Silk Scalp Base -->
+  <g transform="translate(18, 42)">
+    <rect width="112" height="34" rx="8" fill="#FFFFFF" stroke="#E8E2D8" stroke-width="1" filter="url(#ladiesDropShadow)" />
+    <circle cx="14" cy="17" r="4.5" fill="#B58D4A" />
+    <text x="26" y="15" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#242424">Silk Scalp Base</text>
+    <text x="26" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="7.5" fill="#6B6258">Natural skin partition</text>
+    <line x1="112" y1="17" x2="162" y2="70" stroke="#B58D4A" stroke-width="1" stroke-dasharray="2 3" opacity="0.8" />
+    <circle cx="162" cy="70" r="2.5" fill="#B58D4A" />
+  </g>
+
+  <!-- Bottom Right: Clip-In Attachment -->
+  <g transform="translate(268, 178)">
+    <rect width="115" height="34" rx="8" fill="#FFFFFF" stroke="#E8E2D8" stroke-width="1" filter="url(#ladiesDropShadow)" />
+    <circle cx="14" cy="17" r="4.5" fill="#B58D4A" />
+    <text x="26" y="15" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#242424">Silicone Micro-Clips</text>
+    <text x="26" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="7.5" fill="#6B6258">Zero tension or pulling</text>
+    <line x1="0" y1="17" x2="-28" y2="-75" stroke="#B58D4A" stroke-width="1" stroke-dasharray="2 3" opacity="0.8" />
+    <circle cx="-28" cy="-75" r="2.5" fill="#B58D4A" />
+  </g>
+
+  <!-- Bottom Center Pill Badge -->
+  <g transform="translate(100, 252)">
+    <rect width="200" height="20" rx="10" fill="#FAF8F4" stroke="#D3B896" stroke-width="0.8" />
+    <text x="100" y="14" font-family="system-ui, -apple-system, sans-serif" font-size="8.5" font-weight="700" fill="#96713B" text-anchor="middle">
+      INSTANT CROWN VOLUME • 100% VIRGIN HAIR
+    </text>
+  </g>
+</svg>

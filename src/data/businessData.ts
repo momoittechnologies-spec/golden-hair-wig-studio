@@ -33,6 +33,7 @@ export interface Service {
   process: string[];
   maintenance: string;
   image: string;
+  illustration?: string;
   category: 'hair-replacement' | 'core-services' | 'specialized';
   faqs: { question: string; answer: string }[];
 }
@@ -160,6 +161,7 @@ export const SERVICES: Service[] = [
     ],
     maintenance: "Depends on chosen attachment method: bonding requires servicing every 3–4 weeks; clipping can be removed and cleaned at home.",
     image: "/images/slider/slide_1.jpg",
+    illustration: "/images/solutions/non-surgical-replacement.svg",
     category: "hair-replacement",
     faqs: [
       {
@@ -197,6 +199,7 @@ export const SERVICES: Service[] = [
     ],
     maintenance: "Monthly servicing recommended every 25–30 days for hygiene and adhesive renewal.",
     image: "/images/slider/slide_3.jpg",
+    illustration: "/images/solutions/mens-hair-systems.svg",
     category: "hair-replacement",
     faqs: [
       {
@@ -230,6 +233,7 @@ export const SERVICES: Service[] = [
     ],
     maintenance: "Routine servicing every 3–4 weeks for bonded patches; clip patches can be maintained at home with periodic salon conditioning.",
     image: "/images/slider/slide_2.jpg",
+    illustration: "/images/solutions/hair-patch.svg",
     category: "hair-replacement",
     faqs: [
       {
@@ -263,6 +267,7 @@ export const SERVICES: Service[] = [
     ],
     maintenance: "Requires servicing every 25 to 30 days to cleanse the scalp, condition hair fibers, and apply fresh bonding adhesive.",
     image: "/images/client/services_card.jpg",
+    illustration: "/images/solutions/hair-bonding.svg",
     category: "core-services",
     faqs: [
       {
@@ -296,6 +301,7 @@ export const SERVICES: Service[] = [
     ],
     maintenance: "Wash gently at home every 7–10 days; visit studio every 2–3 months for deep conditioning.",
     image: "/images/client/poster_banner.jpg",
+    illustration: "/images/solutions/hair-clipping.svg",
     category: "core-services",
     faqs: [
       {
@@ -329,6 +335,7 @@ export const SERVICES: Service[] = [
     ],
     maintenance: "Recommended every 25 to 30 days for continuous comfort.",
     image: "/images/client/poster_banner.jpg",
+    illustration: "/images/solutions/hair-system-maintenance.svg",
     category: "core-services",
     faqs: [
       {
@@ -362,6 +369,7 @@ export const SERVICES: Service[] = [
     ],
     maintenance: "Gentle home washing with specialized wig shampoo; periodic studio re-conditioning.",
     image: "/images/slider/slide_1.jpg",
+    illustration: "/images/solutions/hair-wigs.svg",
     category: "specialized",
     faqs: [
       {
@@ -395,6 +403,7 @@ export const SERVICES: Service[] = [
     ],
     maintenance: "Simple routine home maintenance with periodic salon conditioning visits.",
     image: "/images/client/services_card.jpg",
+    illustration: "/images/solutions/ladies-extensions.svg",
     category: "specialized",
     faqs: [
       {

@@ -63,20 +63,19 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenBooking }) => 
             key={service.id}
             className="flex flex-col rounded-3xl bg-[#FAF8F4] border border-[#E8E2D8] hover:border-gold-400 transition-all duration-300 hover:-translate-y-1 overflow-hidden shadow-xs"
           >
-            {/* Card Image */}
-            <div className="relative h-52 overflow-hidden bg-neutral-100">
+            {/* Card Visual Header */}
+            <div className="relative h-52 overflow-hidden bg-white border-b border-[#E8E2D8] flex items-center justify-center p-3">
               <img
-                src={service.image}
+                src={service.illustration || service.image}
                 alt={service.title}
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-xs text-neutral-900 text-[11px] font-bold shadow-xs">
+              <span className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-xs text-gold-700 border border-[#E8E2D8] text-[11px] font-bold shadow-2xs">
                 {service.badge}
               </span>
-              <span className="absolute bottom-3 right-4 text-xs font-semibold text-white flex items-center gap-1 drop-shadow-xs">
-                <Clock className="w-3.5 h-3.5 text-gold-300" aria-hidden="true" />
+              <span className="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-neutral-600 border border-[#E8E2D8] text-[11px] font-medium flex items-center gap-1 shadow-2xs">
+                <Clock className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
                 <span>{service.duration}</span>
               </span>
             </div>
