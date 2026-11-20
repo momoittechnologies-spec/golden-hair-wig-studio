@@ -1,0 +1,166 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Clock, ShieldCheck, CheckCircle2, ArrowRight, MessageCircle, Sparkles } from 'lucide-react';
+import { SERVICES, BUSINESS_INFO } from '../data/businessData';
+import { buildWhatsAppUrl } from '../utils/whatsapp';
+import { SEOHead } from '../components/SEOHead';
+import { ComparisonSection } from '../components/ComparisonSection';
+
+interface ServicesPageProps {
+  onOpenBooking: (branchId?: string, serviceId?: string) => void;
+}
+
+export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenBooking }) => {
+  const [filter, setFilter] = useState<'all' | 'men' | 'women'>('all');
+
+  const filteredServices = SERVICES.filter(
+    s => filter === 'all' || s.category === filter || s.category === 'all'
+  );
+
+  return (
+    <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <SEOHead
+        title="Non-Surgical Hair Replacement Services"
+        description="Explore personalized non-surgical hair replacement solutions: Hair Bonding, Hair Clipping, Hair Taping, Hair Weaving, Ladies Extensions, and System Maintenance across Andhra Pradesh."
+        canonicalPath="/services"
+      />
+
+      {/* Header */}
+      <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/15 border border-gold-500/30 text-gold-400 text-xs font-semibold uppercase tracking-wider">
+          <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
+          <span>Non-Surgical Aesthetic Hair Restoration</span>
+        </div>
+        <h1 className="text-3xl sm:text-5xl font-serif font-extrabold text-white tracking-tight">
+          Personalized Hair Replacement Services
+        </h1>
+        <p className="text-sm sm:text-base text-ivory/80 leading-relaxed">
+          From semi-permanent active-wear bonding to zero-adhesive daily clip-on systems, each procedure is customized for undetectable hairline realism using 100% human hair.
+        </p>
+
+        {/* Filter Tabs */}
+        <div className="flex justify-center gap-2 pt-4">
+          {(['all', 'men', 'women'] as const).map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setFilter(cat)}
+              className={`px-4 py-2 rounded-xl text-xs font-semibold capitalize transition-all ${
+                filter === cat
+                  ? 'bg-gold-gradient text-charcoal shadow-gold-glow'
+                  : 'bg-neutral-900 border border-neutral-700 text-ivory/70 hover:text-white'
+              }`}
+            >
+              {cat === 'all' ? 'All Services' : cat === 'men' ? "Men's Systems" : "Women's Solutions"}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Services Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        {filteredServices.map((service) => (
+          <article
+            key={service.id}
+            className="flex flex-col rounded-3xl bg-neutral-900/80 border border-gold-500/20 hover:border-gold-500/50 transition-all duration-300 hover:-translate-y-1 overflow-hidden shadow-xl"
+          >
+            {/* Card Image */}
+            <div className="relative h-52 overflow-hidden">
+              <img
+                src={service.image}
+                alt={service.title}
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent" />
+              <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-gold-gradient text-charcoal text-[11px] font-bold shadow-md">
+                {service.badge}
+              </span>
+              <span className="absolute bottom-3 right-4 text-xs font-semibold text-ivory/90 flex items-center gap-1">
+                <Clock className="w-3.5 h-3.5 text-gold-400" aria-hidden="true" />
+                <span>{service.duration}</span>
+              </span>
+            </div>
+
+            {/* Card Body */}
+            <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+              <div>
+                <h2 className="text-xl font-serif font-bold text-white hover:text-gold-300 transition-colors">
+                  <Link to={`/services/${service.slug}`}>
+                    {service.title}
+                  </Link>
+                </h2>
+                <p className="text-xs text-gold-400 font-medium mt-1">
+                  {service.subtitle}
+                </p>
+                <p className="text-xs text-ivory/70 mt-3 line-clamp-3 leading-relaxed">
+                  {service.description}
+                </p>
+
+                {/* Key Benefits */}
+                <div className="mt-4 space-y-2">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-ivory/60 block">
+                    Key Highlights:
+                  </span>
+                  {service.benefits.slice(0, 2).map((benefit, i) => (
+                    <div key={i} className="flex items-start gap-2 text-xs text-ivory/80">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-gold-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                      <span>{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Card Footer Actions */}
+              <div className="pt-4 border-t border-neutral-800 space-y-2">
+                <div className="grid grid-cols-2 gap-2">
+                  <Link
+                    to={`/services/${service.slug}`}
+                    className="py-2.5 px-3 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-ivory text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                  >
+                    <span>Full Details</span>
+                    <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                  </Link>
+
+                  <button
+                    onClick={() => onOpenBooking(undefined, service.id)}
+                    className="py-2.5 px-3 rounded-xl bg-gold-gradient text-charcoal font-bold text-xs shadow-gold-glow flex items-center justify-center gap-1"
+                  >
+                    <span>Book Fitting</span>
+                  </button>
+                </div>
+
+                <a
+                  href={buildWhatsAppUrl({ serviceTitle: service.title, enquiryType: 'consultation' })}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[11px] font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                >
+                  <MessageCircle className="w-3.5 h-3.5" aria-hidden="true" />
+                  <span>Ask about {service.title} on WhatsApp</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {/* Honest Comparison Table */}
+      <ComparisonSection onOpenBooking={() => onOpenBooking()} />
+
+      {/* Trust & Transparency Note */}
+      <div className="mt-12 p-6 sm:p-8 rounded-3xl bg-neutral-900 border border-gold-500/25 flex flex-col sm:flex-row items-center gap-6">
+        <div className="p-4 rounded-2xl bg-gold-500/10 text-gold-400 border border-gold-500/30 flex-shrink-0">
+          <ShieldCheck className="w-8 h-8" aria-hidden="true" />
+        </div>
+        <div className="space-y-1 text-center sm:text-left">
+          <h3 className="text-lg font-serif font-bold text-white">
+            Ethical & Transparent Consultation
+          </h3>
+          <p className="text-xs text-ivory/70 leading-relaxed">
+            {BUSINESS_INFO.cosmeticDisclaimer} Every client receives a private evaluation with Mr. Swarup or trained stylists to choose the exact attachment technique matching their lifestyle.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};

@@ -1,6 +1,8 @@
 import React from 'react';
-import { Phone, MessageCircle, ShieldCheck } from 'lucide-react';
-import { BUSINESS_INFO, BRANCHES } from '../data/businessData';
+import { Link } from 'react-router-dom';
+import { Phone, MessageCircle, ShieldCheck, MapPin } from 'lucide-react';
+import { BUSINESS_INFO, BRANCHES, SERVICES } from '../data/businessData';
+import { buildWhatsAppUrl } from '../utils/whatsapp';
 
 interface FooterProps {
   onOpenBooking: () => void;
@@ -8,128 +10,162 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
   return (
-    <footer className="bg-obsidian-950 border-t border-gold-500/20 text-slate-400 text-xs pt-16 pb-24 lg:pb-12">
+    <footer className="bg-charcoal-950 border-t border-gold-500/20 text-ivory/70 text-xs pt-16 pb-24 lg:pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-neutral-800">
           
           {/* Brand Col with Official Logo */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-3">
+            <Link to="/" className="flex items-center gap-3 group">
               <img
                 src="/images/logo.png"
-                alt="Golden Hair Wig Studio Official Logo"
-                className="w-12 h-12 object-contain rounded-full border border-gold-500/50 shadow-gold-glow"
+                alt="Golden Hair Wig Studio Official Brand Crest"
+                className="w-12 h-12 object-contain rounded-full border border-gold-500/50 shadow-gold-glow group-hover:scale-105 transition-transform"
               />
               <div>
-                <span className="font-serif font-bold text-lg text-white block">
+                <span className="font-serif font-bold text-lg text-white block group-hover:text-gold-300 transition-colors">
                   GOLDEN HAIR WIG STUDIO
                 </span>
                 <span className="text-[10px] text-gold-400 font-semibold tracking-wider uppercase">
                   Non-Surgical Hair Replacement
                 </span>
               </div>
-            </div>
+            </Link>
 
-            <p className="text-xs text-slate-300 leading-relaxed max-w-sm">
-              Rayalaseema's premier destination for instant, 100% natural hair restoration. 
-              Under the visionary leadership of <strong>Mr. Swarup</strong>, we have restored youthful confidence for over 5,000+ happy clients across Andhra Pradesh.
+            <p className="text-xs text-ivory/80 leading-relaxed max-w-sm">
+              Rayalaseema's premier studio for personalized non-surgical hair replacement solutions. 
+              Under the direct leadership of <strong>Mr. Swarup</strong>, we deliver natural-looking human hair systems, undetectable hairlines, and continuous maintenance support across Andhra Pradesh.
             </p>
 
-            <div className="pt-1 flex items-center gap-3">
+            <div className="pt-1 flex flex-wrap items-center gap-3">
               <a
                 href={`tel:${BUSINESS_INFO.rawPrimaryPhone}`}
-                className="px-3.5 py-2 rounded-xl bg-obsidian-900 border border-slate-700 text-slate-200 hover:text-white font-semibold text-xs flex items-center gap-1.5"
+                className="px-3.5 py-2 rounded-xl bg-neutral-900 border border-neutral-700 text-ivory hover:text-white font-semibold text-xs flex items-center gap-1.5 transition-colors"
+                aria-label={`Call Golden Hair Wig Studio at ${BUSINESS_INFO.primaryPhone}`}
               >
-                <Phone className="w-3.5 h-3.5 text-gold-400" />
+                <Phone className="w-3.5 h-3.5 text-gold-400" aria-hidden="true" />
                 <span>{BUSINESS_INFO.primaryPhone}</span>
               </a>
 
               <a
-                href={`https://wa.me/${BUSINESS_INFO.rawPrimaryPhone}`}
+                href={buildWhatsAppUrl({ enquiryType: 'consultation' })}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3.5 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-semibold text-xs flex items-center gap-1.5"
+                className="px-3.5 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-semibold text-xs flex items-center gap-1.5 hover:bg-emerald-500/20 transition-colors"
+                aria-label="Direct WhatsApp consultation"
               >
-                <MessageCircle className="w-3.5 h-3.5" />
+                <MessageCircle className="w-3.5 h-3.5" aria-hidden="true" />
                 <span>WhatsApp</span>
               </a>
             </div>
           </div>
 
-          {/* Core Services Links */}
+          {/* Dedicated Service Links */}
           <div>
             <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-4">
-              Core Procedures
+              Our Services
             </h4>
             <ul className="space-y-2.5">
-              <li><a href="#services" className="hover:text-gold-400 transition-colors">Hair Bonding Process</a></li>
-              <li><a href="#services" className="hover:text-gold-400 transition-colors">Hair Clipping Process</a></li>
-              <li><a href="#services" className="hover:text-gold-400 transition-colors">Hair Taping Process</a></li>
-              <li><a href="#services" className="hover:text-gold-400 transition-colors">Hair Weaving Process</a></li>
-              <li><a href="#services" className="hover:text-gold-400 transition-colors">Ladies Hair Extensions</a></li>
-              <li><a href="#services" className="hover:text-gold-400 transition-colors">Crown Volumizing Toppers</a></li>
-              <li><a href="#services" className="hover:text-gold-400 transition-colors">System Servicing & Styling</a></li>
+              {SERVICES.map((s) => (
+                <li key={s.id}>
+                  <Link
+                    to={`/services/${s.slug}`}
+                    className="hover:text-gold-400 transition-colors text-ivory/80 hover:underline block"
+                  >
+                    {s.title}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link
+                  to="/services"
+                  className="text-gold-400 font-semibold hover:underline block pt-1"
+                >
+                  View All Services →
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Quick Navigation */}
+          {/* Studio Hubs */}
           <div>
             <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-4">
-              Quick Exploration
-            </h4>
-            <ul className="space-y-2.5">
-              <li><a href="#gallery-slider" className="hover:text-gold-400 transition-colors">Featured Studios & Slider</a></li>
-              <li><a href="#transformations" className="hover:text-gold-400 transition-colors">1-Hour Real Transformations</a></li>
-              <li><a href="#patch-anatomy" className="hover:text-gold-400 transition-colors">Swiss Lace Anatomy</a></li>
-              <li><a href="#why-us" className="hover:text-gold-400 transition-colors">Hair Studio vs Transplant</a></li>
-              <li><a href="#branches" className="hover:text-gold-400 transition-colors">Branch Locations & Maps</a></li>
-              <li><a href="#faq" className="hover:text-gold-400 transition-colors">Client FAQs & Maintenance</a></li>
-              <li><button onClick={onOpenBooking} className="text-gold-400 hover:text-gold-300 font-semibold">Book Free Consultation</button></li>
-            </ul>
-          </div>
-
-          {/* Studio Branches Summary */}
-          <div>
-            <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-4">
-              Our 4 Branches
+              Our 4 Hubs
             </h4>
             <ul className="space-y-3">
               {BRANCHES.map(b => (
                 <li key={b.id}>
-                  <strong className="text-slate-200 block">{b.name}</strong>
-                  <span className="text-[11px] text-slate-400 block">{b.landmark}</span>
-                  <a href={b.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="text-gold-400 hover:underline text-[10px]">
-                    Open in Maps →
-                  </a>
+                  <Link
+                    to={`/locations/${b.slug}`}
+                    className="group block"
+                  >
+                    <span className="text-ivory font-semibold group-hover:text-gold-300 transition-colors flex items-center gap-1">
+                      <MapPin className="w-3 h-3 text-gold-500" aria-hidden="true" />
+                      <span>{b.city}</span>
+                      {b.isHQ && (
+                        <span className="text-[9px] bg-gold-500/20 text-gold-400 px-1 py-0.2 rounded font-bold">HQ</span>
+                      )}
+                    </span>
+                    <span className="text-[11px] text-ivory/60 block pl-4 truncate">{b.landmark}</span>
+                  </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  to="/locations"
+                  className="text-gold-400 font-semibold hover:underline block pt-1"
+                >
+                  All Studio Addresses →
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Studio & Legal Navigation */}
+          <div>
+            <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-4">
+              Studio & Policies
+            </h4>
+            <ul className="space-y-2.5">
+              <li><Link to="/about" className="hover:text-gold-400 transition-colors text-ivory/80">About Mr. Swarup</Link></li>
+              <li><Link to="/gallery" className="hover:text-gold-400 transition-colors text-ivory/80">Real Transformations</Link></li>
+              <li><Link to="/contact" className="hover:text-gold-400 transition-colors text-ivory/80">Contact & Directions</Link></li>
+              <li><Link to="/privacy-policy" className="hover:text-gold-400 transition-colors text-ivory/80">Privacy & Consent</Link></li>
+              <li><Link to="/terms" className="hover:text-gold-400 transition-colors text-ivory/80">Cosmetic Service Terms</Link></li>
+              <li>
+                <button
+                  onClick={onOpenBooking}
+                  className="text-gold-400 hover:text-gold-300 font-semibold text-left pt-1"
+                >
+                  Book Free Consultation →
+                </button>
+              </li>
             </ul>
           </div>
 
         </div>
 
-        {/* Disclaimer & Bottom Bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-400 border-b border-slate-800/60 pb-6">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-gold-500" />
-            <span>100% Non-Surgical, Non-Invasive Aesthetic Hair Replacement. All Rights Reserved.</span>
-          </div>
-
-          <div>
-            © {new Date().getFullYear()} Golden Hair Wig Studio. Kadapa (HQ) • Proddatur • Madanapalle • Nandyal.
+        {/* Cosmetic Disclaimer Strip */}
+        <div className="pt-8 pb-6 border-b border-neutral-800 text-[11px] text-ivory/60 space-y-2">
+          <div className="flex items-start gap-2">
+            <ShieldCheck className="w-4 h-4 text-gold-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <p className="leading-relaxed">
+              <strong>Cosmetic Non-Surgical Disclaimer:</strong> Hair systems, toupees, and custom hair patches are non-surgical cosmetic prosthetics. They do not stimulate biological hair growth or alter underlying medical follicular conditions. Attachment longevity and maintenance schedules vary according to personal scalp perspiration, sebum production, and routine lifestyle care.
+            </p>
           </div>
         </div>
 
-        {/* Powered by MOMO IT TECHNOLOGIES Strip */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-          <span className="text-slate-500 text-[11px]">
-            Designed for high performance, mobile speed & Cloudflare Edge delivery
-          </span>
+        {/* Bottom Bar & Powered by MOMO IT TECHNOLOGIES */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+          <div className="text-ivory/60 text-[11px] text-center sm:text-left">
+            © {new Date().getFullYear()} Golden Hair Wig Studio. Kadapa (HQ) • Proddatur • Madanapalle • Nandyal. All rights reserved.
+          </div>
 
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-obsidian-900 border border-gold-500/30 text-slate-300 shadow-sm">
-            <span className="text-[11px] font-medium text-slate-400">Powered by</span>
+          {/* Powered by MOMO IT TECHNOLOGIES Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-gold-500/30 text-ivory/80 shadow-sm">
+            <span className="text-[11px] font-medium text-ivory/60">Powered by</span>
             <span className="font-bold text-gold-gradient tracking-wide uppercase text-xs">
               MOMO IT TECHNOLOGIES
             </span>
