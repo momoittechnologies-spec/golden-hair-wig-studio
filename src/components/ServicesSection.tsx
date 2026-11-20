@@ -80,17 +80,17 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenBooking 
               className="rounded-2xl bg-[#FAF8F4] border border-[#E8E2D8] hover:border-gold-400 p-5 sm:p-6 flex flex-col justify-between transition-all duration-200 hover:shadow-md group"
             >
               <div className="space-y-4">
-                {/* Perfectly Sized Realistic Illustration Fitting Card Padding */}
-                {service.illustration ? (
+                {/* Realistic High-Quality Commercial Photography Fitting Card Padding */}
+                {(service.image || service.illustration) ? (
                   <Link
                     to={`/services/${service.slug}`}
                     className="block w-full aspect-[400/265] rounded-xl overflow-hidden border border-[#E8E2D8] bg-[#FAF8F4] group-hover:border-gold-400 transition-all shadow-2xs relative"
                     aria-label={`View details for ${service.title}`}
                   >
                     <img
-                      src={service.illustration}
-                      alt={`${service.title} clinical illustration`}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-103"
+                      src={service.image || service.illustration}
+                      alt={`${service.title} at Golden Hair Wig Studio`}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                     />
                     <div className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-gold-700 border border-[#E8E2D8] text-[11px] font-bold shadow-2xs">

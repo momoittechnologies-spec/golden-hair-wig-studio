@@ -163,8 +163,8 @@ export const SERVICES: Service[] = [
       "Custom salon haircut, fade blend, and modern styling"
     ],
     maintenance: "Depends on chosen attachment method: bonding requires servicing every 3–4 weeks; clipping can be removed and cleaned at home.",
-    image: "/images/slider/slide_1.jpg",
-    illustration: "/images/solutions/non-surgical-replacement.svg",
+    image: "/images/solutions/non-surgical-replacement.webp",
+    illustration: "/images/solutions/non-surgical-replacement.webp",
     category: "hair-replacement",
     faqs: [
       {
@@ -201,8 +201,8 @@ export const SERVICES: Service[] = [
       "Precision razor blending with your natural side hair"
     ],
     maintenance: "Monthly servicing recommended every 25–30 days for hygiene and adhesive renewal.",
-    image: "/images/slider/slide_3.jpg",
-    illustration: "/images/solutions/mens-hair-systems.svg",
+    image: "/images/solutions/mens-hair-systems.webp",
+    illustration: "/images/solutions/mens-hair-systems.webp",
     category: "hair-replacement",
     faqs: [
       {
@@ -235,8 +235,8 @@ export const SERVICES: Service[] = [
       "Layering and texturing by Mr. Swarup"
     ],
     maintenance: "Routine servicing every 3–4 weeks for bonded patches; clip patches can be maintained at home with periodic salon conditioning.",
-    image: "/images/slider/slide_2.jpg",
-    illustration: "/images/solutions/hair-patch.svg",
+    image: "/images/solutions/hair-patch.webp",
+    illustration: "/images/solutions/hair-patch.webp",
     category: "hair-replacement",
     faqs: [
       {
@@ -269,8 +269,8 @@ export const SERVICES: Service[] = [
       "Integration cut, blow-dry, and styling"
     ],
     maintenance: "Requires servicing every 25 to 30 days to cleanse the scalp, condition hair fibers, and apply fresh bonding adhesive.",
-    image: "/images/client/services_card.jpg",
-    illustration: "/images/solutions/hair-bonding.svg",
+    image: "/images/solutions/hair-bonding.webp",
+    illustration: "/images/solutions/hair-bonding.webp",
     category: "core-services",
     faqs: [
       {
@@ -303,8 +303,8 @@ export const SERVICES: Service[] = [
       "Custom layering to blend naturally with your native hair"
     ],
     maintenance: "Wash gently at home every 7–10 days; visit studio every 2–3 months for deep conditioning.",
-    image: "/images/client/poster_banner.jpg",
-    illustration: "/images/solutions/hair-clipping.svg",
+    image: "/images/solutions/hair-clipping.webp",
+    illustration: "/images/solutions/hair-clipping.webp",
     category: "core-services",
     faqs: [
       {
@@ -337,8 +337,8 @@ export const SERVICES: Service[] = [
       "Fresh bonding/taping and precision restyling"
     ],
     maintenance: "Recommended every 25 to 30 days for continuous comfort.",
-    image: "/images/client/poster_banner.jpg",
-    illustration: "/images/solutions/hair-system-maintenance.svg",
+    image: "/images/solutions/hair-system-maintenance.webp",
+    illustration: "/images/solutions/hair-system-maintenance.webp",
     category: "core-services",
     faqs: [
       {
@@ -371,8 +371,8 @@ export const SERVICES: Service[] = [
       "Daily wear and care demonstration"
     ],
     maintenance: "Gentle home washing with specialized wig shampoo; periodic studio re-conditioning.",
-    image: "/images/slider/slide_1.jpg",
-    illustration: "/images/solutions/hair-wigs.svg",
+    image: "/images/solutions/hair-wigs.webp",
+    illustration: "/images/solutions/hair-wigs.webp",
     category: "specialized",
     faqs: [
       {
@@ -405,8 +405,8 @@ export const SERVICES: Service[] = [
       "Face-framing haircut and salon styling"
     ],
     maintenance: "Simple routine home maintenance with periodic salon conditioning visits.",
-    image: "/images/client/services_card.jpg",
-    illustration: "/images/solutions/ladies-extensions.svg",
+    image: "/images/solutions/ladies-extensions.webp",
+    illustration: "/images/solutions/ladies-extensions.webp",
     category: "specialized",
     faqs: [
       {
