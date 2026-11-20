@@ -28,8 +28,8 @@ const CASE_STUDIES: CaseStudy[] = [
     afterLabel: "AFTER: 100% Natural Density",
     beforeDesc: "Visible scalp, receding temples, loss of personal and professional confidence.",
     afterDesc: "Fully undetectable front hairline, natural swirl, seamless blend with existing side hair.",
-    beforeImg: "/images/client/poster_banner.jpg",
-    afterImg: "/images/client/poster_banner.jpg",
+    beforeImg: "/images/transformations/case1_before.jpg",
+    afterImg: "/images/transformations/case1_after.jpg",
   },
   {
     id: 'case-2',
@@ -42,8 +42,8 @@ const CASE_STUDIES: CaseStudy[] = [
     afterLabel: "AFTER: Youthful Textured Cut",
     beforeDesc: "Hair thinning making client appear older than his biological age.",
     afterDesc: "Natural fringe with micro-silicone comfort clips. Easily removable at bedtime.",
-    beforeImg: "/images/client/services_card.jpg",
-    afterImg: "/images/client/services_card.jpg",
+    beforeImg: "/images/transformations/case2_hairline_before.jpg",
+    afterImg: "/images/transformations/case2_hairline_after.jpg",
   },
   {
     id: 'case-3',
@@ -56,8 +56,8 @@ const CASE_STUDIES: CaseStudy[] = [
     afterLabel: "AFTER: Lush, Full Crown Volume",
     beforeDesc: "Diffuse crown thinning making scalp plainly visible under ambient lighting.",
     afterDesc: "Seamless silk partition that mimics real scalp pores. Heat-styling and blow-dry friendly.",
-    beforeImg: "/images/client/services_card.jpg",
-    afterImg: "/images/client/services_card.jpg",
+    beforeImg: "/images/transformations/case3_before.jpg",
+    afterImg: "/images/transformations/case3_after.jpg",
   }
 ];
 
@@ -172,7 +172,7 @@ export const InteractiveBeforeAfter: React.FC<InteractiveBeforeAfterProps> = ({ 
               <img
                 src={activeCase.afterImg}
                 alt="After Golden Hair System"
-                className="w-full h-full object-contain sm:object-cover pointer-events-none"
+                className="w-full h-full object-cover object-top pointer-events-none"
               />
               <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md border border-emerald-300 text-emerald-800 px-3 py-1.5 rounded-lg text-xs font-bold tracking-wide shadow-md flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
@@ -192,7 +192,7 @@ export const InteractiveBeforeAfter: React.FC<InteractiveBeforeAfterProps> = ({ 
                 <img
                   src={activeCase.beforeImg}
                   alt="Before Hair Restoration"
-                  className="w-full h-full object-contain sm:object-cover pointer-events-none grayscale-[40%]"
+                  className="w-full h-full object-cover object-top pointer-events-none"
                 />
                 <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-md border border-amber-300 text-amber-800 px-3 py-1.5 rounded-lg text-xs font-bold tracking-wide shadow-md">
                   {activeCase.beforeLabel}
