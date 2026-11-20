@@ -136,8 +136,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
             </div>
           </Link>
 
-          {/* Centered Desktop Navigation */}
-          <nav aria-label="Main Navigation" className="hidden xl:flex items-center gap-7 text-sm font-medium text-neutral-700">
+          {/* Centered Desktop Navigation with generous breathing room */}
+          <nav aria-label="Main Navigation" className="hidden xl:flex items-center gap-7 text-sm font-medium text-neutral-700 ml-8 xl:ml-12">
             <Link
               to="/"
               className={`hover:text-gold-600 transition-colors py-1 ${
@@ -195,6 +195,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                   >
                     <strong className="block text-neutral-900 font-semibold">Hair Patch Solutions</strong>
                     <span className="text-[11px] text-neutral-500">Targeted crown & frontal coverage</span>
+                  </Link>
+                  <Link
+                    to="/guides"
+                    className="block px-3.5 py-2.5 rounded-xl hover:bg-[#FAF8F4] text-xs text-neutral-700 hover:text-gold-700 font-medium transition-colors"
+                    role="menuitem"
+                  >
+                    <strong className="block text-neutral-900 font-semibold">Educational Guides & FAQ</strong>
+                    <span className="text-[11px] text-neutral-500">Patch vs Transplant & Cost Factors</span>
                   </Link>
                   <Link
                     to="/#how-it-works"
@@ -483,6 +491,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                       className="block py-2 hover:text-gold-600"
                     >
                       • Hair Patch Solutions
+                    </Link>
+                    <Link
+                      to="/guides"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-2 text-neutral-800 font-semibold"
+                    >
+                      • Educational Guides & FAQ
                     </Link>
                     <Link
                       to="/#how-it-works"

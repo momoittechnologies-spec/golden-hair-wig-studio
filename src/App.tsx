@@ -17,6 +17,7 @@ import { GalleryPage } from './pages/GalleryPage';
 import { ContactPage } from './pages/ContactPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsPage } from './pages/TermsPage';
+import { GuidesPage } from './pages/GuidesPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 export function App() {
@@ -54,6 +55,7 @@ export function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             <Route path="/terms" element={<TermsPage />} />
+            <Route path="/guides" element={<GuidesPage onOpenBooking={() => handleOpenBooking()} />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>

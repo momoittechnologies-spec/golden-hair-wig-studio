@@ -30,16 +30,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
 
             {/* Main Headline: Exact Recommended H1 */}
             <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-serif font-extrabold text-neutral-900 tracking-tight leading-[1.18]">
-              Natural-Looking Hair Replacement,{' '}
+              Natural-Looking Hair Replacement.{' '}
               <span className="text-gold-700 decoration-gold-400">
-                Designed for Your Confidence
+                Confidence That Feels Like You.
               </span>
             </h1>
 
             {/* Supporting Text */}
             <p className="text-neutral-600 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
-              Explore personalized non-surgical hair replacement solutions at Golden Hair Wig Studio, 
-              serving <strong className="text-neutral-800 font-semibold">Kadapa, Proddatur, Madanapalle and Nandyal</strong>.
+              Discover personalized non-surgical hair replacement solutions at Golden Hair Wig Studio, 
+              serving <strong className="text-neutral-800 font-semibold">Kadapa, Proddatur, Madanapalle, and Nandyal</strong>.
               Experience undetectable, custom-styled human hair systems fitted in just 60 minutes with zero surgery and zero downtime.
             </p>
 

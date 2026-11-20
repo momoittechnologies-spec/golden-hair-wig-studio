@@ -16,9 +16,9 @@ export function SEOHead({
   pageJsonLd,
 }: SEOHeadProps) {
   useEffect(() => {
-    // 1. Set document title
+    // 1. Set document title (prevent duplicate brand suffix)
     const fullTitle = title
-      ? `${title} | ${BUSINESS_INFO.name}`
+      ? (title.includes(BUSINESS_INFO.name) ? title : `${title} | ${BUSINESS_INFO.name}`)
       : `${BUSINESS_INFO.name} | Non-Surgical Hair Replacement in Kadapa, Proddatur, Madanapalle & Nandyal`;
     document.title = fullTitle;
 

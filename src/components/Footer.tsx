@@ -10,7 +10,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
   return (
-    <footer className="bg-[#FAF8F4] border-t border-[#E8E2D8] text-neutral-600 text-xs pt-16 pb-24 lg:pb-12">
+    <footer className="bg-[#FAF8F4] border-t border-[#E8E2D8] text-neutral-600 text-xs pt-16 pb-24 lg:pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Footer Grid */}
@@ -142,6 +142,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             <ul className="space-y-2.5">
               <li><Link to="/about" className="hover:text-gold-700 transition-colors block">About Mr. Swarup</Link></li>
               <li><Link to="/gallery" className="hover:text-gold-700 transition-colors block">1-Hour Transformations</Link></li>
+              <li><Link to="/guides" className="hover:text-gold-700 transition-colors block font-medium text-gold-700">Educational Hair Guides</Link></li>
               <li><Link to="/contact" className="hover:text-gold-700 transition-colors block">Contact & Location Maps</Link></li>
               <li><Link to="/privacy-policy" className="hover:text-gold-700 transition-colors block">Privacy & Photo Consent</Link></li>
               <li><Link to="/terms" className="hover:text-gold-700 transition-colors block">Cosmetic Service Terms</Link></li>
@@ -180,7 +181,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             href="https://www.momoittechnologies.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white hover:bg-neutral-50 border border-[#E8E2D8] hover:border-gold-400 text-neutral-700 shadow-2xs transition-all duration-200 group"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white hover:bg-neutral-50 border border-[#E8E2D8] hover:border-gold-400 text-neutral-700 shadow-2xs transition-all duration-200 group whitespace-nowrap flex-shrink-0"
             aria-label="Powered by MOMO IT TECHNOLOGIES - Visit Website"
           >
             <span className="text-[11px] font-medium text-neutral-500">Powered by</span>
