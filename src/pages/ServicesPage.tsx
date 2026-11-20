@@ -63,18 +63,18 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenBooking }) => 
             key={service.id}
             className="flex flex-col rounded-3xl bg-[#FAF8F4] border border-[#E8E2D8] hover:border-gold-400 transition-all duration-300 hover:-translate-y-1 overflow-hidden shadow-xs"
           >
-            {/* Card Visual Header */}
-            <div className="relative h-52 overflow-hidden bg-white border-b border-[#E8E2D8] flex items-center justify-center p-3">
+            {/* Card Visual Header - Perfectly Sized to Fit Frame */}
+            <div className="relative w-full aspect-[400/265] overflow-hidden bg-[#FAF8F4] border-b border-[#E8E2D8]">
               <img
                 src={service.illustration || service.image}
                 alt={service.title}
-                className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-103"
                 loading="lazy"
               />
-              <span className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-xs text-gold-700 border border-[#E8E2D8] text-[11px] font-bold shadow-2xs">
+              <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 backdrop-blur-xs text-gold-700 border border-[#E8E2D8] text-[11px] font-bold shadow-2xs">
                 {service.badge}
               </span>
-              <span className="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-neutral-600 border border-[#E8E2D8] text-[11px] font-medium flex items-center gap-1 shadow-2xs">
+              <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-neutral-600 border border-[#E8E2D8] text-[11px] font-medium flex items-center gap-1 shadow-2xs">
                 <Clock className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
                 <span>{service.duration}</span>
               </span>

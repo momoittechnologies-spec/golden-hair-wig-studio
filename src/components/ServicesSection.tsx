@@ -80,23 +80,23 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenBooking 
               className="rounded-2xl bg-[#FAF8F4] border border-[#E8E2D8] hover:border-gold-400 p-5 sm:p-6 flex flex-col justify-between transition-all duration-200 hover:shadow-md group"
             >
               <div className="space-y-4">
-                {/* Small Realistic Illustration */}
+                {/* Perfectly Sized Realistic Illustration Fitting Card Padding */}
                 {service.illustration ? (
                   <Link
                     to={`/services/${service.slug}`}
-                    className="block w-full h-44 sm:h-48 rounded-xl overflow-hidden border border-[#E8E2D8] bg-white group-hover:border-gold-300 transition-colors shadow-2xs relative"
+                    className="block w-full aspect-[400/265] rounded-xl overflow-hidden border border-[#E8E2D8] bg-[#FAF8F4] group-hover:border-gold-400 transition-all shadow-2xs relative"
                     aria-label={`View details for ${service.title}`}
                   >
                     <img
                       src={service.illustration}
                       alt={`${service.title} clinical illustration`}
-                      className="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-102"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-103"
                       loading="lazy"
                     />
-                    <div className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-white/95 backdrop-blur-xs text-gold-700 border border-[#E8E2D8] text-[11px] font-bold shadow-2xs">
+                    <div className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-gold-700 border border-[#E8E2D8] text-[11px] font-bold shadow-2xs">
                       {service.badge}
                     </div>
-                    <div className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-white/95 backdrop-blur-xs text-neutral-600 border border-[#E8E2D8] text-[11px] font-medium flex items-center gap-1 shadow-2xs">
+                    <div className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-neutral-600 border border-[#E8E2D8] text-[11px] font-medium flex items-center gap-1 shadow-2xs">
                       <Clock className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
                       <span>{service.duration}</span>
                     </div>

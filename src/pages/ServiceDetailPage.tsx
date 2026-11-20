@@ -134,11 +134,11 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ onOpenBook
       {service.illustration && (
         <div className="mb-16 p-6 sm:p-8 rounded-3xl bg-[#FAF8F4] border border-[#E8E2D8]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-5 rounded-2xl bg-white border border-[#E8E2D8] p-4 shadow-xs overflow-hidden flex items-center justify-center">
+            <div className="lg:col-span-5 rounded-2xl bg-[#FAF8F4] border border-[#E8E2D8] shadow-xs overflow-hidden relative aspect-[400/280]">
               <img
                 src={service.illustration}
                 alt={`${service.title} clinical illustration`}
-                className="w-full h-56 sm:h-64 object-contain"
+                className="w-full h-full object-cover"
                 loading="lazy"
               />
             </div>
