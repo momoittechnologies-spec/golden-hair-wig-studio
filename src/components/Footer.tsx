@@ -165,7 +165,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
         {/* Bottom Bar & Powered by MOMO IT TECHNOLOGIES */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
           <div className="text-neutral-500 text-[11px] text-center sm:text-left">
-            © {new Date().getFullYear()} Golden Hair Wig Studio. Kadapa (HQ) • Proddatur • Madanapalle • Nandyal. All rights reserved.
+            © {new Date().getFullYear()} Golden Hair Wig Studio. All rights reserved.
           </div>
 
           {/* Powered by MOMO IT TECHNOLOGIES Badge linking to momoittechnologies.com */}
