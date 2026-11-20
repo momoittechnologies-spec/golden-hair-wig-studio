@@ -387,7 +387,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                     role="menuitem"
                   >
                     <strong className="block text-neutral-900 group-hover:text-gold-800 font-semibold">Kadapa (Headquarters)</strong>
-                    <span className="text-[11px] text-neutral-500 block mt-0.5">Railway Station Road</span>
+                    <span className="text-[11px] text-neutral-500 block mt-0.5">SLB Enclave, Y.S. Nagar</span>
                   </Link>
                   <Link
                     to="/locations/proddatur"
@@ -395,7 +395,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                     role="menuitem"
                   >
                     <strong className="block text-neutral-900 group-hover:text-gold-800 font-semibold">Proddatur Branch</strong>
-                    <span className="text-[11px] text-neutral-500 block mt-0.5">Near Clock Tower</span>
+                    <span className="text-[11px] text-neutral-500 block mt-0.5">DCSR Colony, Nadimpalli</span>
                   </Link>
                   <Link
                     to="/locations/madanapalle"
@@ -403,7 +403,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                     role="menuitem"
                   >
                     <strong className="block text-neutral-900 group-hover:text-gold-800 font-semibold">Madanapalle Branch</strong>
-                    <span className="text-[11px] text-neutral-500 block mt-0.5">Near NTR Circle</span>
+                    <span className="text-[11px] text-neutral-500 block mt-0.5">Near Vijaya Lodge & DTDC</span>
                   </Link>
                   <Link
                     to="/locations/nandyal"
@@ -411,7 +411,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                     role="menuitem"
                   >
                     <strong className="block text-neutral-900 group-hover:text-gold-800 font-semibold">Nandyal Branch</strong>
-                    <span className="text-[11px] text-neutral-500 block mt-0.5">Near Gandhi Chowk</span>
+                    <span className="text-[11px] text-neutral-500 block mt-0.5">Near Palla's Hotel, Atmakur Rd</span>
                   </Link>
                   <Link
                     to="/locations"

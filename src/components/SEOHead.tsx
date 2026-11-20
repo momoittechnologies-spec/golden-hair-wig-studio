@@ -61,7 +61,7 @@ export function SEOHead({
       },
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "1st Floor, Door No: 4-622-1, Railway Station Road, Beside Shirdi Sai Sweets",
+        "streetAddress": "SLB Enclave, Railway Station Road, Y.S. Nagar",
         "addressLocality": "Kadapa",
         "addressRegion": "Andhra Pradesh",
         "postalCode": "516001",

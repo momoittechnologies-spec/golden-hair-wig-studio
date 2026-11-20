@@ -13,10 +13,10 @@ An ultra-modern, high-converting digital experience designed for **Golden Hair W
 * **Google Rating:** ⭐ 5.0 (850+ Verified Client Reviews)
 
 ### 📍 Branches in Rayalaseema, Andhra Pradesh
-1. **Kadapa (Headquarters):** 1st Floor, Door No. 4-622-1, Beside Shirdi Sai Sweets, Near RTC Bus Stand, Railway Station Road, Kadapa - 516001.
-2. **Proddatur:** Opp. RTC Bus Stand Road, Near Clock Tower Commercial Area.
-3. **Madanapalle:** Bangalore Road, Near NTR Circle.
-4. **Nandyal:** Main Road, Near Sanjeeva Nagar Gate / Gandhi Chowk.
+1. **Kadapa (Headquarters):** SLB Enclave, Railway Station Road, Y.S. Nagar, Kadapa - 516001.
+2. **Proddatur:** Haji Syed Hussain Street, DCSR Colony, Nadimpalli, Proddatur - 516360.
+3. **Madanapalle:** 1st Floor, Door No. 14-71, Venkateswara Street, Near Vijaya Lodge & DTDC Courier, Rama Gopal Naidu Colony, Madanapalle - 517325.
+4. **Nandyal:** First Floor, Door No. 25-162, Atmakur Road, Near Palla's Hotel, Sanjeev Nagar, Nandyal - 518501.
 
 ---
 

@@ -37,7 +37,7 @@ Furthermore, the header navigation, marquee placement, inner service catalog URL
 
 The following verified business data will be strictly preserved:
 1. **Proprietor Leadership:** Mr. Swarup (10+ years dedicated experience).
-2. **Kadapa HQ Verified Address:** *1st Floor, Door No: 4-622-1, Railway Station Road, Beside Shirdi Sai Sweets, Near Old / New RTC Bus Stand, Kadapa - 516001*.
+2. **Kadapa HQ Verified Address:** *SLB Enclave, Railway Station Road, Y.S. Nagar, Kadapa - 516001*.
 3. **Confirmed Helpline Numbers:** `+91 8617264887` & `+91 8609256195`.
 4. **Operating Hours:** Open All 7 Days: 9:00 AM – 9:00 PM.
 5. **Authentic Assets:** Official brand crest logo (`/images/logo.png`), Kadapa studio banner (`/images/client/poster_banner.jpg`), services photo (`/images/client/services_card.jpg`), and custom slider photography.
