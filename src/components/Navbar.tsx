@@ -118,26 +118,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           {/* Logo on Left */}
           <Link
             to="/"
-            className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 rounded-lg p-0.5 flex-shrink-0"
+            className="flex items-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 rounded-lg p-0.5 flex-shrink-0"
             aria-label="Golden Hair Wig Studio - Home"
           >
             <img
               src="/images/logo.png"
-              alt="Golden Hair Wig Studio Logo"
-              className="h-10 w-10 sm:h-11 sm:w-11 object-contain rounded-full border border-[#E8E2D8] shadow-xs group-hover:scale-105 transition-transform"
+              alt="Golden Hair Wig Studio"
+              className="h-8 sm:h-9 xl:h-11 w-auto object-contain transition-transform group-hover:scale-[1.02]"
             />
-            <div className="flex flex-col">
-              <span className="font-serif font-bold text-base sm:text-lg tracking-tight text-neutral-900 group-hover:text-gold-600 transition-colors leading-tight">
-                GOLDEN HAIR
-              </span>
-              <span className="text-[10px] uppercase font-bold tracking-widest text-gold-600">
-                WIG STUDIO
-              </span>
-            </div>
           </Link>
 
           {/* Centered Desktop Navigation with generous breathing room */}
-          <nav aria-label="Main Navigation" className="hidden xl:flex items-center gap-7 text-sm font-medium text-neutral-700 ml-8 xl:ml-12">
+          <nav aria-label="Main Navigation" className="hidden xl:flex items-center gap-5 2xl:gap-7 text-[13px] 2xl:text-sm font-medium text-neutral-700 ml-5 xl:ml-8 flex-shrink-0">
             <Link
               to="/"
               className={`hover:text-gold-600 transition-colors py-1 ${
@@ -390,10 +382,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           </nav>
 
           {/* Action on Right (Call Link & Consultation Button) */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0">
             <a
               href={getDirectCallUrl()}
-              className="hidden lg:flex items-center gap-1.5 px-3 py-2 rounded-xl text-neutral-700 hover:text-gold-600 text-xs font-semibold hover:bg-[#FAF8F4] border border-transparent hover:border-[#E8E2D8] transition-colors"
+              className="hidden 2xl:flex items-center gap-1.5 px-3 py-2 rounded-xl text-neutral-700 hover:text-gold-600 text-xs font-semibold hover:bg-[#FAF8F4] border border-transparent hover:border-[#E8E2D8] transition-colors"
               aria-label="Direct Phone Line"
             >
               <Phone className="w-3.5 h-3.5 text-gold-600" aria-hidden="true" />
@@ -402,7 +394,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
 
             <button
               onClick={() => onOpenBooking()}
-              className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-xs sm:text-sm shadow-xs hover:shadow-md transition-all active:scale-98 flex items-center gap-1.5"
+              className="px-3.5 sm:px-4 xl:px-5 py-2 sm:py-2.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-xs sm:text-sm shadow-xs hover:shadow-md transition-all active:scale-98 flex items-center gap-1.5 whitespace-nowrap"
             >
               <CalendarCheck className="w-4 h-4" aria-hidden="true" />
               <span>Book Consultation</span>

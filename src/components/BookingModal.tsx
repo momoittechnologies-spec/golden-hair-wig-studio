@@ -136,8 +136,8 @@ Please share appointment availability and consultation guidance.`;
               <div className="flex items-center gap-3">
                 <img
                   src="/images/logo.png"
-                  alt="Golden Hair Wig Studio Crest"
-                  className="w-10 h-10 object-contain rounded-full border border-[#E8E2D8]"
+                  alt="Golden Hair Wig Studio"
+                  className="h-9 w-auto object-contain"
                 />
                 <div>
                   <div className="inline-flex items-center gap-1.5 text-gold-700 text-[11px] font-bold uppercase tracking-wider">

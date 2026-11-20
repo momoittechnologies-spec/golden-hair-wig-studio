@@ -18,20 +18,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
           
           {/* Brand Col with Official Logo */}
           <div className="lg:col-span-2 space-y-4">
-            <Link to="/" className="flex items-center gap-3 group">
+            <Link to="/" className="inline-block group mb-1" aria-label="Golden Hair Wig Studio - Home">
               <img
                 src="/images/logo.png"
-                alt="Golden Hair Wig Studio Crest"
-                className="w-11 h-11 object-contain rounded-full border border-[#E8E2D8] shadow-xs group-hover:scale-105 transition-transform"
+                alt="Golden Hair Wig Studio"
+                className="h-12 sm:h-14 w-auto object-contain transition-transform group-hover:scale-[1.02]"
               />
-              <div>
-                <span className="font-serif font-bold text-lg text-neutral-900 block group-hover:text-gold-700 transition-colors">
-                  GOLDEN HAIR WIG STUDIO
-                </span>
-                <span className="text-[10px] text-gold-700 font-semibold tracking-wider uppercase">
-                  Non-Surgical Hair Replacement
-                </span>
-              </div>
             </Link>
 
             <p className="text-xs text-neutral-600 leading-relaxed max-w-sm">
