@@ -1,6 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Phone, MessageCircle, MapPin, Menu, X, ChevronDown, CalendarCheck, Clock, ShieldCheck, Star } from 'lucide-react';
+import {
+  Phone,
+  MessageCircle,
+  MapPin,
+  Menu,
+  X,
+  ChevronDown,
+  CalendarCheck,
+  Clock,
+  ShieldCheck,
+  Star,
+  Home,
+  Scissors,
+  Layers,
+  Sparkles,
+  BookOpen,
+  ArrowRight
+} from 'lucide-react';
 import { BUSINESS_INFO, BRANCHES } from '../data/businessData';
 import { buildWhatsAppUrl, getDirectCallUrl } from '../utils/whatsapp';
 import { InstagramIcon, GoogleIcon } from './SocialIcons';
@@ -212,7 +229,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
 
               {activeDropdown === 'replacement' && (
                 <div
-                  className="absolute top-full left-0 mt-2 w-72 bg-white/98 backdrop-blur-xl rounded-2xl border border-[#E8E2D8] shadow-[0_16px_40px_rgba(0,0,0,0.12)] p-2 animate-in fade-in slide-in-from-top-2 duration-150 z-50"
+                  className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl border border-[#E8E2D8] shadow-[0_16px_40px_rgba(0,0,0,0.12)] p-2 animate-in fade-in slide-in-from-top-2 duration-150 z-50"
                   role="menu"
                 >
                   <Link
@@ -285,7 +302,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
 
               {activeDropdown === 'services' && (
                 <div
-                  className="absolute top-full left-0 mt-2 w-72 bg-white/98 backdrop-blur-xl rounded-2xl border border-[#E8E2D8] shadow-[0_16px_40px_rgba(0,0,0,0.12)] p-2 animate-in fade-in slide-in-from-top-2 duration-150 z-50"
+                  className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl border border-[#E8E2D8] shadow-[0_16px_40px_rgba(0,0,0,0.12)] p-2 animate-in fade-in slide-in-from-top-2 duration-150 z-50"
                   role="menu"
                 >
                   <Link
@@ -378,7 +395,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
 
               {activeDropdown === 'locations' && (
                 <div
-                  className="absolute top-full left-0 mt-2 w-64 bg-white/98 backdrop-blur-xl rounded-2xl border border-[#E8E2D8] shadow-[0_16px_40px_rgba(0,0,0,0.12)] p-2 animate-in fade-in slide-in-from-top-2 duration-150 z-50"
+                  className="absolute top-full left-0 mt-2 w-64 bg-white rounded-2xl border border-[#E8E2D8] shadow-[0_16px_40px_rgba(0,0,0,0.12)] p-2 animate-in fade-in slide-in-from-top-2 duration-150 z-50"
                   role="menu"
                 >
                   <Link
@@ -490,232 +507,371 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
         </div>
       </header>
 
-      {/* Mobile Navigation Drawer (Rendered outside header to avoid backdrop-filter fixed containment) */}
+      {/* Mobile Dark Backdrop Overlay */}
+      {mobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 top-[68px] sm:top-[72px] bg-black/40 z-40 transition-opacity duration-200"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile Navigation Drawer (Solid opaque white background, high contrast, clean typography) */}
       {mobileMenuOpen && (
         <div
           id="mobile-menu-drawer"
-          className="lg:hidden fixed inset-x-0 top-[68px] sm:top-[72px] bottom-0 h-[calc(100dvh-68px)] sm:h-[calc(100dvh-72px)] bg-white/98 backdrop-blur-xl border-t border-[#E8E2D8] z-50 overflow-y-auto px-5 py-6 space-y-5 animate-in slide-in-from-top-2 duration-200 shadow-2xl pb-24"
+          className="lg:hidden fixed inset-x-0 top-[68px] sm:top-[72px] bottom-0 h-[calc(100dvh-68px)] sm:h-[calc(100dvh-72px)] bg-white border-t border-[#E8E2D8] z-50 overflow-y-auto px-5 py-6 space-y-5 animate-in slide-in-from-top-2 duration-200 shadow-2xl pb-28 select-none"
         >
           {/* Quick Contact Action Bar in Drawer */}
-          <div className="grid grid-cols-2 gap-2.5 pb-4 border-b border-[#E8E2D8]">
+          <div className="grid grid-cols-2 gap-3 pb-4 border-b border-[#E8E2D8]">
             <a
               href={getDirectCallUrl()}
-              className="py-2.5 px-3 rounded-xl bg-[#FAF8F4] border border-[#E8E2D8] text-neutral-800 text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all shadow-2xs"
+              className="py-3 px-3.5 rounded-xl bg-[#FAF8F4] border border-[#E8E2D8] hover:border-gold-400 text-neutral-900 text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all shadow-2xs"
             >
-              <Phone className="w-4 h-4 text-gold-600" />
+              <Phone className="w-4 h-4 text-gold-600 fill-gold-600/20" />
               <span>Call Studio</span>
             </a>
             <a
               href={buildWhatsAppUrl({ enquiryType: 'consultation' })}
               target="_blank"
               rel="noopener noreferrer"
-              className="py-2.5 px-3 rounded-xl bg-[#E8EEE8] border border-emerald-300 text-emerald-800 text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all shadow-2xs"
+              className="py-3 px-3.5 rounded-xl bg-[#E8EEE8] border border-emerald-300 text-emerald-800 text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all shadow-2xs"
             >
               <MessageCircle className="w-4 h-4 text-emerald-600" />
-              <span>WhatsApp</span>
+              <span>WhatsApp Us</span>
             </a>
           </div>
 
-          {/* Accordion & Direct Navigation */}
-          <nav className="space-y-1 text-sm font-semibold text-neutral-800">
+          {/* Structured Mobile Navigation with Icons and High-Contrast Text */}
+          <nav className="space-y-1.5 text-sm font-semibold">
+            {/* 1. Home */}
             <Link
               to="/"
               onClick={() => setMobileMenuOpen(false)}
-              className={`block py-2.5 px-3 rounded-xl transition-colors ${
-                location.pathname === '/' ? 'bg-gold-50 text-gold-800 font-bold' : 'hover:bg-[#FAF8F4]'
+              className={`flex items-center gap-3 py-3 px-3.5 rounded-xl text-sm font-bold transition-all ${
+                location.pathname === '/'
+                  ? 'bg-gold-50 text-gold-800 border border-gold-200/80 shadow-2xs'
+                  : 'text-neutral-900 hover:bg-[#FAF8F4] active:bg-[#FAF8F4]'
               }`}
             >
-              Home
+              <Home className="w-4.5 h-4.5 text-gold-600 flex-shrink-0" />
+              <span>Home</span>
             </Link>
 
-            {/* Hair Replacement Accordion */}
+            {/* 2. Hair Replacement Solutions Accordion */}
             <div>
               <button
                 type="button"
                 onClick={() => toggleMobileAccordion('replacement')}
-                className="w-full flex items-center justify-between py-2.5 px-3 rounded-xl hover:bg-[#FAF8F4] text-left"
+                className={`w-full flex items-center justify-between py-3 px-3.5 rounded-xl text-sm font-bold text-left transition-all ${
+                  mobileAccordion === 'replacement' || isHairReplacementActive
+                    ? 'bg-[#FAF8F4] text-neutral-900'
+                    : 'text-neutral-900 hover:bg-[#FAF8F4]'
+                }`}
               >
-                <span className="font-semibold text-neutral-900">Hair Replacement</span>
-                <ChevronDown className={`w-4 h-4 text-neutral-400 transition-transform ${mobileAccordion === 'replacement' ? 'rotate-180' : ''}`} />
+                <div className="flex items-center gap-3">
+                  <Scissors className="w-4.5 h-4.5 text-gold-600 flex-shrink-0" />
+                  <span>Hair Replacement Solutions</span>
+                </div>
+                <ChevronDown
+                  className={`w-4 h-4 text-neutral-500 transition-transform duration-200 ${
+                    mobileAccordion === 'replacement' ? 'rotate-180 text-gold-600' : ''
+                  }`}
+                />
               </button>
+
               {mobileAccordion === 'replacement' && (
-                <div className="pl-4 pr-2 py-1 space-y-1 bg-[#FAF8F4] rounded-xl mt-1 text-xs text-neutral-600">
+                <div className="pl-3 pr-2 py-2 space-y-1.5 bg-[#FAF8F4] border border-[#E8E2D8] rounded-2xl mt-1 text-xs">
                   <Link
                     to="/services/non-surgical-hair-replacement"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 hover:text-gold-700"
+                    className="flex items-center justify-between py-2 px-3 rounded-xl hover:bg-white active:bg-white text-neutral-800 hover:text-gold-800 font-semibold transition-colors group"
                   >
-                    • Non-Surgical Hair Replacement
+                    <div>
+                      <span className="block font-bold text-neutral-900 group-hover:text-gold-800">
+                        Non-Surgical Hair Replacement
+                      </span>
+                      <span className="block text-[11px] text-neutral-500 font-normal">
+                        Instant 60-min undetectable front hairline
+                      </span>
+                    </div>
+                    <ArrowRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-gold-600 flex-shrink-0" />
                   </Link>
+
                   <Link
                     to="/services/mens-hair-systems"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 hover:text-gold-700"
+                    className="flex items-center justify-between py-2 px-3 rounded-xl hover:bg-white active:bg-white text-neutral-800 hover:text-gold-800 font-semibold transition-colors group"
                   >
-                    • Hair Systems for Men
+                    <div>
+                      <span className="block font-bold text-neutral-900 group-hover:text-gold-800">
+                        Hair Systems for Men
+                      </span>
+                      <span className="block text-[11px] text-neutral-500 font-normal">
+                        French & Swiss lace with modern fade blend
+                      </span>
+                    </div>
+                    <ArrowRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-gold-600 flex-shrink-0" />
                   </Link>
+
                   <Link
                     to="/services/hair-patch"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 hover:text-gold-700"
+                    className="flex items-center justify-between py-2 px-3 rounded-xl hover:bg-white active:bg-white text-neutral-800 hover:text-gold-800 font-semibold transition-colors group"
                   >
-                    • Hair Patch Solutions
+                    <div>
+                      <span className="block font-bold text-neutral-900 group-hover:text-gold-800">
+                        Hair Patch Solutions
+                      </span>
+                      <span className="block text-[11px] text-neutral-500 font-normal">
+                        Targeted crown & partition bald spot coverage
+                      </span>
+                    </div>
+                    <ArrowRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-gold-600 flex-shrink-0" />
                   </Link>
-                  <Link
-                    to="/guides"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 text-neutral-800 font-semibold"
-                  >
-                    • Educational Guides & FAQ
-                  </Link>
+
                   <Link
                     to="/#how-it-works"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 text-gold-700 font-bold"
+                    className="flex items-center justify-between py-2 px-3 rounded-xl hover:bg-white text-gold-700 font-bold border-t border-[#E8E2D8]/80 transition-colors"
                   >
-                    • How It Works (4 Steps)
+                    <span>How It Works (4-Step Process)</span>
+                    <ArrowRight className="w-3.5 h-3.5 flex-shrink-0" />
                   </Link>
                 </div>
               )}
             </div>
 
-            {/* Our Services Accordion */}
+            {/* 3. Our Core Services Accordion */}
             <div>
               <button
                 type="button"
                 onClick={() => toggleMobileAccordion('services')}
-                className="w-full flex items-center justify-between py-2.5 px-3 rounded-xl hover:bg-[#FAF8F4] text-left"
+                className={`w-full flex items-center justify-between py-3 px-3.5 rounded-xl text-sm font-bold text-left transition-all ${
+                  mobileAccordion === 'services' || isOurServicesActive
+                    ? 'bg-[#FAF8F4] text-neutral-900'
+                    : 'text-neutral-900 hover:bg-[#FAF8F4]'
+                }`}
               >
-                <span className="font-semibold text-neutral-900">Our Services</span>
-                <ChevronDown className={`w-4 h-4 text-neutral-400 transition-transform ${mobileAccordion === 'services' ? 'rotate-180' : ''}`} />
+                <div className="flex items-center gap-3">
+                  <Layers className="w-4.5 h-4.5 text-gold-600 flex-shrink-0" />
+                  <span>Our Core Services</span>
+                </div>
+                <ChevronDown
+                  className={`w-4 h-4 text-neutral-500 transition-transform duration-200 ${
+                    mobileAccordion === 'services' ? 'rotate-180 text-gold-600' : ''
+                  }`}
+                />
               </button>
+
               {mobileAccordion === 'services' && (
-                <div className="pl-4 pr-2 py-1 space-y-1 bg-[#FAF8F4] rounded-xl mt-1 text-xs text-neutral-600">
+                <div className="pl-3 pr-2 py-2 space-y-1.5 bg-[#FAF8F4] border border-[#E8E2D8] rounded-2xl mt-1 text-xs">
                   <Link
                     to="/services/hair-bonding"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 hover:text-gold-700"
+                    className="flex items-center justify-between py-2 px-3 rounded-xl hover:bg-white active:bg-white text-neutral-800 hover:text-gold-800 font-semibold transition-colors group"
                   >
-                    • Hair Bonding Process
+                    <div>
+                      <span className="block font-bold text-neutral-900 group-hover:text-gold-800">
+                        Hair Bonding Process
+                      </span>
+                      <span className="block text-[11px] text-neutral-500 font-normal">
+                        3–4 weeks continuous hold, swim & gym safe
+                      </span>
+                    </div>
+                    <ArrowRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-gold-600 flex-shrink-0" />
                   </Link>
+
                   <Link
                     to="/services/hair-clipping"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 hover:text-gold-700"
+                    className="flex items-center justify-between py-2 px-3 rounded-xl hover:bg-white active:bg-white text-neutral-800 hover:text-gold-800 font-semibold transition-colors group"
                   >
-                    • Hair Clipping (Daily Wear)
+                    <div>
+                      <span className="block font-bold text-neutral-900 group-hover:text-gold-800">
+                        Hair Clipping (Daily Wear)
+                      </span>
+                      <span className="block text-[11px] text-neutral-500 font-normal">
+                        10-second self-removal with zero glue
+                      </span>
+                    </div>
+                    <ArrowRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-gold-600 flex-shrink-0" />
                   </Link>
-                  <Link
-                    to="/services/hair-patch"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 hover:text-gold-700"
-                  >
-                    • Hair Patch Fitting
-                  </Link>
-                  <Link
-                    to="/services/hair-system-maintenance"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 hover:text-gold-700"
-                  >
-                    • Hair System Maintenance
-                  </Link>
+
                   <Link
                     to="/services/hair-wigs"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 hover:text-gold-700"
+                    className="flex items-center justify-between py-2 px-3 rounded-xl hover:bg-white active:bg-white text-neutral-800 hover:text-gold-800 font-semibold transition-colors group"
                   >
-                    • Hair Wigs & Toupees
+                    <div>
+                      <span className="block font-bold text-neutral-900 group-hover:text-gold-800">
+                        Women's Wigs & Silk Toppers
+                      </span>
+                      <span className="block text-[11px] text-neutral-500 font-normal">
+                        100% human hair toppers for crown thinning
+                      </span>
+                    </div>
+                    <ArrowRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-gold-600 flex-shrink-0" />
                   </Link>
+
+                  <Link
+                    to="/services/hair-system-maintenance"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-between py-2 px-3 rounded-xl hover:bg-white active:bg-white text-neutral-800 hover:text-gold-800 font-semibold transition-colors group"
+                  >
+                    <div>
+                      <span className="block font-bold text-neutral-900 group-hover:text-gold-800">
+                        System Servicing & Re-bonding
+                      </span>
+                      <span className="block text-[11px] text-neutral-500 font-normal">
+                        Deep ultrasonic wash, scalp detox & adhesive renewal
+                      </span>
+                    </div>
+                    <ArrowRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-gold-600 flex-shrink-0" />
+                  </Link>
+
                   <Link
                     to="/services"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 text-gold-700 font-bold"
+                    className="flex items-center justify-between py-2 px-3 rounded-xl hover:bg-white text-gold-700 font-bold border-t border-[#E8E2D8]/80 transition-colors"
                   >
-                    • View All Services →
+                    <span>View Complete Services Directory →</span>
+                    <ArrowRight className="w-3.5 h-3.5 flex-shrink-0" />
                   </Link>
                 </div>
               )}
             </div>
 
+            {/* 4. Client Transformations (Results) */}
             <Link
               to="/gallery"
               onClick={() => setMobileMenuOpen(false)}
-              className={`block py-2.5 px-3 rounded-xl transition-colors ${
-                location.pathname === '/gallery' ? 'bg-gold-50 text-gold-800 font-bold' : 'hover:bg-[#FAF8F4]'
+              className={`flex items-center justify-between py-3 px-3.5 rounded-xl text-sm font-bold transition-all ${
+                location.pathname === '/gallery'
+                  ? 'bg-gold-50 text-gold-800 border border-gold-200/80 shadow-2xs'
+                  : 'text-neutral-900 hover:bg-[#FAF8F4] active:bg-[#FAF8F4]'
               }`}
             >
-              Transformations
+              <div className="flex items-center gap-3">
+                <Sparkles className="w-4.5 h-4.5 text-gold-600 flex-shrink-0" />
+                <span>Client Transformations</span>
+              </div>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gold-100 text-gold-800 border border-gold-200">
+                1-Hour Results
+              </span>
             </Link>
 
-            {/* Locations Accordion */}
+            {/* 5. Educational Hair Guides & FAQ */}
+            <Link
+              to="/guides"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`flex items-center justify-between py-3 px-3.5 rounded-xl text-sm font-bold transition-all ${
+                location.pathname === '/guides'
+                  ? 'bg-gold-50 text-gold-800 border border-gold-200/80 shadow-2xs'
+                  : 'text-neutral-900 hover:bg-[#FAF8F4] active:bg-[#FAF8F4]'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <BookOpen className="w-4.5 h-4.5 text-gold-600 flex-shrink-0" />
+                <span>Educational Guides & FAQ</span>
+              </div>
+              <ArrowRight className="w-3.5 h-3.5 text-neutral-400 flex-shrink-0" />
+            </Link>
+
+            {/* 6. Our Studio Locations Accordion */}
             <div>
               <button
                 type="button"
                 onClick={() => toggleMobileAccordion('locations')}
-                className="w-full flex items-center justify-between py-2.5 px-3 rounded-xl hover:bg-[#FAF8F4] text-left"
+                className={`w-full flex items-center justify-between py-3 px-3.5 rounded-xl text-sm font-bold text-left transition-all ${
+                  mobileAccordion === 'locations' || isLocationsActive
+                    ? 'bg-[#FAF8F4] text-neutral-900'
+                    : 'text-neutral-900 hover:bg-[#FAF8F4]'
+                }`}
               >
-                <span className="font-semibold text-neutral-900">Our Locations</span>
-                <ChevronDown className={`w-4 h-4 text-neutral-400 transition-transform ${mobileAccordion === 'locations' ? 'rotate-180' : ''}`} />
+                <div className="flex items-center gap-3">
+                  <MapPin className="w-4.5 h-4.5 text-gold-600 flex-shrink-0" />
+                  <span>Our Studio Locations</span>
+                </div>
+                <ChevronDown
+                  className={`w-4 h-4 text-neutral-500 transition-transform duration-200 ${
+                    mobileAccordion === 'locations' ? 'rotate-180 text-gold-600' : ''
+                  }`}
+                />
               </button>
+
               {mobileAccordion === 'locations' && (
-                <div className="pl-4 pr-2 py-1 space-y-1 bg-[#FAF8F4] rounded-xl mt-1 text-xs text-neutral-600">
-                  <Link
-                    to="/locations/kadapa"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 hover:text-gold-700"
-                  >
-                    • Kadapa (Headquarters)
-                  </Link>
-                  <Link
-                    to="/locations/proddatur"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 hover:text-gold-700"
-                  >
-                    • Proddatur Branch
-                  </Link>
-                  <Link
-                    to="/locations/madanapalle"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 hover:text-gold-700"
-                  >
-                    • Madanapalle Branch
-                  </Link>
-                  <Link
-                    to="/locations/nandyal"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 hover:text-gold-700"
-                  >
-                    • Nandyal Branch
-                  </Link>
+                <div className="pl-3 pr-2 py-2 space-y-1.5 bg-[#FAF8F4] border border-[#E8E2D8] rounded-2xl mt-1 text-xs">
+                  {BRANCHES.map((b) => (
+                    <Link
+                      key={b.id}
+                      to={`/locations/${b.slug}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center justify-between py-2 px-3 rounded-xl hover:bg-white active:bg-white text-neutral-800 hover:text-gold-800 font-semibold transition-colors group"
+                    >
+                      <div>
+                        <div className="flex items-center gap-1.5">
+                          <strong className="block font-bold text-neutral-900 group-hover:text-gold-800">
+                            {b.city}
+                          </strong>
+                          {b.isHQ && (
+                            <span className="text-[9px] bg-gold-500 text-white px-1.5 py-0.2 rounded font-bold">
+                              HQ
+                            </span>
+                          )}
+                        </div>
+                        <span className="block text-[11px] text-neutral-500 font-normal">
+                          {b.landmark}
+                        </span>
+                      </div>
+                      <ArrowRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-gold-600 flex-shrink-0" />
+                    </Link>
+                  ))}
+
                   <Link
                     to="/locations"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 text-gold-700 font-bold"
+                    className="flex items-center justify-between py-2 px-3 rounded-xl hover:bg-white text-gold-700 font-bold border-t border-[#E8E2D8]/80 transition-colors"
                   >
-                    • View All 4 Studios →
+                    <span>View All 4 Studios Map Directory →</span>
+                    <ArrowRight className="w-3.5 h-3.5 flex-shrink-0" />
                   </Link>
                 </div>
               )}
             </div>
 
+            {/* 7. About Mr. Swarup */}
             <Link
               to="/about"
               onClick={() => setMobileMenuOpen(false)}
-              className={`block py-2.5 px-3 rounded-xl transition-colors ${
-                location.pathname === '/about' ? 'bg-gold-50 text-gold-800 font-bold' : 'hover:bg-[#FAF8F4]'
+              className={`flex items-center justify-between py-3 px-3.5 rounded-xl text-sm font-bold transition-all ${
+                location.pathname === '/about'
+                  ? 'bg-gold-50 text-gold-800 border border-gold-200/80 shadow-2xs'
+                  : 'text-neutral-900 hover:bg-[#FAF8F4] active:bg-[#FAF8F4]'
               }`}
             >
-              About Us
+              <div className="flex items-center gap-3">
+                <ShieldCheck className="w-4.5 h-4.5 text-gold-600 flex-shrink-0" />
+                <span>About Mr. Swarup & Studio</span>
+              </div>
+              <ArrowRight className="w-3.5 h-3.5 text-neutral-400 flex-shrink-0" />
             </Link>
 
+            {/* 8. Contact & Branch Directions */}
             <Link
               to="/contact"
               onClick={() => setMobileMenuOpen(false)}
-              className={`block py-2.5 px-3 rounded-xl transition-colors ${
-                location.pathname === '/contact' ? 'bg-gold-50 text-gold-800 font-bold' : 'hover:bg-[#FAF8F4]'
+              className={`flex items-center justify-between py-3 px-3.5 rounded-xl text-sm font-bold transition-all ${
+                location.pathname === '/contact'
+                  ? 'bg-gold-50 text-gold-800 border border-gold-200/80 shadow-2xs'
+                  : 'text-neutral-900 hover:bg-[#FAF8F4] active:bg-[#FAF8F4]'
               }`}
             >
-              Contact
+              <div className="flex items-center gap-3">
+                <Phone className="w-4.5 h-4.5 text-gold-600 flex-shrink-0" />
+                <span>Contact & Directions</span>
+              </div>
+              <ArrowRight className="w-3.5 h-3.5 text-neutral-400 flex-shrink-0" />
             </Link>
           </nav>
 
@@ -726,7 +882,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                 href={BUSINESS_INFO.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="py-2.5 px-3 rounded-xl bg-white border border-[#E8E2D8] hover:border-rose-300 text-neutral-800 text-xs font-semibold flex items-center justify-center gap-1.5 shadow-2xs"
+                className="py-2.5 px-3 rounded-xl bg-[#FAF8F4] border border-[#E8E2D8] hover:border-rose-300 text-neutral-900 text-xs font-semibold flex items-center justify-center gap-1.5 shadow-2xs"
                 aria-label="Follow on Instagram"
               >
                 <span className="p-0.5 rounded-xs bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white">
@@ -739,7 +895,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                 href={BUSINESS_INFO.googleReviewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="py-2.5 px-3 rounded-xl bg-white border border-[#E8E2D8] hover:border-gold-400 text-neutral-800 text-xs font-semibold flex items-center justify-center gap-1.5 shadow-2xs"
+                className="py-2.5 px-3 rounded-xl bg-[#FAF8F4] border border-[#E8E2D8] hover:border-gold-400 text-neutral-900 text-xs font-semibold flex items-center justify-center gap-1.5 shadow-2xs"
                 aria-label="Rate Us on Google"
               >
                 <GoogleIcon className="w-3.5 h-3.5" />
@@ -753,11 +909,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                 setMobileMenuOpen(false);
                 onOpenBooking();
               }}
-              className="w-full py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-sm shadow-xs flex items-center justify-center gap-2 active:scale-98 transition-all"
+              className="w-full py-3.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-sm shadow-sm flex items-center justify-center gap-2 active:scale-98 transition-all"
             >
               <CalendarCheck className="w-4 h-4" />
               <span>Book Free Consultation</span>
             </button>
+
+            <div className="text-center pt-1 text-[11px] text-neutral-500 font-medium">
+              Open All 7 Days: 9:00 AM – 9:00 PM
+            </div>
           </div>
         </div>
       )}
