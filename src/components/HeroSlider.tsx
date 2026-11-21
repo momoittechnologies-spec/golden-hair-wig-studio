@@ -67,7 +67,8 @@ interface HeroSliderProps {
 
 export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenBooking }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const [isManuallyPaused, setIsManuallyPaused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
@@ -94,17 +95,21 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenBooking }) => {
     setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
   }, []);
 
-  // Autoplay management (6.5s per slide, paused on hover/focus or reduced motion)
+  // Autoplay management: automatically advances every 5 seconds unless manually paused, hovered on desktop, or prefers-reduced-motion is enabled
   useEffect(() => {
-    if (!isPaused && !prefersReducedMotion) {
-      timerRef.current = setInterval(() => {
-        nextSlide();
-      }, 6500);
+    if (isManuallyPaused || isHovered || prefersReducedMotion) {
+      if (timerRef.current) clearInterval(timerRef.current);
+      return;
     }
+
+    timerRef.current = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [isPaused, prefersReducedMotion, nextSlide]);
+  }, [isManuallyPaused, isHovered, prefersReducedMotion, nextSlide, currentSlide]);
 
   // Touch swipe support for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -143,10 +148,8 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenBooking }) => {
       role="region"
       aria-roledescription="carousel"
       aria-label="Golden Hair Studio Solutions Slider"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onFocus={() => setIsPaused(true)}
-      onBlur={() => setIsPaused(false)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       onKeyDown={handleKeyDown}
@@ -246,12 +249,12 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenBooking }) => {
                         {/* Autoplay Pause / Play Control */}
                         <button
                           type="button"
-                          onClick={() => setIsPaused((prev) => !prev)}
-                          aria-label={isPaused ? 'Resume autoplay slideshow' : 'Pause autoplay slideshow'}
-                          title={isPaused ? 'Resume autoplay' : 'Pause autoplay'}
+                          onClick={() => setIsManuallyPaused((prev) => !prev)}
+                          aria-label={isManuallyPaused ? 'Resume autoplay slideshow' : 'Pause autoplay slideshow'}
+                          title={isManuallyPaused ? 'Resume autoplay' : 'Pause autoplay'}
                           className="p-1.5 rounded-full text-[#555555] hover:text-[#B58D4A] hover:bg-white border border-transparent hover:border-[#E8E2D8] transition-colors"
                         >
-                          {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
+                          {isManuallyPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
                         </button>
 
                         <span className="h-3 w-px bg-[#E0D8CC]" aria-hidden="true" />
@@ -375,11 +378,11 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenBooking }) => {
                       <div className="flex items-center gap-1.5">
                         <button
                           type="button"
-                          onClick={() => setIsPaused((prev) => !prev)}
-                          aria-label={isPaused ? 'Resume autoplay' : 'Pause autoplay'}
+                          onClick={() => setIsManuallyPaused((prev) => !prev)}
+                          aria-label={isManuallyPaused ? 'Resume autoplay' : 'Pause autoplay'}
                           className="p-1 rounded-full text-[#555555] hover:text-[#B58D4A] transition-colors"
                         >
-                          {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
+                          {isManuallyPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
                         </button>
                         <button
                           type="button"
